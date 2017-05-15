@@ -2,7 +2,57 @@
 
 \usepackage{amssymb}		% to get all AMS symbols
 \usepackage{graphicx}		% to insert figures
-\usepackage{hyperref}		% PDF hyperreferences??
+
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+\usepackage{url,color}
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=blue,citecolor=magenta]{
+hyperref}
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+\usepackage{amsmath}
+\usepackage{amssymb,amsthm,nicefrac,paralist}
+\usepackage{mathtools}
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty
+   
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg.
+\usepackage{verbatim}  
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{maintheorem}[theorem]{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{convention}[theorem]{Convention}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{mtheorem}{Main Theorem}
+\newtheorem*{gtheorem}{General Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{addendum}[theorem]{Addendum}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand\R{\mathbb{R}}
+\newcommand\NC{\textrm{NCP}}
 
 %%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
 
