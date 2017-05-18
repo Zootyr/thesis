@@ -10,20 +10,133 @@ vertices. The elements of $E$ are 2-element subsets of $V$ and they are called
 the edges of the graph. 
 \end{definition}
 
+The connectivity of graph is the minimum number of vertices or edges that are 
+required to be removed in order to disconnect the graph. However, this often 
+means that one of the components is very small. A more nuanced view is provided 
+by separators:
+
+\begin{definition}
+(Separator) A separator is a partition of the vertices of a graph into sets 
+$(A,B,C)$ where $|A|, |B| \geq c|V|$ where $0<c<1/2$ is called the separation 
+constant. The size of the separator is $|C|$.  
+\end{definition}
+
+
 The main objects of study in this work are polytopes. They are interesting 
 objects in their own right but also play an important role in e.g. 
 optimization. In the following section we introduces the basics of polytopes. 
-More in-depth knowledge can be found in Ziegler's book [citation]. 
+More in-depth knowledge can be found in Ziegler's book [citation]. There are 
+two ways to define a polytope, the vertex (or interior) representation and the 
+half-space (or exterior) representation.
 
 \begin{definition}
-(Polytope) A polytope is the convex hull of a finite number of points in 
+(V-Polytope) A polytope is the convex hull of a finite number of points in 
 $\mathbb{R}^d$, that is 
 \begin{equation}
- P = \left\{x \middle| x = \sum_{i=1}^{|V|} \lambda_i v_i, 0\leq \lambda_i 
-\leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}
+ P = \left\{x\in \mathbb{R}^d \middle| x = \sum_{i=1}^{|V|} \lambda_i v_i, 
+0\leq \lambda_i \leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}
 \end{equation}
 
 \end{definition}
+
+\begin{definition}
+ (H-polytope) A polytope is the bounded intersection of a finite number of 
+half-space, that is
+\begin{equation}
+ P = \bigcap_{i=1}^n \{x \in \mathbb{R}^d \mid \mathbf{a}_i^T \mathbf{x} \leq 
+c_i \}
+\end{equation}
+where $a_i \in \mathbb{R}^d$ are normal vectors of the hyperplanes and $c_i \in 
+mathbb{R}$ are displacements. If this description is minimal with respect to 
+the number of half-spaces required to describe $P$, it is called irredundant.
+\end{definition}
+
+It is a fundamental theorem of polytopes that these two representations are 
+equivalent.
+
+The dimension of a polytope is the dimension of its affine hull. The affine 
+hull of a set of points is the smallest hyperplane which contains all of the 
+points. If the lowest dimensional hyperplane which contains $n$ points is 
+$(n-)1$-dimensional, the points are set to be affinely independent. The 
+boundary 
+of a polytope consists of lower dimensional polytopes called faces. 
+\begin{definition}
+ (Face) A face is an intersection of a polytope with a hyperplane 
+\begin{equation}
+ F = P \cap \{x \in \mathbb{R}^d \mid \mathbf{a}\mathbf{x} = c\}
+\end{equation}
+where the hyperplane has to be \textit{valid}, that is $\mathbf{a}\mathbf{x} 
+\leq c$ holds for all points in $P$. 
+
+\end{definition}
+
+Some faces have special names: the 0-dimensional faces are called 
+\textit{vertices}, the 1-dimensional faces are \textit{edges} and the 
+$d-1$-dimensional faces are \textit{facets}. The faces of various dimensions 
+are counted by the face vector
+\begin{definition}
+ (Face vector) The face vector is $(f_0, f_1, \dots, f_{d-1})$ where $f_i$ is 
+the number of $i$-dimensional faces.
+\end{definition}
+ The faces of a polytope 
+form a lattice with ordering given by inclusion. This lattice is called the 
+\textit{face lattice} of the polytope.
+
+A polytopal complex is a collection of polytopes that fit together nicely.
+More precisely:
+\begin{definition}
+ (Polytopal complex) A polytopal complex $\mathfrak{C}$ is a finite set of 
+polytopes with the following properties:
+\begin{enumerate}
+ \item The empty polytope $\emptyset \in \mathfrak{C}$.
+  \item If $F \subset P$ is a face of $P$ and $P \in \mathfrak{C}$, then 
+$F\mathfrak{C}$.
+\item The intersection $P\cap Q$ of $P,Q \in \mathfrak{C}$ is a face of both 
+and $P\cap Q \in \mathfrak{C}$.
+\end{enumerate}
+
+\end{definition}
+
+Examples of polytopal complexes include the polytope itself and its 
+\texit{boundary complex} which is the collection of all proper faces of $P$. 
+The $k$-skeleton of a polytope is the collection of all faces of dimension 
+$\leq k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and 
+the boundary complex is the $(d-1)$-skeleton. The 1-skeleton of a polytope is 
+called its graph and will be important for us later on.
+
+Each polytope has a dual polytope associated to it. Its face lattice is the 
+lattice of the original polytope ``upside down''. Hence its $i$-faces 
+correspond to the $(d-i)$-dimensional faces of the original. The dual of the 
+dual is the original polytope. 
+
+In any dimension, the polytope with the fewest vertices is the simplex. 
+\begin{definition}
+ (Simplex) A $d$-simplex is the convex hull of $d+1$ affinely independant 
+points.
+\end{definition}
+The faces of a simplex are lower dimensional simplices. A polytope whose facets 
+(but not necessarily the polytope itself) are simplices is called 
+\textit{simplicial}. The dual of a simplicial polytope is called 
+\textit{simple}. The vertices of a simple $d$-polytope are contained in exactly 
+$d$ edges and $d$ facets.
+
+Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
+\textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
+\rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
+polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
+polytopes are combinatorially equivalent if their face lattices are isomorphic 
+i.e. there is an bijection between the elements of the lattice which respects 
+the inclusion relation. 
+
+Cutting of a vertex is a way to get a new polytope from an old one. This is 
+done by adding a new inequality to the description. This inequality is not 
+valid for the vertex which is cut off but is valid for all other vertices. All 
+the polytopes formed this way are combinatorially equivalent (but not 
+necessarily affinely isomorphic). For each face intersected by the hyperplane, 
+a face of one dimension lower is added to the face lattice. The dual operation 
+is called stacking on a facet. It means adding a new vertex to the polytope 
+which satisfies all the inequalities in the irredundant description with strict 
+inequality except one (which is violated).
 
 
 
