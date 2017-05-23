@@ -1,26 +1,6 @@
 \chapter{Expander graphs}
 \label{mathchapter}
 
-Graphs appear everywhere in mathematics but they are especially common in 
-combinatorics. 
-
-\begin{definition}
-(Graph) A graph is an ordered pair $G=(V,E)$. The elements of $V$ are called 
-vertices. The elements of $E$ are 2-element subsets of $V$ and they are called 
-the edges of the graph. 
-\end{definition}
-
-The connectivity of graph is the minimum number of vertices or edges that are 
-required to be removed in order to disconnect the graph. However, this often 
-means that one of the components is very small. A more nuanced view is provided 
-by separators:
-
-\begin{definition}
-(Separator) A separator is a partition of the vertices of a graph into sets 
-$(A,B,C)$ where $|A|, |B| \geq c|V|$ where $0<c<1/2$ is called the separation 
-constant. The size of the separator is $|C|$.  
-\end{definition}
-
 
 The main objects of study in this work are polytopes. They are interesting 
 objects in their own right but also play an important role in e.g. 
@@ -98,7 +78,7 @@ and $P\cap Q \in \mathfrak{C}$.
 \end{definition}
 
 Examples of polytopal complexes include the polytope itself and its 
-\texit{boundary complex} which is the collection of all proper faces of $P$. 
+\textit{boundary complex} which is the collection of all proper faces of $P$. 
 The $k$-skeleton of a polytope is the collection of all faces of dimension 
 $\leq k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and 
 the boundary complex is the $(d-1)$-skeleton. The 1-skeleton of a polytope is 
@@ -120,6 +100,18 @@ The faces of a simplex are lower dimensional simplices. A polytope whose facets
 \textit{simple}. The vertices of a simple $d$-polytope are contained in exactly 
 $d$ edges and $d$ facets.
 
+Another important polytope is the $n$-cube.
+
+\begin{definition}
+ The $d$-cube (or hypercube) is a defined by the inequalities
+\begin{equation}
+ 0 \leq x_i \leq 1 
+\end{equation}
+for $i \in 1,\dots, n$.
+\end{definition}
+The $d$-cube has $2^d$ vertices, $n2^{d-1}$ edges and $2d$ facets which
+are $(d-1)$-cubes.
+
 Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
 \textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
 \rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
@@ -138,7 +130,62 @@ is called stacking on a facet. It means adding a new vertex to the polytope
 which satisfies all the inequalities in the irredundant description with strict 
 inequality except one (which is violated).
 
+Graphs appear everywhere in mathematics but they are especially common in 
+combinatorics. 
 
+\begin{definition}
+(Graph) A graph is an ordered pair $G=(V,E)$. The elements of $V$ are called 
+vertices. The elements of $E$ are 2-element subsets of $V$ and they are called 
+the edges of the graph. 
+\end{definition}
+
+A $d$-regular graph is a graph where every vertex is incident to a $d$ edges.
+
+The connectivity of graph is the minimum number of vertices or edges that are 
+required to be removed in order to disconnect the graph The graphs of 
+3-polytopes are precisely all planar, simple, 3-connected graphs. However, this 
+often means that one of the components is very small. A more nuanced view is 
+provided 
+by separators:
+
+\begin{definition}
+(Separator) A (vertex) separator is a partition of the vertices of a graph into 
+sets $(A,B,C)$ where $|A|, |B| \geq c|V|$ where $0<c<1/2$ is called the 
+separation 
+constant. The size of the separator is $|C|$.  
+\end{definition}
+
+Separators can also be defined by removing edges instead of vertices. However, 
+for regular graphs the sizes of these separators differ by a constant multiple 
+so we ignore the distinction.
+
+The size of minimal separators in the graphs of 3-polytopes was discovered by 
+Lipton and Tarjan [refhere] in 1979. They showed that planar graphs have 
+separators of size $O(\sqrt{n})$ where $n$ is the number of vertices. This is 
+the best possible result since an $mxm$-grid requires $m$ vertices to be 
+removed to be separated. However, in higher dimensions such results are 
+impossible due to the existance of \textit{neighborly polytopes}.
+
+\begin{definition}
+ A neighborly polytope on $n$-vertices is a $d$-polytope with the $\left\lfloor 
+\frac{d}{2} \right\rfloor$-skeleton of a $n$-simplex.
+\end{definition}
+
+Hence any neighborly polytope of dimension $\geq 4$ has the complete graph as 
+its graph and can't be separated by removing vertices. However, simple 
+$d$-polytopes have $d$-regular graphs and there better results could be 
+possible. 
+
+An analogous class of polytopes which we will be using is called neighbourly 
+cubical polytopes. 
+
+\begin{definition}
+ A neighborly cubical polytope is a $d$-polytope with the $\left\lfloor 
+\frac{d}{2} 
+\right\rfloor$-skeleton of a $n$-cube and whose facets are $d-1$ cubes.
+\end{definition}
+
+They were first discovered by Joswig and Ziegler.
 
 \section{The End}
 \label{sec:end}
