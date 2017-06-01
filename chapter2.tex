@@ -27,7 +27,7 @@ half-space, that is
 c_i \}
 \end{equation}
 where $a_i \in \mathbb{R}^d$ are normal vectors of the hyperplanes and $c_i \in 
-mathbb{R}$ are displacements. If this description is minimal with respect to 
+\mathbb{R}$ are displacements. If this description is minimal with respect to 
 the number of half-spaces required to describe $P$, it is called irredundant.
 \end{definition}
 
@@ -37,7 +37,7 @@ equivalent.
 The dimension of a polytope is the dimension of its affine hull. The affine 
 hull of a set of points is the smallest hyperplane which contains all of the 
 points. If the lowest dimensional hyperplane which contains $n$ points is 
-$(n-)1$-dimensional, the points are set to be affinely independent. The 
+$(n-1)$-dimensional, the points are set to be affinely independent. The 
 boundary 
 of a polytope consists of lower dimensional polytopes called faces. 
 \begin{definition}
@@ -52,15 +52,32 @@ where the hyperplane has to be \textit{valid}, that is $\mathbf{a}\mathbf{x}
 
 Some faces have special names: the 0-dimensional faces are called 
 \textit{vertices}, the 1-dimensional faces are \textit{edges} and the 
-$d-1$-dimensional faces are \textit{facets}. The faces of various dimensions 
-are counted by the face vector
+$d-1$-dimensional faces are \textit{facets}.
+ The faces of a polytope 
+form a lattice with ordering given by inclusion. This lattice is called the 
+\textit{face lattice} of the polytope.
+
+The faces of various dimensions 
+are counted by the face vector.
 \begin{definition}
  (Face vector) The face vector is $(f_0, f_1, \dots, f_{d-1})$ where $f_i$ is 
 the number of $i$-dimensional faces.
 \end{definition}
- The faces of a polytope 
-form a lattice with ordering given by inclusion. This lattice is called the 
-\textit{face lattice} of the polytope.
+The face vector satisfies the famous Euler-Poincare equation
+\begin{equation}
+ \sum_{i=0}^{d-1} (-1)^i f_i = 1 - (-1)^d.
+\end{equation}
+This is the only linear equation satisfied by the face vector. However, we can 
+find more constraints by studying the \textit{flag vector}.
+
+\begin{definition}
+ (Flag vector) The flag vector counts the chains of faces in specified 
+dimensions.
+\end{definition}
+
+For example, the entry $f_{013}$ counts the number of chains in the face 
+lattice which has entries in dimensions $(0,1,3)$. However, many of the entries 
+in the flag vector are redundant.
 
 A polytopal complex is a collection of polytopes that fit together nicely.
 More precisely:
@@ -69,25 +86,41 @@ More precisely:
 polytopes with the following properties:
 \begin{enumerate}
  \item The empty polytope $\emptyset \in \mathfrak{C}$.
-  \item If $F \subset P$ is a face of $P$ and $P \in \mathfrak{C}$, then 
-$F\mathfrak{C}$.
-\item The intersection $P\cap Q$ of $P,Q \in \mathfrak{C}$ is a face of both 
-and $P\cap Q \in \mathfrak{C}$.
+  \item (Downward closure) If $F \subset P$ is a face of $P$ and $P \in 
+\mathfrak{C}$, then 
+$F \in \mathfrak{C}$.
+\item The intersection $P\cap Q$ of $P,Q \in \mathfrak{C}$ is a face of both.
+
 \end{enumerate}
 
 \end{definition}
 
-Examples of polytopal complexes include the polytope itself and its 
-\textit{boundary complex} which is the collection of all proper faces of $P$. 
-The $k$-skeleton of a polytope is the collection of all faces of dimension 
-$\leq k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and 
-the boundary complex is the $(d-1)$-skeleton. The 1-skeleton of a polytope is 
-called its graph and will be important for us later on.
+% Examples of polytopal complexes include the polytope itself and its 
+% \textit{boundary complex} which is the collection of all proper faces of $P$. 
+Any polytope $P$ is a polytopal complex, as is the \textit{boundary complex} of 
+$P$. The boundary complex is the collection of proper faces of $P$.
+The $k$-skeleton of a polytope is the collection of all faces of dimension $\leq 
+k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and the 
+boundary complex is the $(d-1)$-skeleton. The 1-skeleton of a polytope is called 
+its graph and will be important for us later on.
 
-Each polytope has a dual polytope associated to it. Its face lattice is the 
-lattice of the original polytope ``upside down''. Hence its $i$-faces 
-correspond to the $(d-i)$-dimensional faces of the original. The dual of the 
-dual is the original polytope. 
+% Each polytope has a dual polytope associated to it. Its face lattice is the 
+% lattice of the original polytope ``upside down''. Hence its $i$-faces 
+% correspond to the $(d-i)$-dimensional faces of the original. The dual of the 
+% dual is the original polytope. 
+
+Two polytopes are said to be dual to each other if there is an inclusion 
+reversing bijection between their face lattices. Clearly, the dual of a 
+$d$-polytope is another $d$-polytope. The fact that every polytope has a dual 
+can be seen from the \textit{polar set}. Let $A\subset \mathbb{R}^d$, then the 
+polar set $A^*$ is defined by
+\begin{equation}
+ A^* = \{y \in \mathbb{R}^d \mid \langle x,y\rangle \leq 1 \, \forall  x  \in A 
+\} 
+\end{equation}
+If $A$ is a convex compact set with $0 \in$ int $A$, so is $A^*$. In 
+particular, if $A$ is a polytope containing $0$ in the interior, $A^*$ is dual 
+to it. 
 
 In any dimension, the polytope with the fewest vertices is the simplex. 
 \begin{definition}
@@ -98,7 +131,7 @@ The faces of a simplex are lower dimensional simplices. A polytope whose facets
 (but not necessarily the polytope itself) are simplices is called 
 \textit{simplicial}. The dual of a simplicial polytope is called 
 \textit{simple}. The vertices of a simple $d$-polytope are contained in exactly 
-$d$ edges and $d$ facets.
+$d$ edges and $d$ facets. 
 
 Another important polytope is the $n$-cube.
 
@@ -125,10 +158,13 @@ done by adding a new inequality to the description. This inequality is not
 valid for the vertex which is cut off but is valid for all other vertices. All 
 the polytopes formed this way are combinatorially equivalent (but not 
 necessarily affinely isomorphic). For each face intersected by the hyperplane, 
-a face of one dimension lower is added to the face lattice. The dual operation 
-is called stacking on a facet. It means adding a new vertex to the polytope 
-which satisfies all the inequalities in the irredundant description with strict 
-inequality except one (which is violated).
+a face of one dimension lower is added to the face lattice. The new facet is 
+called the \textit{vertex figure}. Vertex cuts can be generalized to cutting of 
+faces of higher dimensions by requiring the added inequality to be violated by 
+all the vertices in the face. The dual operation is called stacking on a facet. 
+It means adding a new vertex to the polytope which satisfies all the 
+inequalities in the irredundant description with strict inequality except one 
+(which is violated).
 
 Graphs appear everywhere in mathematics but they are especially common in 
 combinatorics. 
@@ -138,6 +174,8 @@ combinatorics.
 vertices. The elements of $E$ are 2-element subsets of $V$ and they are called 
 the edges of the graph. 
 \end{definition}
+
+If $(u,v) \in E$, the vertices $u$ and $v$ are said to be \textit{adjacent}.
 
 A $d$-regular graph is a graph where every vertex is incident to a $d$ edges.
 
@@ -154,6 +192,15 @@ sets $(A,B,C)$ where $|A|, |B| \geq c|V|$ where $0<c<1/2$ is called the
 separation 
 constant. The size of the separator is $|C|$.  
 \end{definition}
+
+Another way to think about separators is by minimizing \textit{neighborhoods} 
+of a set of given size.
+
+\begin{definition}
+ (Neighborhood) Let $S \subset V$ be a set of vertices. Then its neighborhood 
+$N(S)$ is the set $\{v \in V\setminus S \mid (u,v) \in E, u \in S\}$. 
+\end{definition}
+
 
 Separators can also be defined by removing edges instead of vertices. However, 
 for regular graphs the sizes of these separators differ by a constant multiple 
@@ -180,12 +227,115 @@ An analogous class of polytopes which we will be using is called neighbourly
 cubical polytopes. 
 
 \begin{definition}
- A neighborly cubical polytope is a $d$-polytope with the $\left\lfloor 
-\frac{d}{2} 
-\right\rfloor$-skeleton of a $n$-cube and whose facets are $d-1$ cubes.
+ A neighborly cubical polytope $\NC_d(m)$ is a $d$-polytope with the 
+$\left\lfloor \frac{d}{2} 
+\right\rfloor$-skeleton of a $m$-cube and whose facets are $d-1$ cubes.
 \end{definition}
 
 They were first discovered by Joswig and Ziegler.
+
+\begin{conjecture}
+ (Kalai 1991/2004) The graph of a simple $d$-polytope can be separated by 
+removing $O(n^{(d-2)/(d-1)})$ vertices. 
+\end{conjecture}
+
+This reduces to the planar separator theorem in the 3-dimensional case. 
+
+\begin{theorem}
+ There exist $d$-dimensional simple polytopes which require separators of size 
+$\Theta(n/(\log n)^{\frac{3}{2}})$.
+\end{theorem}
+
+Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
+While hypercubes are simple polytopesm, $\NC_4(m)$ are not since each vertex is 
+incident to $m>d$ edges. 
+
+\begin{lemma}
+ A $d$-polytope can be made simple by $(d-2)$ iterative cuts.
+\end{lemma}
+
+\begin{proof}
+This is easier to see in the dual case. The dual operation of cutting a vertex 
+is stacking on a facet. By stacking on all facets one after the other, we 
+remove all the original facets and introduce new ones, which are pyramids over 
+$(d-2)$-faces. The original $(d-2)$-faces are preserved and we can stack on 
+them, removing them and the facets created in the previous operation. Every 
+iteration of this operation removes all the facets created in previous 
+iterations and creates new facets which are iterated pyramids on successively 
+lower dimensional faces. Once we have done it $(d-2)$ times, the iterated 
+pyramids are over edges and hence simplices.  
+\end{proof}
+
+Therefore, by 2 iterations of cuts, we can turn $\NC_4(m)$ into a simple 
+polytope. Let us see what this polytope looks like. 
+
+The starting polytope $\NC_4(m)$ has the flag vector 
+\begin{align}
+ flag(\NC_4(m)) &:= (f_0, f_1, f_2, f_3; f_{03}) \\
+	&= (2^m, m2^{m-1}, 3(m-2)2^{m-2}, (m-2)2^{m-2}; 8(m-2)2^{m-2}) \\
+	&= (4, 2m, 3(m-2), m-2; 8(m-2))2^{m-2}
+\end{align}
+
+The first two entries follow from the fact that the graph is the same as that 
+of the $m$-cube. The final entry follows from the fact that the facets are 
+cubes and hence consists of 8 vertices. Since the facets are cubes, they 
+consists of 6 squares, and each of these squares is an intersection of two 
+cubes. Hence we know that $3f_2 = f_3$ and we can calculate these values with 
+the Euler-Poincare formula.
+
+We denote the polytope formed by cutting of all the vertices by $\NC'_4(m)$.
+Cutting off all the vertices means removing all of the original vertices, but 
+adding 2 for each edge, one for each end of the edge. The facets of this new 
+polytope come in two types:
+
+\begin{itemize}
+ \item The $(m-2)2^{m-2}$ original facets, which are cubes whose vertices are 
+cut off. These are simple polytopes with $f$-vector (24,36,14).
+ \item The $2^m$ new facets which are the vertex figures. The facets of these 
+facets are vertex figures of the cube and hence triangles. Therefore these 
+new facets are simplicial. Their $f$-vector is ($m$, 
+$3m-6, 2m-4)$.
+\end{itemize}
+
+This means that the flag vector of $\NC'_4(m)$ is 
+\begin{equation}
+ flag(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2})
+\end{equation}
+
+By cutting of all of the original (but shortened) edges we arrive at 
+$\NC''_4(m)$. It has three types of facets:
+
+\begin{itemize}
+ \item $(m-2)2^{m-2}$ simple polytopes which correspond to the facets of 
+$\NC_4(m)$, but whose vertices and edges have been cut. Their $f$-vector is 
+(48, 72, 26).
+\item $m2^{m-1}$ prisms over polygons with $3$ to $m-1$ sides. They come from 
+the edges of the original polytope.
+\item $2^m$ simple polytopes which are the truncated vertex figures of 
+$\NC_4(m)$. Their $f$-vector is $(6m - 12, 9m-18, 3m-4)$.
+\end{itemize}
+
+Using the knowledge of the facets we can work out the flag vector of 
+$\NC''_4(m)$.
+
+\begin{equation}
+ flag(\NC''_4(m)) = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
+\end{equation}
+
+Since $2f_0 = f_1$, we can verify that $\NC''_4(m)$ is indeed a simple 
+polytope.
+
+\subsection{Horsey Porsey}
+
+We are interested in what the graph $G(\NC''_4(m)$ looks like. Its most 
+striking feature is its similarity to the graph of the hypercube, $C_m$. $C_m$ 
+is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC''_4(m)$ similarly 
+consists of $2^m$ groups of $(6m-12)$ vertices which we call \textit{clusters}. 
+Each cluster is a 3-regular graph and the clusters are connected to each other 
+by 3 to $m-1$ edges. 
+
+Harper solved the \textit{discrete isoperimetric problem} on the hypercube. The 
+problem asks 
 
 \section{The End}
 \label{sec:end}
