@@ -10,8 +10,8 @@ two ways to define a polytope, the vertex (or interior) representation and the
 half-space (or exterior) representation.
 
 \begin{definition}
-(V-Polytope) A polytope is the convex hull of a finite number of points in 
-$\mathbb{R}^d$, that is 
+(V-Polytope) A polytope is the convex hull of a finite number of points $V 
+\subset \mathbb{R}^d$, that is 
 \begin{equation}
  P = \left\{x\in \mathbb{R}^d \middle| x = \sum_{i=1}^{|V|} \lambda_i v_i, 
 0\leq \lambda_i \leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}
@@ -23,10 +23,12 @@ $\mathbb{R}^d$, that is
  (H-polytope) A polytope is the bounded intersection of a finite number of 
 half-space, that is
 \begin{equation}
- P = \bigcap_{i=1}^n \{x \in \mathbb{R}^d \mid \mathbf{a}_i^T \mathbf{x} \leq 
-c_i \}
+ P = \bigcap_{i=1}^n \left\{x \in \mathbb{R}^d \mid \mathbf{a}_i^T \mathbf{x} 
+\leq 
+c_i \right\}
 \end{equation}
-where $a_i \in \mathbb{R}^d$ are normal vectors of the hyperplanes and $c_i \in 
+where $\mathbf{a}_i \in \mathbb{R}^d$ are normal vectors of the hyperplanes and 
+$c_i \in 
 \mathbb{R}$ are displacements. If this description is minimal with respect to 
 the number of half-spaces required to describe $P$, it is called irredundant.
 \end{definition}
@@ -35,10 +37,12 @@ It is a fundamental theorem of polytopes that these two representations are
 equivalent.
 
 The dimension of a polytope is the dimension of its affine hull. The affine 
-hull of a set of points is the smallest hyperplane which contains all of the 
-points. If the lowest dimensional hyperplane which contains $n$ points is 
-$(n-1)$-dimensional, the points are set to be affinely independent. The 
-boundary 
+hull of a set of points is the dimension of the smallest hyperplane which 
+contains all of the points. If the lowest dimensional hyperplane which contains 
+$n$ points is $(n-1)$-dimensional, the points are set to be affinely 
+independent.
+
+ The boundary 
 of a polytope consists of lower dimensional polytopes called faces. 
 \begin{definition}
  (Face) A face is an intersection of a polytope with a hyperplane 
@@ -49,10 +53,10 @@ where the hyperplane has to be \textit{valid}, that is $\mathbf{a}\mathbf{x}
 \leq c$ holds for all points in $P$. 
 
 \end{definition}
-
+A face that is not equal to all of $P$ is called a \textit{proper face}.
 Some faces have special names: the 0-dimensional faces are called 
-\textit{vertices}, the 1-dimensional faces are \textit{edges} and the 
-$d-1$-dimensional faces are \textit{facets}.
+\textit{vertices}, the 1-dimensional faces are called \textit{edges} and the 
+$d-1$-dimensional faces are called \textit{facets}.
  The faces of a polytope 
 form a lattice with ordering given by inclusion. This lattice is called the 
 \textit{face lattice} of the polytope.
@@ -60,7 +64,8 @@ form a lattice with ordering given by inclusion. This lattice is called the
 The faces of various dimensions 
 are counted by the face vector.
 \begin{definition}
- (Face vector) The face vector is $(f_0, f_1, \dots, f_{d-1})$ where $f_i$ is 
+ (Face vector) The face vector is $(f_0, f_1, \dots, f_{d-1}) \in \mathbb{Z}^d$ 
+where $f_i$ is 
 the number of $i$-dimensional faces.
 \end{definition}
 The face vector satisfies the famous Euler-Poincare equation
@@ -136,7 +141,7 @@ $d$ edges and $d$ facets.
 Another important polytope is the $n$-cube.
 
 \begin{definition}
- The $d$-cube (or hypercube) is a defined by the inequalities
+ The $d$-cube is a simple polytope defined by the inequalities
 \begin{equation}
  0 \leq x_i \leq 1 
 \end{equation}
@@ -176,9 +181,7 @@ the edges of the graph.
 \end{definition}
 
 If $(u,v) \in E$, the vertices $u$ and $v$ are said to be \textit{adjacent}.
-
 A $d$-regular graph is a graph where every vertex is incident to a $d$ edges.
-
 The connectivity of graph is the minimum number of vertices or edges that are 
 required to be removed in order to disconnect the graph The graphs of 
 3-polytopes are precisely all planar, simple, 3-connected graphs. However, this 
@@ -209,7 +212,7 @@ so we ignore the distinction.
 The size of minimal separators in the graphs of 3-polytopes was discovered by 
 Lipton and Tarjan [refhere] in 1979. They showed that planar graphs have 
 separators of size $O(\sqrt{n})$ where $n$ is the number of vertices. This is 
-the best possible result since an $mxm$-grid requires $m$ vertices to be 
+the best possible result since an $m-by-m$-grid requires $m$ vertices to be 
 removed to be separated. However, in higher dimensions such results are 
 impossible due to the existance of \textit{neighborly polytopes}.
 
@@ -247,7 +250,7 @@ $\Theta(n/(\log n)^{\frac{3}{2}})$.
 \end{theorem}
 
 Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
-While hypercubes are simple polytopesm, $\NC_4(m)$ are not since each vertex is 
+While hypercubes are simple polytopes, $\NC_4(m)$ are not since each vertex is 
 incident to $m>d$ edges. 
 
 \begin{lemma}
@@ -263,7 +266,8 @@ them, removing them and the facets created in the previous operation. Every
 iteration of this operation removes all the facets created in previous 
 iterations and creates new facets which are iterated pyramids on successively 
 lower dimensional faces. Once we have done it $(d-2)$ times, the iterated 
-pyramids are over edges and hence simplices.  
+pyramids are over edges and hence simplices. This means that the facets are 
+simplices, so the polytope is simplicial and its dual is simple.
 \end{proof}
 
 Therefore, by 2 iterations of cuts, we can turn $\NC_4(m)$ into a simple 
@@ -327,7 +331,7 @@ polytope.
 
 \subsection{Horsey Porsey}
 
-We are interested in what the graph $G(\NC''_4(m)$ looks like. Its most 
+We are interested in what the graph $G(\NC''_4(m))$ looks like. Its most 
 striking feature is its similarity to the graph of the hypercube, $C_m$. $C_m$ 
 is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC''_4(m)$ similarly 
 consists of $2^m$ groups of $(6m-12)$ vertices which we call \textit{clusters}. 
@@ -335,7 +339,16 @@ Each cluster is a 3-regular graph and the clusters are connected to each other
 by 3 to $m-1$ edges. 
 
 Harper solved the \textit{discrete isoperimetric problem} on the hypercube. The 
-problem asks 
+problem asks to find the set of a given size $k$ with minimal size 
+neighborhood. The answer turns out to be Hamming balls.
+
+\begin{definition}
+ (Hamming ball) Let $a,b \in \{0,1\}^n$. The Hamming distance between $a$ and 
+$b$ is the number of elements where $a$ and $b$ differ. The Hamming ball 
+$B(x,r)$ is the set of elements at distance $\leq r$ from $x$.
+\end{definition}
+
+
 
 \section{The End}
 \label{sec:end}
