@@ -204,6 +204,8 @@ of a set of given size.
 $N(S)$ is the set $\{v \in V\setminus S \mid (u,v) \in E, u \in S\}$. 
 \end{definition}
 
+We are generally interested how the size of the separator behaves as a function 
+of the number of vertices for some fixed graph family.
 
 Separators can also be defined by removing edges instead of vertices. However, 
 for regular graphs the sizes of these separators differ by a constant multiple 
@@ -329,14 +331,14 @@ $\NC''_4(m)$.
 Since $2f_0 = f_1$, we can verify that $\NC''_4(m)$ is indeed a simple 
 polytope.
 
-\subsection{Horsey Porsey}
+\subsection{Small separator}
 
-We are interested in what the graph $G(\NC''_4(m))$ looks like. Its most 
-striking feature is its similarity to the graph of the hypercube, $C_m$. $C_m$ 
-is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC''_4(m)$ similarly 
-consists of $2^m$ groups of $(6m-12)$ vertices which we call \textit{clusters}. 
-Each cluster is a 3-regular graph and the clusters are connected to each other 
-by 3 to $m-1$ edges. 
+We are interested in what the graph $G(\NC''_4(m)) = C''_m$ looks like. Its 
+most striking feature is its similarity to the graph of the hypercube, $Q_m$. 
+$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC''_4(m)$ 
+similarly consists of $2^m$ groups of $(6m-12)$ vertices which we call 
+\textit{clusters}. Each cluster is a 3-regular graph and the clusters are 
+connected to each other by 3 to $m-1$ edges. 
 
 Harper solved the \textit{discrete isoperimetric problem} on the hypercube. The 
 problem asks to find the set of a given size $k$ with minimal size 
@@ -347,6 +349,64 @@ neighborhood. The answer turns out to be Hamming balls.
 $b$ is the number of elements where $a$ and $b$ differ. The Hamming ball 
 $B(x,r)$ is the set of elements at distance $\leq r$ from $x$.
 \end{definition}
+
+A Hamming ball $B(x,r) \subset Q_m$ has 
+\begin{equation}
+ \sum_{i=0}^r {m \choose i}
+\end{equation}
+vertices. If $k$ can't be expressed in this form, let $r$ be maximal so that 
+the sum is $\leq k$ and include some vertices with distance $r+1$ to the set. 
+However, the choice is not arbitrary. Suppose $x$ is the vertex labeled with 
+all zeros. Then the extra vertices are those which come first in 
+\textit{lexicographic order} of vertices with $r+1$ ones and the rest zeros.
+\begin{definition}
+ (Lexicographic order) Let $a,b \in \{0,1\}^m$. Then $a<b$ if the first $i$ 
+elements of $a$ and $b$ are the same but $a_{i+1} < b_{i+1}$.
+\end{definition}
+The sets with smallest vertex boundary hence form an increasing sequence i.e. 
+the previous set is a subset of the following set. The order in which the 
+vertices are added is also called \textit{graded lexicographic order}.
+
+Asymptotically, if $k = c2^m$ for some $0<c<1$ as $m\rightarrow \infty$, this 
+means that the layer $r$ needs to be near the middle, i.e. $r\approx m/2$. 
+By Stirling's formula,
+\begin{equation}
+ {m \choose m/2} = \Theta \left(\frac{2^m}{\sqrt{m}}\right)
+\end{equation}
+
+Let $f: \NC''_4(m) \rightarrow Q_m$ 
+be the map that sends all the vertices of a cluster to the corresponding vertex 
+in the cube. 
+Let $(A,B,C)$ be a separator in $C''_m$. Then we can define a partition on 
+$Q_m$ to sets $(a,b,c)$ with $f$. If $f^\{-1\}(v) \subset A$ (resp.) $B$ then 
+$v \in a$ (resp.) $b$. Otherwise, $v \in c$. Clearly $|c| \leq |C|$, since a 
+cluster can't contain both $A$ and $B$ vertices without containing $C$ vertices 
+as it is a connected graph.
+Now, no vertices with labels $a$ and $b$ are adjacent since this would imply 
+that a cluster which belongs to $A$ is adjacent to a cluster which belongs to 
+$B$ which impossible in a separator. Therefore
+\begin{enumerate}
+ \item $(a,b,c)$ is a separator of $Q_m$ or
+\item one or both of $a,b$ is small.
+\end{enumerate}
+In the first case, $c$ contains at least the neighborhood of $a$ and $b$ and 
+hence its size is bounded by the isoperimetric inequality. Therefore $c$ has 
+$\Omega(2^m/\sqrt{m}$ vertices. Hence $C$ contains at least $\Omega(N/(\log 
+N)^{\frac{3}{2}}$.
+
+In the latter case, $c$ must contain a linear number of vertices. This means 
+that also the set $C$ must be large.  
+
+The minimal separators of $C''_m$ have $O(n/\log n)$ vertices. By setting $A$ 
+and $B$ to two $(m-1)$-cubes along a random ``edge direction'' of $Q_m$ we get 
+two sets with $3\cdot 2^m$ edges going between them. Moving either end vertex 
+of the edge to set $C$ we get a separator with $3\cdot 2^m = O(n/\log(n)$ 
+edges.
+
+\subsection{Higher dimensions}
+
+ 
+
 
 
 
