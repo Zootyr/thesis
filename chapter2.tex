@@ -5,7 +5,7 @@
 The main objects of study in this work are polytopes. They are interesting 
 objects in their own right but also play an important role in e.g. 
 optimization. In the following section we introduces the basics of polytopes. 
-More in-depth knowledge can be found in Ziegler's book [citation]. 
+More in-depth knowledge can be found in Ziegler's book \cite{PolyLec}. 
 
 There are 
 two ways to define a polytope, the vertex (or interior) representation and the 
@@ -238,7 +238,7 @@ for regular graphs the sizes of these separators differ by a constant multiple
 so we ignore the distinction.
 
 The size of minimal separators in the graphs of 3-polytopes was discovered by 
-Lipton and Tarjan [refhere] in 1979. They showed that planar graphs have 
+Lipton and Tarjan \cite{LiTa} in 1979. They showed that planar graphs have 
 separators of size $O(\sqrt{n})$ where $n$ is the number of vertices. This is 
 the best possible result since an $m-by-m$-grid requires $m$ vertices to be 
 removed to be separated. However, in higher dimensions such results are 
@@ -263,20 +263,22 @@ $\left\lfloor \frac{d}{2}
 \right\rfloor$-skeleton of a $m$-cube and whose facets are $d-1$ cubes.
 \end{definition}
 
-They were first discovered by Joswig and Ziegler. Sanyal and Ziegler 
+They were first discovered by Joswig and Ziegler. Sanyal and Ziegler \cite{Z102}
 generalized the construction to show that each $(d-2)$-dimensional neighborly 
-polytope on $(m-1)$ vertices can be used to define a distinct $\NC_d(m)$.
+polytope on $(m-1)$ vertices can be used to define a distinct $\NC_d(m)$. 
 
 \begin{conjecture}
- (Kalai 1991/2004) The graph of a simple $d$-polytope can be separated by 
-removing $O(n^{(d-2)/(d-1)})$ vertices. 
+ (Kalai 1991 \cite{Ka2}, corrected version 2004 \cite{kalai04:_polyt}) The 
+graph of a simple $d$-polytope can be separated by removing 
+$O(n^{(d-2)/(d-1)})$ vertices. 
 \end{conjecture}
 
 This reduces to the planar separator theorem in the 3-dimensional case. 
 
 \begin{theorem}
- There exist $d$-dimensional simple polytopes which require separators of size 
-$\Theta(n/(\log n)^{\frac{3}{2}})$.
+\label{maintheorem}
+ Let $d\geq 4$. There exist $d$-dimensional simple polytopes which require 
+separators of size $\Theta(n/(\log n)^{\frac{3}{2}})$.
 \end{theorem}
 
 Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
