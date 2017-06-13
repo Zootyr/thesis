@@ -1,0 +1,38 @@
+% Star graph
+% Author: Anthony Labarre <http://homepages.ulb.ac.be/~alabarre/home.html>
+\documentclass{minimal}
+
+\usepackage{tikz}
+\newcommand{\LD}{\langle}
+\newcommand{\RD}{\rangle}
+
+\begin{document}
+
+\begin{center}
+\begin{tikzpicture}
+    \tikzstyle{every node}=[draw,circle,fill=white,minimum size=4pt,
+                            inner sep=0pt]
+
+    % First, draw the inner hexagon with a ``pin'' -- namely, (3214)
+    \draw (0,0) node (1) [label=120:1] {}
+        -- ++(0:2.0cm) node (2) [label=60:2] {}
+        -- ++(330:2.0cm) node (3) [label=right:3] {}
+        -- ++(300:2.0cm) node (4) [label=right:4] {}
+        -- ++(270:2.0cm) node (5) [label=right:5] {}
+        -- ++(240:2.0cm) node (6) [label=300:6] {}
+        -- ++(210:2.0cm) node (7) [label=below:7] {}
+        -- ++(180:2.0cm) node (8) [label=below:8] {}
+        -- ++(150:2.0cm) node (9) [label=210:9] {}
+        -- ++(120:2.0cm) node (10) [label=left:10] {}
+        -- ++(90:2.0cm) node (11) [label=left:11] {}
+        -- ++(60:2.0cm) node (12) [label=120:12] {}
+	-- (1)
+        -- ++(285:3.86cm) node (0) [label=right:0] {};
+%        -- (1234) % shape is closed, we now connect it to an outer vertex:
+%        -- ++(300:2.0cm) node (3214) [label=120:$\LD 3\ 2\ 1\ 4\RD$] {};
+\draw[loosely dashed] (7) -- (0);
+ 
+\end{tikzpicture}
+\end{center}
+
+\end{document}

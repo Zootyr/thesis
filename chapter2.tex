@@ -5,7 +5,9 @@
 The main objects of study in this work are polytopes. They are interesting 
 objects in their own right but also play an important role in e.g. 
 optimization. In the following section we introduces the basics of polytopes. 
-More in-depth knowledge can be found in Ziegler's book [citation]. There are 
+More in-depth knowledge can be found in Ziegler's book [citation]. 
+
+There are 
 two ways to define a polytope, the vertex (or interior) representation and the 
 half-space (or exterior) representation.
 
@@ -171,6 +173,30 @@ It means adding a new vertex to the polytope which satisfies all the
 inequalities in the irredundant description with strict inequality except one 
 (which is violated).
 
+Another way to produce new polytopes is taking prisms. This operation takes a 
+$d$-polytope $P$ in $\mathbb{R}^d$ and produces a $(d+1)$-polytope in 
+$\mathbb{R}^{d+1}$. 
+\begin{definition}
+ A prism is the convex hull of a copy of $P$ embedded on the hyperplane 
+$x_{d+1} = 0$ and another copy on the the hyperplane $x_{d+1} = 1$.
+\end{definition}
+
+ The new polytope prism$(P)$ has 2 copies of 
+each face at the top and bottom and for each face $F$ a face isomorphic to 
+prism$(F)$ in the middle. Two vertices in $G(\text{pyr}(P))$ are adjacent if 
+they are copies of the same vertex or if they are in the same copy and are 
+adjacent there. 
+The $n$-cube can be defined as the $n$-fold 
+prism over the zero dimensional polytope (a point). The dual operation to prism 
+is the bipyramid. 
+\begin{definition}
+ (Bipyramid) Let $P\subset \mathbb{R}^d$ be a $d$-polytope with zero in the 
+interior. Then the bipyramid bipyr$(P)$ is the convex hull of $P$ embedded on 
+the hyperplane $x_{d+1} = 0$ and the points $(0,0,\dots, 1)$ and $(0,0,\dots, 
+-1)$.
+\end{definition}
+
+
 Graphs appear everywhere in mathematics but they are especially common in 
 combinatorics. 
 
@@ -237,7 +263,9 @@ $\left\lfloor \frac{d}{2}
 \right\rfloor$-skeleton of a $m$-cube and whose facets are $d-1$ cubes.
 \end{definition}
 
-They were first discovered by Joswig and Ziegler.
+They were first discovered by Joswig and Ziegler. Sanyal and Ziegler 
+generalized the construction to show that each $(d-2)$-dimensional neighborly 
+polytope on $(m-1)$ vertices can be used to define a distinct $\NC_d(m)$.
 
 \begin{conjecture}
  (Kalai 1991/2004) The graph of a simple $d$-polytope can be separated by 
@@ -331,6 +359,8 @@ $\NC''_4(m)$.
 Since $2f_0 = f_1$, we can verify that $\NC''_4(m)$ is indeed a simple 
 polytope.
 
+\subsection{Combinatorial types}
+
 \subsection{Small separator}
 
 We are interested in what the graph $G(\NC''_4(m)) = C''_m$ looks like. Its 
@@ -405,7 +435,20 @@ edges.
 
 \subsection{Higher dimensions}
 
- 
+This construction generalizes easily to higher dimensions. There are two 
+natural ways, using $\NC_d(m)$ i.e. higher dimensional neighborly polytope, or 
+taking prisms over $\NC''_4(m)$.  In the first case we have to do more cuts to 
+make the polytope simple, resulting in a large number of vertices. Hence the 
+second way is the correct one. 
+
+Let $G$ be the graph of a $(d-4)$-fold prism over $\NC''_4(m)$. Any separator 
+$(A,B,C)$ of $\NC''_4(m)$ can be turned into a separator of $G$ by setting 
+$(A',B',C')$ to be the prisms over their respective sets. Since no vertices 
+$a\in A, b\in B$ are adjacent and all the copies of a single vertex are in the 
+same set, there are no edges between vertices in $A'$ and $B'$. This means that 
+$G$ is at least as easy to separate as $\NC''_4(m)$. On the other hand, $G$ 
+also has a cubelike structure and hence with the discrete isoperimetric 
+inequality we get the same upper bound as for $\NC''_4(m)$. 
 
 
 
