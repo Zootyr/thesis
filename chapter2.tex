@@ -1,3 +1,30 @@
+\chapter{Introduction}
+\label{intro}
+
+Graph separators are a way to separate a graph into two disjoint parts which 
+are roughly equal in size. The separators can be defined either on the edges or 
+the vertices. We study the separators of simple polytopes whose graphs are 
+regular, which means that the size of the minimal vertex and edge separators 
+differ at most by a multiplicative constant so we choose to ignore this 
+distinction and focus on the vertex separators. 
+
+Previously, Ungar \cite{Ungar1951} had proven that planar graphs have minimal 
+separators of size $O(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
+separator theorem  \cite{LiTa} which shows that the sharp bound is 
+$O(\sqrt{n})$. Miller and Thurston \cite{MillerThurston-separators} gave a 
+geometric proof of the planar separation theorem using the  
+Koebe–Andreev–Thurston circle-packing theorem.
+
+Miller, Teng, Thurston and Vavasis \cite{MillerTengThurstonVavasis} generalized 
+the theorem to intersection graphs of ball packings in $d$ dimensions. This 
+led Kalai (\cite{Kal07}, corrected in \cite{kalai04:_polyt}) to conjecture that 
+simple $d$-polytopes would also have small separators.
+Simplicity is necessary as the graph of the cyclic polytopes is complete for 
+$d\geq 4$ and hence has no vertex separator. Kalai also refers to 
+\cite{MillerTengThurstonVavasis} for the claim that there are triangulations of 
+$S^3$ which don't have separators the size of $O(n/\log n)$ but this is not 
+stated in the paper.
+
 \chapter{Expander graphs}
 \label{mathchapter}
 
@@ -286,7 +313,8 @@ While hypercubes are simple polytopes, $\NC_4(m)$ are not since each vertex is
 incident to $m>d$ edges. 
 
 \begin{lemma}
- A $d$-polytope can be made simple by $(d-2)$ iterative cuts.
+(See also Ewald \& Shephard \cite{Ewald1974}) A $d$-polytope can be made simple 
+by $(d-2)$ iterative cuts.
 \end{lemma}
 
 \begin{proof}

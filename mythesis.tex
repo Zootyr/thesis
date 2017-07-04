@@ -99,31 +99,22 @@ hyperref}
 
 \ToCisShort	% use this only for 1-page Table of Contents
 
-\LoFisShort	% use this only for 1-page Table of Figures
-% \emptyLoF	% use this if there is no List of Figures
-
-\LoTisShort	% use this only for 1-page Table of Tables
-% \emptyLoT	% use this if there is no List of Tables
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%       BEGIN DOCUMENT...         %%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\input macros.tex
-\input chapter1.tex
 \input chapter2.tex
 
 %%%%%%%%%   then the Bibliography, if any   %%%%%%%%%
 \bibliographystyle{plain}	% or "siam", or "alpha", etc.
 \nocite{*}		% list all refs in database, cited or not
-\bibliography{refs}		% Bib database in "refs.bib"
+\bibliography{separators}		% Bib database in "refs.bib"
 
 %%%%%%%%%   then the Appendices, if any   %%%%%%%%%
 \appendix
-\input appendixA.tex
-\input appendixB.tex
+
 
 
 \end{document}
