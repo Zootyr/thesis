@@ -25,14 +25,17 @@ $d\geq 4$ and hence has no vertex separator. Kalai also refers to
 $S^3$ which don't have separators the size of $O(n/\log n)$ but this is not 
 stated in the paper.
 
-\chapter{Expander graphs}
+\chapter{Graphs and Polytopes}
 \label{mathchapter}
 
+\section{Polytopes}
 
-The main objects of study in this work are polytopes. They are interesting 
+The main objects of study in this work are graphs of polytopes. Polytopes are 
+interesting 
 objects in their own right but also play an important role in e.g. 
-optimization. In the following section we introduces the basics of polytopes. 
-More in-depth knowledge can be found in Ziegler's book \cite{PolyLec}. 
+optimization. In the following section we introduce the basics of polytopes. 
+A more thorough introduction can be found in books by Ziegler \cite{PolyLec} 
+and Gr\"unbaum \cite{Grunbaum69convexpolytopes}. 
 
 There are 
 two ways to define a polytope, the vertex (or interior) representation and the 
@@ -59,7 +62,8 @@ c_i \right\}
 where $\mathbf{a}_i \in \mathbb{R}^d$ are normal vectors of the hyperplanes and 
 $c_i \in 
 \mathbb{R}$ are displacements. If this description is minimal with respect to 
-the number of half-spaces required to describe $P$, it is called irredundant.
+the number of half-spaces required to describe $P$, it is called 
+\textit{irredundant}.
 \end{definition}
 
 It is a fundamental theorem of polytopes that these two representations are 
@@ -67,9 +71,10 @@ equivalent.
 
 The dimension of a polytope is the dimension of its affine hull. The affine 
 hull of a set of points is the dimension of the smallest hyperplane which 
-contains all of the points. If the lowest dimensional hyperplane which contains 
-$n$ points is $(n-1)$-dimensional, the points are set to be affinely 
-independent.
+contains all of the points. A $d$-polytope in $\mathbb{R}^d$ is said to be 
+\textit{full-dimensional}. If the lowest dimensional hyperplane which contains 
+$n$ points is $(n-1)$-dimensional, the points are set to be \textit{affinely 
+independent}.
 
  The boundary 
 of a polytope consists of lower dimensional polytopes called faces. 
@@ -101,8 +106,8 @@ The face vector satisfies the famous Euler-Poincare equation
 \begin{equation}
  \sum_{i=0}^{d-1} (-1)^i f_i = 1 - (-1)^d.
 \end{equation}
-This is the only linear equation satisfied by the face vector. However, we can 
-find more constraints by studying the \textit{flag vector}.
+This is the only linear equation satisfied by the face vector. More 
+constraints can be found by studying the \textit{flag vector}.
 
 \begin{definition}
  (Flag vector) The flag vector counts the chains of faces in specified 
@@ -113,6 +118,9 @@ For example, the entry $f_{013}$ counts the number of chains in the face
 lattice which has entries in dimensions $(0,1,3)$. However, many of the entries 
 in the flag vector are redundant.
 
+We are interested in studying the graphs of polytopes. The most theoretically 
+pleasing way to define them is to consider them a special class of 
+\textit{polytopal complexes}.
 A polytopal complex is a collection of polytopes that fit together nicely.
 More precisely:
 \begin{definition}
@@ -131,12 +139,13 @@ $F \in \mathfrak{C}$.
 
 % Examples of polytopal complexes include the polytope itself and its 
 % \textit{boundary complex} which is the collection of all proper faces of $P$. 
-Any polytope $P$ is a polytopal complex, as is the \textit{boundary complex} of 
+Any polytope $P$ with its faces is a polytopal complex, as is the 
+\textit{boundary complex} of 
 $P$. The boundary complex is the collection of proper faces of $P$.
 The $k$-skeleton of a polytope is the collection of all faces of dimension $\leq 
 k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and the 
-boundary complex is the $(d-1)$-skeleton. The 1-skeleton of a polytope is called 
-its graph and will be important for us later on.
+boundary complex is the $(d-1)$-skeleton. The graph of the polytope is its 
+1-skeleton and it is denoted by $G(P)$.
 
 % Each polytope has a dual polytope associated to it. Its face lattice is the 
 % lattice of the original polytope ``upside down''. Hence its $i$-faces 
@@ -174,31 +183,37 @@ Another important polytope is the $n$-cube.
 \begin{equation}
  0 \leq x_i \leq 1 
 \end{equation}
-for $i \in 1,\dots, n$.
+for $i \in 1,\dots, d$.
 \end{definition}
-The $d$-cube has $2^d$ vertices, $n2^{d-1}$ edges and $2d$ facets which
-are $(d-1)$-cubes.
+The $d$-cube has $2^d$ vertices, $d2^{d-1}$ edges and $2d$ facets which
+are $(d-1)$-cubes. Each vertex $v$ of the $d$-cube has coordinates equal to 0 
+or 1, that is $v\in \{0,1\}^d$. The coordinate vector is called the 
+\textit{label} of the vertex. Two vertices of the cube are adjacent if and only 
+if their labels differ in exactly one coordinate.
 
 Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
 \textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
 \rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
 polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
 polytopes are combinatorially equivalent if their face lattices are isomorphic 
-i.e. there is an bijection between the elements of the lattice which respects 
+i.e.\ there is an bijection between the elements of the lattice which respects 
 the inclusion relation. 
 
-Cutting of a vertex is a way to get a new polytope from an old one. This is 
-done by adding a new inequality to the description. This inequality is not 
-valid for the vertex which is cut off but is valid for all other vertices. All 
+Truncating a vertex (also called vertex cut) is a way to get a new polytope 
+from an old one. This is 
+done by adding a new inequality to the halfspace description. This inequality 
+is not 
+valid for the vertex which is being truncated but is valid for all other 
+vertices. All 
 the polytopes formed this way are combinatorially equivalent (but not 
 necessarily affinely isomorphic). For each face intersected by the hyperplane, 
 a face of one dimension lower is added to the face lattice. The new facet is 
 called the \textit{vertex figure}. Vertex cuts can be generalized to cutting of 
 faces of higher dimensions by requiring the added inequality to be violated by 
-all the vertices in the face. The dual operation is called stacking on a facet. 
+all the vertices in the face. The dual operation is called stacking. 
 It means adding a new vertex to the polytope which satisfies all the 
-inequalities in the irredundant description with strict inequality except one 
-(which is violated).
+inequalities in the irredundant description with strict inequality except the 
+ones corresponding to the face being stacked on.
 
 Another way to produce new polytopes is taking prisms. This operation takes a 
 $d$-polytope $P$ in $\mathbb{R}^d$ and produces a $(d+1)$-polytope in 
@@ -223,30 +238,47 @@ the hyperplane $x_{d+1} = 0$ and the points $(0,0,\dots, 1)$ and $(0,0,\dots,
 -1)$.
 \end{definition}
 
+\section{Graphs}
 
 Graphs appear everywhere in mathematics but they are especially common in 
 combinatorics. 
 
 \begin{definition}
 (Graph) A graph is an ordered pair $G=(V,E)$. The elements of $V$ are called 
-vertices. The elements of $E$ are 2-element subsets of $V$ and they are called 
+vertices. The elements of $E$ are 2-element subsets of $V$. They are called 
 the edges of the graph. 
 \end{definition}
+We consider only simple graphs, i.e.\ graphs without loops or parallel 
+edges.
 
-If $(u,v) \in E$, the vertices $u$ and $v$ are said to be \textit{adjacent}.
-A $d$-regular graph is a graph where every vertex is incident to a $d$ edges.
-The connectivity of graph is the minimum number of vertices or edges that are 
-required to be removed in order to disconnect the graph The graphs of 
-3-polytopes are precisely all planar, simple, 3-connected graphs. However, this 
+If $(u,v) \in E$, the vertices $u$ and $v$ are said to be \textit{adjacent}. 
+The vertices $u$ and $v$ are \textit{incident} to the edge $(u,v)$. 
+\begin{definition}
+ (Path) A set of edges $(u_1, u_2), (u_2, u_3), \dots (u_{k-1}, u_k) \subset E$ 
+is called a path between the vertices $u_1$ and $u_k$ if all the $u_i$ are 
+distinct.
+\end{definition}
+If there is a path between every pair of vertices, the graph is said to be 
+\textit{connected}. Otherwise it is \textit{disconnected}. A disconnected graph 
+consists of several \textit{connected components}.
+
+The \textit{degree} of a vertex is the number of edges it is incident to. 
+If all the vertices in the graph have degree $d$, the graph is called 
+$d$-regular. A graph is called is $k$-vertex-connected if removal of fewer than 
+$k$ vertices does not disconnect the graph. Edge connectivity is defined in an 
+analogous manner. Steinitz' theorem states that the graphs of 
+3-polytopes are precisely all planar, simple, 3-vertex-connected graphs. Hence 
+removal of only a few vertices disconnects the graph. However, this
 often means that one of the components is very small. A more nuanced view is 
 provided 
 by separators:
 
 \begin{definition}
-(Separator) A (vertex) separator is a partition of the vertices of a graph into 
-sets $(A,B,C)$ where $|A|, |B| \geq c|V|$ where $0<c<1/2$ is called the 
-separation 
-constant. The size of the separator is $|C|$.  
+(Separator) A (vertex) separator with separation constant $0<c<1/2$ is a 
+partition of the vertices of a graph into 
+sets $(A,B,C)$ and every path from $v_1 \in A$, $v_2 \in B$ contains a vertex 
+in $C$. In addition it is required that $|A|, |B| \geq c|V|$. The size of the 
+separator is $|C|$.  
 \end{definition}
 
 Another way to think about separators is by minimizing \textit{neighborhoods} 
@@ -257,7 +289,8 @@ of a set of given size.
 $N(S)$ is the set $\{v \in V\setminus S \mid (u,v) \in E, u \in S\}$. 
 \end{definition}
 
-We are generally interested how the size of the separator behaves as a function 
+We are generally interested how the size of the smallest separator behaves as a 
+function 
 of the number of vertices for some fixed graph family.
 
 Separators can also be defined by removing edges instead of vertices. However, 
@@ -267,7 +300,7 @@ so we ignore the distinction.
 The size of minimal separators in the graphs of 3-polytopes was discovered by 
 Lipton and Tarjan \cite{LiTa} in 1979. They showed that planar graphs have 
 separators of size $O(\sqrt{n})$ where $n$ is the number of vertices. This is 
-the best possible result since an $m-by-m$-grid requires $m$ vertices to be 
+the best possible result since an $m\times m$-grid requires $m$ vertices to be 
 removed to be separated. However, in higher dimensions such results are 
 impossible due to the existance of \textit{neighborly polytopes}.
 
@@ -292,9 +325,11 @@ $\left\lfloor \frac{d}{2}
 
 They were first discovered by Joswig and Ziegler. Sanyal and Ziegler \cite{Z102}
 generalized the construction to show that each $(d-2)$-dimensional neighborly 
-polytope on $(m-1)$ vertices can be used to define a distinct $\NC_d(m)$. 
+polytope on $(m-1)$ vertices can be used to define a 
+different combinatorial type of $\NC_d(m)$. 
 
 \begin{conjecture}
+\label{simpleconjecture}
  (Kalai 1991 \cite{Ka2}, corrected version 2004 \cite{kalai04:_polyt}) The 
 graph of a simple $d$-polytope can be separated by removing 
 $O(n^{(d-2)/(d-1)})$ vertices. 
@@ -302,13 +337,22 @@ $O(n^{(d-2)/(d-1)})$ vertices.
 
 This reduces to the planar separator theorem in the 3-dimensional case. 
 
+
+
+\chapter{A simple construction of simple polytopes}
+
+In the following chapter we disprove conjecture \ref{simpleconjecture} with 
+the following result:
+
 \begin{theorem}
 \label{maintheorem}
- Let $d\geq 4$. There exist $d$-dimensional simple polytopes which require 
-separators of size $\Theta(n/(\log n)^{\frac{3}{2}})$.
+ Let $d\geq 4$. There exist $d$-dimensional simple polytopes with
+separators of size $\Omega(n/(\log n)^{\frac{3}{2}})$.
 \end{theorem}
 
 Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
+Their graph is that of an $m$-cube whose separators were discovered by Harper 
+\cite{Harp}.
 While hypercubes are simple polytopes, $\NC_4(m)$ are not since each vertex is 
 incident to $m>d$ edges. 
 
@@ -342,14 +386,14 @@ The starting polytope $\NC_4(m)$ has the flag vector
 
 The first two entries follow from the fact that the graph is the same as that 
 of the $m$-cube. The final entry follows from the fact that the facets are 
-cubes and hence consists of 8 vertices. Since the facets are cubes, they 
+3-cubes and hence consists of 8 vertices. Since the facets are 3-cubes, they 
 consists of 6 squares, and each of these squares is an intersection of two 
-cubes. Hence we know that $3f_2 = f_3$ and we can calculate these values with 
+3-cubes. Hence we know that $3f_2 = f_3$ and we can calculate these values with 
 the Euler-Poincare formula.
 
-We denote the polytope formed by cutting of all the vertices by $\NC'_4(m)$.
-Cutting off all the vertices means removing all of the original vertices, but 
-adding 2 for each edge, one for each end of the edge. The facets of this new 
+We denote the polytope formed by truncating all the vertices by $\NC_4(m)'$.
+Truncating the vertices means removing all of the original vertices, but 
+adding 2 for each edge, one at each end of the edge. The facets of this new 
 polytope come in two types:
 
 \begin{itemize}
@@ -363,7 +407,7 @@ $3m-6, 2m-4)$.
 
 This means that the flag vector of $\NC'_4(m)$ is 
 \begin{equation}
- flag(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2})
+ flag(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2}
 \end{equation}
 
 By cutting of all of the original (but shortened) edges we arrive at 
@@ -389,9 +433,9 @@ $\NC''_4(m)$.
 Since $2f_0 = f_1$, we can verify that $\NC''_4(m)$ is indeed a simple 
 polytope.
 
-\subsection{Combinatorial types}
+\section{Combinatorial types}
 
-\subsection{Small separator}
+\section{Small separator}
 
 We are interested in what the graph $G(\NC''_4(m)) = C''_m$ looks like. Its 
 most striking feature is its similarity to the graph of the hypercube, $Q_m$. 
@@ -423,12 +467,12 @@ all zeros. Then the extra vertices are those which come first in
  (Lexicographic order) Let $a,b \in \{0,1\}^m$. Then $a<b$ if the first $i$ 
 elements of $a$ and $b$ are the same but $a_{i+1} < b_{i+1}$.
 \end{definition}
-The sets with smallest vertex boundary hence form an increasing sequence i.e. 
+The sets with smallest vertex boundary hence form an increasing sequence i.e.\ 
 the previous set is a subset of the following set. The order in which the 
 vertices are added is also called \textit{graded lexicographic order}.
 
 Asymptotically, if $k = c2^m$ for some $0<c<1$ as $m\rightarrow \infty$, this 
-means that the layer $r$ needs to be near the middle, i.e. $r\approx m/2$. 
+means that the layer $r$ needs to be near the middle, i.e.\ $r\approx m/2$. 
 By Stirling's formula,
 \begin{equation}
  {m \choose m/2} = \Theta \left(\frac{2^m}{\sqrt{m}}\right)
@@ -463,10 +507,10 @@ two sets with $3\cdot 2^m$ edges going between them. Moving either end vertex
 of the edge to set $C$ we get a separator with $3\cdot 2^m = O(n/\log(n)$ 
 edges.
 
-\subsection{Higher dimensions}
+\section{Higher dimensions}
 
 This construction generalizes easily to higher dimensions. There are two 
-natural ways, using $\NC_d(m)$ i.e. higher dimensional neighborly polytope, or 
+natural ways, using $\NC_d(m)$ i.e.\ higher dimensional neighborly polytope, or 
 taking prisms over $\NC''_4(m)$.  In the first case we have to do more cuts to 
 make the polytope simple, resulting in a large number of vertices. Hence the 
 second way is the correct one. 
@@ -482,15 +526,4 @@ inequality we get the same upper bound as for $\NC''_4(m)$.
 
 
 
-
-\section{The End}
-\label{sec:end}
-
-Finally, this is the end.  The bibliography starts on
-the next page.
-Note how the \verb2\hyperref2 package
-(mentioned in chapter \ref{introchap})
-also makes hyperlinks from references
-(e.g., Mulick\cite{mulick})
-to entries in the bibliography.
 
