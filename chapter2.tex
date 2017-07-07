@@ -179,15 +179,15 @@ $d$ edges and $d$ facets.
 Another important polytope is the $n$-cube.
 
 \begin{definition}
- The $d$-cube is a simple polytope defined by the inequalities
+ The $m$-cube $Q^m$ is a simple polytope defined by the inequalities
 \begin{equation}
  0 \leq x_i \leq 1 
 \end{equation}
-for $i \in 1,\dots, d$.
+for $i \in 1,\dots, m$.
 \end{definition}
-The $d$-cube has $2^d$ vertices, $d2^{d-1}$ edges and $2d$ facets which
-are $(d-1)$-cubes. Each vertex $v$ of the $d$-cube has coordinates equal to 0 
-or 1, that is $v\in \{0,1\}^d$. The coordinate vector is called the 
+The $m$-cube has $2^m$ vertices, $m2^{m-1}$ edges and $2m$ facets which
+are $(m-1)$-cubes. Each vertex $v$ of the $m$-cube has coordinates equal to 0 
+or 1, that is $v\in \{0,1\}^m$. The coordinate vector is called the 
 \textit{label} of the vertex. Two vertices of the cube are adjacent if and only 
 if their labels differ in exactly one coordinate.
 
@@ -405,7 +405,7 @@ new facets are simplicial. Their $f$-vector is ($m$,
 $3m-6, 2m-4)$.
 \end{itemize}
 
-This means that the flag vector of $\NC'_4(m)$ is 
+This means that the flag vector of $\NC_4(m)'$ is 
 \begin{equation}
  flag(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2}
 \end{equation}
@@ -424,29 +424,33 @@ $\NC_4(m)$. Their $f$-vector is $(6m - 12, 9m-18, 3m-4)$.
 \end{itemize}
 
 Using the knowledge of the facets we can work out the flag vector of 
-$\NC''_4(m)$.
+$\NC_4(m)''$.
 
 \begin{equation}
- flag(\NC''_4(m)) = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
+ flag(\NC_4(m)'') = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
 \end{equation}
 
-Since $2f_0 = f_1$, we can verify that $\NC''_4(m)$ is indeed a simple 
+Since $2f_0 = f_1$, we can verify that $\NC_4(m)''$ is indeed a simple 
 polytope.
 
 \section{Combinatorial types}
 
 \section{Small separator}
 
-We are interested in what the graph $G(\NC''_4(m)) = C''_m$ looks like. Its 
+We are interested in what the graph $G(\NC_4(m)'') = C''_m$ looks like. Its 
 most striking feature is its similarity to the graph of the hypercube, $Q_m$. 
-$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC''_4(m)$ 
+$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC_4(m)'')$ 
 similarly consists of $2^m$ groups of $(6m-12)$ vertices which we call 
 \textit{clusters}. Each cluster is a 3-regular graph and the clusters are 
-connected to each other by 3 to $m-1$ edges. 
+connected to each other by 3 to $m-1$ edges. We will use this similarity to 
+prove a bound on the size of separators of $C''_m$. Let us therefore take a 
+look at the separators of $Q_m$.
 
-Harper solved the \textit{discrete isoperimetric problem} on the hypercube. The 
-problem asks to find the set of a given size $k$ with minimal size 
-neighborhood. The answer turns out to be Hamming balls.
+The problem of finding the sets of size $k$ with minimal size neighborhood is 
+called the \textit{discrete isoperimetric problem}. It is a generalization of 
+the minimum separator problem as there is no restriction on the size of $k$. 
+Harper \cite{Harper} solved the problem on the hypercube in the 1960's. The 
+answer turns out to be Hamming balls.
 
 \begin{definition}
  (Hamming ball) Let $a,b \in \{0,1\}^n$. The Hamming distance between $a$ and 
@@ -469,23 +473,27 @@ elements of $a$ and $b$ are the same but $a_{i+1} < b_{i+1}$.
 \end{definition}
 The sets with smallest vertex boundary hence form an increasing sequence i.e.\ 
 the previous set is a subset of the following set. The order in which the 
-vertices are added is also called \textit{graded lexicographic order}.
+vertices are added as $k$ increases is also called \textit{graded lexicographic 
+order}.
 
 Asymptotically, if $k = c2^m$ for some $0<c<1$ as $m\rightarrow \infty$, this 
 means that the layer $r$ needs to be near the middle, i.e.\ $r\approx m/2$. 
-By Stirling's formula,
-\begin{equation}
- {m \choose m/2} = \Theta \left(\frac{2^m}{\sqrt{m}}\right)
-\end{equation}
+%By Stirling's formula,
 
-Let $f: \NC''_4(m) \rightarrow Q_m$ 
+%\begin{equation}
+% {m \choose m/2} = \Theta \left(\frac{2^m}{\sqrt{m}}\right)
+%\end{equation}
+
+Let $f: \NC_4(m)'' \rightarrow Q_m$ 
 be the map that sends all the vertices of a cluster to the corresponding vertex 
 in the cube. 
-Let $(A,B,C)$ be a separator in $C''_m$. Then we can define a partition on 
-$Q_m$ to sets $(a,b,c)$ with $f$. If $f^\{-1\}(v) \subset A$ (resp.) $B$ then 
-$v \in a$ (resp.) $b$. Otherwise, $v \in c$. Clearly $|c| \leq |C|$, since a 
-cluster can't contain both $A$ and $B$ vertices without containing $C$ vertices 
-as it is a connected graph.
+Let $(A,B,C)$ be a separator in $C''_m$. Then we can partition
+$Q_m$ to sets $(a,b,c)$ using $f$. If $f^{-1}(v) \subset A$ (resp.) $B$ 
+then 
+$v \in a$ (resp.) $b$. Otherwise, $v \in c$. Since the clusters are connected 
+graphs, any cluster which contains vertices in $A$ and $B$ must also contain 
+verices in $C$. This means that $|c| \leq |C|$ as $f^{-1}(c) \cap C \neq 
+\emptyset$.
 Now, no vertices with labels $a$ and $b$ are adjacent since this would imply 
 that a cluster which belongs to $A$ is adjacent to a cluster which belongs to 
 $B$ which impossible in a separator. Therefore
@@ -495,7 +503,7 @@ $B$ which impossible in a separator. Therefore
 \end{enumerate}
 In the first case, $c$ contains at least the neighborhood of $a$ and $b$ and 
 hence its size is bounded by the isoperimetric inequality. Therefore $c$ has 
-$\Omega(2^m/\sqrt{m}$ vertices. Hence $C$ contains at least $\Omega(N/(\log 
+$\Omega(2^m/\sqrt{m})$ vertices. Hence $C$ contains at least $\Omega(N/(\log 
 N)^{\frac{3}{2}}$.
 
 In the latter case, $c$ must contain a linear number of vertices. This means 
@@ -504,19 +512,20 @@ that also the set $C$ must be large.
 The minimal separators of $C''_m$ have $O(n/\log n)$ vertices. By setting $A$ 
 and $B$ to two $(m-1)$-cubes along a random ``edge direction'' of $Q_m$ we get 
 two sets with $3\cdot 2^m$ edges going between them. Moving either end vertex 
-of the edge to set $C$ we get a separator with $3\cdot 2^m = O(n/\log(n)$ 
+of the edge to set $C$ we get a separator with $3\cdot 2^m = O(n/\log(n))$ 
 edges.
 
 \section{Higher dimensions}
 
 This construction generalizes easily to higher dimensions. There are two 
 natural ways, using $\NC_d(m)$ i.e.\ higher dimensional neighborly polytope, or 
-taking prisms over $\NC''_4(m)$.  In the first case we have to do more cuts to 
+taking prisms over $\NC_4(m)''$.  In the first case we have to do more cuts to 
 make the polytope simple, resulting in a large number of vertices. Hence the 
 second way is the correct one. 
 
-Let $G$ be the graph of a $(d-4)$-fold prism over $\NC''_4(m)$. Any separator 
-$(A,B,C)$ of $\NC''_4(m)$ can be turned into a separator of $G$ by setting 
+Let $G$ be the graph of a $(d-4)$-fold prism over $\NC_4(m)''$ for $d\geq 4$. 
+Any separator 
+$(A,B,C)$ of $\NC_4(m)''$ can be turned into a separator of $G$ by setting 
 $(A',B',C')$ to be the prisms over their respective sets. Since no vertices 
 $a\in A, b\in B$ are adjacent and all the copies of a single vertex are in the 
 same set, there are no edges between vertices in $A'$ and $B'$. This means that 
