@@ -1,14 +1,19 @@
 \chapter{Introduction}
 \label{intro}
 
-Graph separators are a way to separate a graph into two disjoint parts which 
-are roughly equal in size. The separators can be defined either on the edges or 
-the vertices. We study the separators of simple polytopes whose graphs are 
-regular, which means that the size of the minimal vertex and edge separators 
-differ at most by a multiplicative constant so we choose to ignore this 
-distinction and focus on the vertex separators. 
+A separator is a partition of the vertices of graph into two "large" sets $A$ and $B$ with no edges
+between the sets and 
+an additional set $C$ containing the rest of the vertices. As moving vertices from $A$ or $B$ to
+$C$ preserves the separation property, we are interested in the minimum size of the set $C$. 
+This is called the size of the separator. A similar definition exists for edge separators, but we study
+only regular graphs where the difference between the two doesn't matter.
+Separators are closely connected to the expander graphs; a family of expander graph has minimal separators
+whose size is linear in the number of vertices.
 
-Previously, Ungar \cite{Ungar1951} had proven that planar graphs have minimal 
+This thesis 
+
+The story of separators of polytopes begins with Ungar \cite{Ungar1951},
+who proved that planar graphs have minimal 
 separators of size $O(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
 separator theorem  \cite{LiTa} which shows that the sharp bound is 
 $O(\sqrt{n})$. Miller and Thurston \cite{MillerThurston-separators} gave a 
