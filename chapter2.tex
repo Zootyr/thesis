@@ -1,8 +1,8 @@
 \chapter{Introduction}
 \label{intro}
 
-A separator is a partition of the vertices of graph into two "large" sets $A$ and $B$ with no edges
-between the sets and 
+A separator is a partition of the vertices of a graph into three sets. There are two "large" sets $A$ and $B$ with no edges
+between a vertex in $A$ and a vertex in $B$, and 
 an additional set $C$ containing the rest of the vertices. As moving vertices from $A$ or $B$ to
 $C$ preserves the separation property, we are interested in the minimum size of the set $C$. 
 This is called the size of the separator. A similar definition exists for edge separators, but we study
@@ -13,9 +13,9 @@ whose size is linear in the number of vertices.
 
 
 The story of separators of polytopes begins with Ungar \cite{Ungar1951},
-who proved that planar graphs have minimal 
+who proved that planar graphs, and therefore graphs of 3-polytopes, have minimal 
 separators of size $\Omega(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
-separator theorem  \cite{LiTa} which shows the separators are of size
+separator theorem  \cite{LiTa}, which gives the correct bound
 $\Omega(\sqrt{n})$. This result is best possible, since the $m\times m$ grid graph
 can't be separated by fewer than $\Omega(m)$ vertices. Miller and Thurston \cite{MillerThurston-separators} gave a 
 geometric proof of the planar separation theorem using the  
@@ -36,11 +36,11 @@ stated in the paper.
 
 \section{Polytopes}
 
-The main objects of study in this work are graphs of polytopes. Polytopes are 
+The main objects of study in this work are polytopes and their graphs. Polytopes are 
 interesting 
-objects in their own right but also play an important role in e.g. 
+objects in their own right, but also play an important role in
 optimization. In the following section we introduce the basics of polytopes. 
-A more thorough introduction can be found in books by Ziegler \cite{PolyLec} 
+A more thorough treatment can be found in books by Ziegler \cite{PolyLec} 
 and Gr\"unbaum \cite{Grunbaum69convexpolytopes}. 
 
 There are 
@@ -52,7 +52,7 @@ half-space (or exterior) representation.
 \subset \mathbb{R}^d$, that is 
 \begin{equation}
  P = \left\{x\in \mathbb{R}^d \middle| x = \sum_{i=1}^{|V|} \lambda_i v_i, 
-0\leq \lambda_i \leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}
+0\leq \lambda_i \leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}.
 \end{equation}
 
 \end{definition}
@@ -74,9 +74,12 @@ the number of half-spaces required to describe $P$, it is called
 
 It is a fundamental theorem of polytopes that these two representations are 
 equivalent.
-
-The dimension of a polytope is the dimension of its affine hull. The affine 
-hull of a set of points is the dimension of the smallest hyperplane which 
+\begin{theorem}
+(Minkowski-Weyl Theorem, \cite[Thm. 1.1.]{PolyLec}) Let $P \subset \mathbb{R}^d$. 
+$P$ is a $H$-polytope if and only if $P$ is a $V$-polytope.
+\end{theorem}
+The dimension of a polytope is the dimension of its affine hull. The \textit{affine 
+hull} of a set of points is the dimension of the smallest hyperplane which 
 contains all of the points. A $d$-polytope in $\mathbb{R}^d$ is said to be 
 \textit{full-dimensional}. If the lowest dimensional hyperplane which contains 
 $n$ points is $(n-1)$-dimensional, the points are set to be \textit{affinely 
@@ -93,6 +96,8 @@ where the hyperplane has to be \textit{valid}, that is $\mathbf{a}\mathbf{x}
 \leq c$ holds for all points in $P$. 
 
 \end{definition}
+Both the empty set and $P$ are faces of $P$, they are given by $0x \le 1$ and $0x \le 0$, respectively.
+The empty set is defined to have dimension -1.
 A face that is not equal to all of $P$ is called a \textit{proper face}.
 Some faces have special names: the 0-dimensional faces are called 
 \textit{vertices}, the 1-dimensional faces are called \textit{edges} and the 
@@ -121,8 +126,9 @@ dimensions.
 \end{definition}
 
 For example, the entry $f_{013}$ counts the number of chains in the face 
-lattice which has entries in dimensions $(0,1,3)$. However, many of the entries 
-in the flag vector are redundant.
+lattice which has entries in dimensions $(0,1,3)$. The complete face vector has $2^d$ entries,
+but many of them are redundant. In particular, in 4 dimensions whrere we work in,
+knowing the vector $(f_0, f_1, f_2, f_3, f_{03})$ is enough to figure out the rest of the entries. 
 
 We are interested in studying the graphs of polytopes. The most theoretically 
 pleasing way to define them is to consider them a special class of 
@@ -171,12 +177,15 @@ If $A$ is a convex compact set with $0 \in$ int $A$, so is $A^*$. In
 particular, if $A$ is a polytope containing $0$ in the interior, $A^*$ is dual 
 to it. 
 
+After all these theoretical construction, let's have a look at some concrete examples.
 In any dimension, the polytope with the fewest vertices is the simplex. 
 \begin{definition}
  (Simplex) A $d$-simplex is the convex hull of $d+1$ affinely independant 
 points.
 \end{definition}
-The faces of a simplex are lower dimensional simplices. A polytope whose facets 
+The faces of a simplex are lower dimensional simplices and any $k\le d+1$ vertices
+of the simplex form a face. 
+ A polytope whose facets 
 (but not necessarily the polytope itself) are simplices is called 
 \textit{simplicial}. The dual of a simplicial polytope is called 
 \textit{simple}. The vertices of a simple $d$-polytope are contained in exactly 
@@ -203,7 +212,8 @@ Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are
 polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
 polytopes are combinatorially equivalent if their face lattices are isomorphic 
 i.e.\ there is an bijection between the elements of the lattice which respects 
-the inclusion relation. 
+the inclusion relation. Two combinatorially equivalent polytopes are said to have the 
+same \textit{combinatorial type}.
 
 Vertex truncation is a common method of creating new polytopes from old ones.
 We will use it extensively.
@@ -211,10 +221,11 @@ We will use it extensively.
 (Vertex truncation) Let $P$ be a polytope with vertex set $V$. Truncating a vertex $v \in V$ means adding
 a new inequality to the halfspace description, which is violated by $v$ but valid for all the others vertices in $V$.
 \end{definition}
-All the polytopes formed this way are combinatorially equivalent (but not 
-necessarily affinely isomorphic). For each face intersected by the hyperplane, 
+All the polytopes formed this way are combinatorially equivalent (but generally not affinely isomorphic). 
+For each face intersected by the hyperplane, 
 a face of one dimension lower is added to the face lattice. The new facet is 
-called the \textit{vertex figure} of the vertex $v$. Vertex cuts can be generalized to cutting of 
+called the \textit{vertex figure} of the vertex $v$. The vertex figure's combinatorial type 
+is independent of the inequality. Vertex cuts can be generalized to cutting of 
 faces of higher dimensions by requiring the added inequality to be violated by 
 all the vertices in the face. The dual operation is called stacking. 
 It means adding a new vertex to the polytope which satisfies all the 
@@ -231,11 +242,11 @@ $x_{d+1} = 0$ and another copy on the the hyperplane $x_{d+1} = 1$.
 
  The new polytope prism$(P)$ has 2 copies of 
 each face at the top and bottom and for each face $F$ a face isomorphic to 
-prism$(F)$ in the middle. Two vertices in $G(\text{pyr}(P))$ are adjacent if 
+prism$(F)$ in the middle. Two vertices in $G(\text{pyr}(P))$ are adjacent if and only if
 they are copies of the same vertex or if they are in the same copy and are 
 adjacent there. 
 The $n$-cube can be defined as the $n$-fold 
-prism over the zero dimensional polytope (a point). The dual operation to prism 
+prism over the zero dimensional polytope (a point). The dual construction to prism 
 is the bipyramid. 
 \begin{definition}
  (Bipyramid) Let $P\subset \mathbb{R}^d$ be a $d$-polytope with zero in the 
@@ -463,7 +474,7 @@ look at the separators of $Q_m$.
 The problem of finding the sets of size $k$ with minimal size neighborhood is 
 called the \textit{discrete isoperimetric problem}. It is a generalization of 
 the minimum separator problem as there is no restriction on the size of $k$. 
-Harper \cite{Harper} solved the problem on the hypercube in the 1960's. The 
+Harper \cite{Harp} solved the problem on the hypercube in the 1960's. The 
 answer turns out to be Hamming balls.
 
 \begin{definition}
@@ -522,6 +533,10 @@ N)^{\frac{3}{2}}$.
 
 In the latter case, $c$ must contain a linear number of vertices. This means 
 that also the set $C$ must be large.  
+
+
+
+\section{Upper bound on minimal separators}
 
 The minimal separators of $C''_m$ have $O(n/\log n)$ vertices. By setting $A$ 
 and $B$ to two $(m-1)$-cubes along a random ``edge direction'' of $Q_m$ we get 
