@@ -10,19 +10,20 @@ only regular graphs where the difference between the two doesn't matter.
 Separators are closely connected to the expander graphs; a family of expander graph has minimal separators
 whose size is linear in the number of vertices.
 
-This thesis 
+
 
 The story of separators of polytopes begins with Ungar \cite{Ungar1951},
 who proved that planar graphs have minimal 
-separators of size $O(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
-separator theorem  \cite{LiTa} which shows that the sharp bound is 
-$O(\sqrt{n})$. Miller and Thurston \cite{MillerThurston-separators} gave a 
+separators of size $\Omega(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
+separator theorem  \cite{LiTa} which shows the separators are of size
+$\Omega(\sqrt{n})$. This result is best possible, since the $m\times m$ grid graph
+can't be separated by fewer than $\Omega(m)$ vertices. Miller and Thurston \cite{MillerThurston-separators} gave a 
 geometric proof of the planar separation theorem using the  
 Koebe–Andreev–Thurston circle-packing theorem.
 
 Miller, Teng, Thurston and Vavasis \cite{MillerTengThurstonVavasis} generalized 
 the theorem to intersection graphs of ball packings in $d$ dimensions. This 
-led Kalai (\cite{Kal07}, corrected in \cite{kalai04:_polyt}) to conjecture that 
+led Kalai (\cite{Kal97}, corrected in \cite{kalai04:_polyt}) to conjecture that 
 simple $d$-polytopes would also have small separators.
 Simplicity is necessary as the graph of the cyclic polytopes is complete for 
 $d\geq 4$ and hence has no vertex separator. Kalai also refers to 
@@ -204,16 +205,16 @@ polytopes are combinatorially equivalent if their face lattices are isomorphic
 i.e.\ there is an bijection between the elements of the lattice which respects 
 the inclusion relation. 
 
-Truncating a vertex (also called vertex cut) is a way to get a new polytope 
-from an old one. This is 
-done by adding a new inequality to the halfspace description. This inequality 
-is not 
-valid for the vertex which is being truncated but is valid for all other 
-vertices. All 
-the polytopes formed this way are combinatorially equivalent (but not 
+Vertex truncation is a common method of creating new polytopes from old ones.
+We will use it extensively.
+\begin{definition}
+(Vertex truncation) Let $P$ be a polytope with vertex set $V$. Truncating a vertex $v \in V$ means adding
+a new inequality to the halfspace description, which is violated by $v$ but valid for all the others vertices in $V$.
+\end{definition}
+All the polytopes formed this way are combinatorially equivalent (but not 
 necessarily affinely isomorphic). For each face intersected by the hyperplane, 
 a face of one dimension lower is added to the face lattice. The new facet is 
-called the \textit{vertex figure}. Vertex cuts can be generalized to cutting of 
+called the \textit{vertex figure} of the vertex $v$. Vertex cuts can be generalized to cutting of 
 faces of higher dimensions by requiring the added inequality to be violated by 
 all the vertices in the face. The dual operation is called stacking. 
 It means adding a new vertex to the polytope which satisfies all the 
@@ -346,23 +347,31 @@ This reduces to the planar separator theorem in the 3-dimensional case.
 
 \chapter{A simple construction of simple polytopes}
 
-In the following chapter we disprove conjecture \ref{simpleconjecture} with 
-the following result:
+In this chapter we construct polytopes which disprove conjecture \ref{simpleconjecture} and
+calculate a lower bound on the size of the minimal separators in two ways. Both proofs are for 
+4-dimensional case, but they easily generalize to higher dimensions. The first way requires
+no advanced methology, but the bound achieved is not sharp. The second way uses a lemma proven by Sinclair
+to study mixing properties of Markov chains and gives the sharp bound. The main result of this
+thesis is the following theorem.
+
 
 \begin{theorem}
 \label{maintheorem}
  Let $d\geq 4$. There exist $d$-dimensional simple polytopes with
-separators of size $\Omega(n/(\log n)^{\frac{3}{2}})$.
+separators of size $\Omega(n/\log n)$.
 \end{theorem}
 
 Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
-Their graph is that of an $m$-cube whose separators were discovered by Harper 
+Their graph is that of an $m$-cube. The separators of $m$-cubes were discovered by Harper 
 \cite{Harp}.
 While hypercubes are simple polytopes, $\NC_4(m)$ are not since each vertex is 
-incident to $m>d$ edges. 
+incident to $m>4$ edges. However, we can construct simple polytopes from them by 
+truncating the edges and vertices.
+
+ 
 
 \begin{lemma}
-(See also Ewald \& Shephard \cite{Ewald1974}) A $d$-polytope can be made simple 
+(See also Ewald \& Shephard \cite{EwSh}) A $d$-polytope can be made simple 
 by $(d-2)$ iterative cuts.
 \end{lemma}
 
