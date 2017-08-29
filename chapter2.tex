@@ -569,11 +569,40 @@ that also the set $C$ must be large.
 
 \section{Sharp lower bound}
 
-For the sharp bound, we will restrict to \textit{cyclic neighborly cubical polytopes}.
+For the sharp bound, we will restrict to \textit{cyclic neighborly cubical polytopes} 
+ $\NC^c_d(m)$.
 This was the combinatorial type discovered by Joswig \& Ziegler \cite{Z62}. They
 are also a result of using the construction method of Sanyal \& Ziegler \cite{Z102}
-on cyclic polytopes with vertices in standard order, which justifies the name. 
+on cyclic polytopes with vertices in standard order, which justifies the name.  According
+to their analysis, the vertex figures are combinatorially equivalent to a pyramid over
+a triangulation of the cyclic polytope $C_{d-2}(m-1)$. Since the graph $G_m$ of $\NC^c_d(m)$
+is isomorphic to that of the $m$-cube, we will label the vertices by vectors in $\{-,+\}^m$ and
+edges by vectors in $\{-,+,*\}^m$ with exactly one $*$-entry. The index of the $*$-entry is
+called the \textit{direction} of the edge. There are $2^{m-1}$ edges in each direction.
+The combinatorics of $\NC^c_d(m)$ are fully described by Cubical Gale Evennes Criterion.
+This criterion is fairly complicated even in the 4-dimensional case, but we do not need the 
+complete description.
 
+\begin{theorem}
+[Part of the Cubical Gale Evenness Criterion, for $d=4$ {\cite[Thm.~18]{Z62}}] 
+The facets of the cyclic neighborly polytope $\NCC_4(m)$ are given by vectors in
+$\{-,+,*\}^m$ with exactly three $*$-entries. 
+
+If the first component of a vector in $\{-,+,*\}^m$ is $*$, it corresponds to a facet 
+of $\NCC_4(m)$ if and only if the rest of the vector satisfies the Gale Evenness criterion, 
+that is, if between any two non-$*$-entries there is an even number of $*$-entries.
+Equivalently, this happens if in the rest of that vector the two $*$-entries are
+cyclically adjacent.
+\end{theorem}
+
+ This shows that for any vertex $v$, the edges in directions $i$ and $i+1$ span a 2-face, because
+the vector $(*,v_2, \dots, v_{i-1}, *, *, v_{i+2}, \dots, v_m)$ corresponds to a facet of $\NCC(4)$
+for $i\le 2 < m$. As the 2-faces correspond to edges in the vertex figure, this means that the vertices 
+of the vertex figure at $v$ are cyclically connected in a consistent way indepdent of $v$. In other words
+there is a Hamiltonian cycle $(123\dots m)$ going through the vertices in the graph of each figure.
+This is also shows that the boundary complex of $\NCC(m)$ contains a copy of the polyhedral surface 
+describe by Ringel \cite{ringel55:_ueber_probl_wuerf_wuerf} in 1957. This was also pointed out by
+Ziegler \cite[Sect 3.]{Z100}. See also Joswig \& Rörig \cite{joswig:_neigh}.
 
 \section{Upper bound on minimal separators}
 
