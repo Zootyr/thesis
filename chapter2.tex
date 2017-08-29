@@ -25,11 +25,16 @@ Miller, Teng, Thurston and Vavasis \cite{MillerTengThurstonVavasis} generalized
 the theorem to intersection graphs of ball packings in $d$ dimensions. This 
 led Kalai (\cite{Kal97}, corrected in \cite{kalai04:_polyt}) to conjecture that 
 simple $d$-polytopes would also have small separators.
+\begin{conjecture}
+\label{simpleconjecture}
+Simple $d$-polytopes have separators of size
+$\Omega \left(n^{\frac{d-2}{d-1}}\right)$.
+\end{conjecture}
 Simplicity is necessary as the graph of the cyclic polytopes is complete for 
 $d\geq 4$ and hence has no vertex separator. Kalai also refers to 
 \cite{MillerTengThurstonVavasis} for the claim that there are triangulations of 
-$S^3$ which don't have separators the size of $O(n/\log n)$ but this is not 
-stated in the paper.
+$S^3$ which don't have separators the size of $\Omega(n/\log n)$ but this is not 
+stated in the paper. 
 
 \chapter{Graphs and Polytopes}
 \label{mathchapter}
@@ -130,6 +135,17 @@ lattice which has entries in dimensions $(0,1,3)$. The complete face vector has 
 but many of them are redundant. In particular, in 4 dimensions whrere we work in,
 knowing the vector $(f_0, f_1, f_2, f_3, f_{03})$ is enough to figure out the rest of the entries. 
 
+Now that we have defined what a polytope is, it we need a criterion to decide which polytopes 
+count as "the same". There are two ways to do this, with one stricter than the other.
+Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
+\textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
+\rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
+polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
+polytopes are \textit{combinatorially equivalent} if their face lattices are isomorphic 
+i.e.\ there is an bijection between the elements of the lattice which respects 
+the inclusion relation. Two combinatorially equivalent polytopes are said to have the 
+same \textit{combinatorial type}. 
+
 We are interested in studying the graphs of polytopes. The most theoretically 
 pleasing way to define them is to consider them a special class of 
 \textit{polytopal complexes}.
@@ -204,16 +220,9 @@ The $m$-cube has $2^m$ vertices, $m2^{m-1}$ edges and $2m$ facets which
 are $(m-1)$-cubes. Each vertex $v$ of the $m$-cube has coordinates equal to 0 
 or 1, that is $v\in \{0,1\}^m$. The coordinate vector is called the 
 \textit{label} of the vertex. Two vertices of the cube are adjacent if and only 
-if their labels differ in exactly one coordinate.
+if their labels differ in exactly one coordinate. A polytope whose facets are combinatorial cubes
+is called cubical.
 
-Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
-\textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
-\rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
-polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
-polytopes are combinatorially equivalent if their face lattices are isomorphic 
-i.e.\ there is an bijection between the elements of the lattice which respects 
-the inclusion relation. Two combinatorially equivalent polytopes are said to have the 
-same \textit{combinatorial type}.
 
 Vertex truncation is a common method of creating new polytopes from old ones.
 We will use it extensively.
@@ -225,9 +234,11 @@ All the polytopes formed this way are combinatorially equivalent (but generally 
 For each face intersected by the hyperplane, 
 a face of one dimension lower is added to the face lattice. The new facet is 
 called the \textit{vertex figure} of the vertex $v$. The vertex figure's combinatorial type 
-is independent of the inequality. Vertex cuts can be generalized to cutting of 
+is depends only on the choice of vertex, not on the inequality. Vertex cuts can be generalized to cutting of 
 faces of higher dimensions by requiring the added inequality to be violated by 
-all the vertices in the face. The dual operation is called stacking. 
+all the vertices in the face. 
+
+The dual operation of truncation is called stacking. 
 It means adding a new vertex to the polytope which satisfies all the 
 inequalities in the irredundant description with strict inequality except the 
 ones corresponding to the face being stacked on.
@@ -265,6 +276,9 @@ combinatorics.
 vertices. The elements of $E$ are 2-element subsets of $V$. They are called 
 the edges of the graph. 
 \end{definition}
+A graph is often visualized by connecting dots (vertices) with lines (edges) on a plane. 
+If such a drawing can be made without any lines intersecting, the graph is called
+planar.
 We consider only simple graphs, i.e.\ graphs without loops or parallel 
 edges.
 
@@ -293,8 +307,8 @@ by separators:
 \begin{definition}
 (Separator) A (vertex) separator with separation constant $0<c<1/2$ is a 
 partition of the vertices of a graph into 
-sets $(A,B,C)$ and every path from $v_1 \in A$, $v_2 \in B$ contains a vertex 
-in $C$. In addition it is required that $|A|, |B| \geq c|V|$. The size of the 
+sets $(A,B,C)$  with $cn \le |A| \le |B| \le (1-c)n$ so that there is no edge between 
+a vertex in $A$ and a vertex in $B$. The \textit{size} of the separator
 separator is $|C|$.  
 \end{definition}
 
@@ -316,43 +330,43 @@ so we ignore the distinction.
 
 The size of minimal separators in the graphs of 3-polytopes was discovered by 
 Lipton and Tarjan \cite{LiTa} in 1979. They showed that planar graphs have 
-separators of size $O(\sqrt{n})$ where $n$ is the number of vertices. This is 
+separators of size $O(\sqrt{n})$ for separation constant $\nicefrac{1}{3}$. This is 
 the best possible result since an $m\times m$-grid requires $m$ vertices to be 
 removed to be separated. However, in higher dimensions such results are 
 impossible due to the existance of \textit{neighborly polytopes}.
 
 \begin{definition}
- A neighborly polytope on $n$-vertices is a $d$-polytope with the $\left\lfloor 
-\frac{d}{2} \right\rfloor$-skeleton of a $n$-simplex.
+ A $k$-neighborly polytope on $n$-vertices is a $d$-polytope with the $k$-skeleton of a $(n-1)$-simplex.
+A $\left\lfloor \frac{d}{2} \right\rfloor$-neighborly $d$-polytope is simply called neighborly, as this is the maximal
+neighborliness of a polytope which is not a simplex.
 \end{definition}
 
-Hence any neighborly polytope of dimension $\geq 4$ has the complete graph as 
-its graph and can't be separated by removing vertices. However, simple 
-$d$-polytopes have $d$-regular graphs and there better results could be 
-possible. 
+Any neighborly polytope of dimension $\geq 4$ has the complete graph as 
+its graph and can't be separated by removing vertices. Simple 
+$d$-polytopes on the other hand have $d$-regular graphs and there better results could be 
+possible.
 
-An analogous class of polytopes which we will be using is called neighbourly 
-cubical polytopes. 
-
-\begin{definition}
- A neighborly cubical polytope $\NC_d(m)$ is a $d$-polytope with the 
-$\left\lfloor \frac{d}{2} 
-\right\rfloor$-skeleton of a $m$-cube and whose facets are $d-1$ cubes.
-\end{definition}
-
-They were first discovered by Joswig and Ziegler. Sanyal and Ziegler \cite{Z102}
-generalized the construction to show that each $(d-2)$-dimensional neighborly 
-polytope on $(m-1)$ vertices can be used to define a 
-different combinatorial type of $\NC_d(m)$. 
-
-\begin{conjecture}
-\label{simpleconjecture}
- (Kalai 1991 \cite{Ka2}, corrected version 2004 \cite{kalai04:_polyt}) The 
-graph of a simple $d$-polytope can be separated by removing 
-$O(n^{(d-2)/(d-1)})$ vertices. 
-\end{conjecture}
-
-This reduces to the planar separator theorem in the 3-dimensional case. 
+%An analogous class of polytopes which we will be using is called neighborly 
+%cubical polytopes. 
+%
+%\begin{definition}
+% A neighborly cubical polytope $\NC_d(m)$ is a cubical $d$-polytope with the 
+%$\left\lfloor \frac{d}{2} 
+%\right\rfloor$-skeleton of a $m$-cube.
+%\end{definition}
+%
+%They were first discovered by Joswig and Ziegler. Sanyal and Ziegler \cite{Z102}
+%generalized the construction to show that each $(d-2)$-dimensional neighborly 
+%polytope on $(m-1)$ vertices can be used to define a 
+%different combinatorial type of $\NC_d(m)$. 
+%
+%\begin{conjecture}
+% (Kalai 1991 \cite{Ka2}, corrected version 2004 \cite{kalai04:_polyt}) The 
+%graph of a simple $d$-polytope can be separated by removing 
+%$O(n^{(d-2)/(d-1)})$ vertices. 
+%\end{conjecture}
+%
+%This reduces to the planar separator theorem in the 3-dimensional case. 
 
 
 
@@ -361,8 +375,10 @@ This reduces to the planar separator theorem in the 3-dimensional case.
 In this chapter we construct polytopes which disprove conjecture \ref{simpleconjecture} and
 calculate a lower bound on the size of the minimal separators in two ways. Both proofs are for 
 4-dimensional case, but they easily generalize to higher dimensions. The first way requires
-no advanced methology, but the bound achieved is not sharp. The second way uses a lemma proven by Sinclair
-to study mixing properties of Markov chains and gives the sharp bound. The main result of this
+no advanced techniques, but the bound achieved is not sharp. For the second proof,
+we restrict ourselves to a subset of the neighborly cubical polytopes where we have complete
+characterization of the combinatorics. This combined with a lemma proven by Sinclair to study
+the mixing properties of Markov chains gets us the sharp bound. The main result of this
 thesis is the following theorem.
 
 
@@ -371,6 +387,21 @@ thesis is the following theorem.
  Let $d\geq 4$. There exist $d$-dimensional simple polytopes with
 separators of size $\Omega(n/\log n)$.
 \end{theorem}
+
+\subsection{Neighborly cubical polytopes}
+
+\begin{definition}
+A neighborly cubical polytope $\NC_d(m)$ is a cubical $d$-polytope with the $\left\lfloor \frac{d}{2} 
+\right\rfloor$-skeleton of a $m$-cube.
+\end{definition}
+
+They were first discovered by Joswig and Ziegler \cite{Z62}. Sanyal and Ziegler \cite{Z102}
+generalized the construction to show that each $(d-2)$-dimensional neighborly 
+polytope on $(m-1)$ vertices can be used to define a 
+different combinatorial type of $\NC_d(m)$. As the boundary complex of any $\NC_d(m)$
+is a subcomplex of the boundary complex of the $m$-cube, its faces correspond to vectors
+in $\{0,1,*\}^m$, or equivalently, $\{-,+,*\}^m$.
+
 
 Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
 Their graph is that of an $m$-cube. The separators of $m$-cubes were discovered by Harper 
@@ -403,11 +434,11 @@ Therefore, by 2 iterations of cuts, we can turn $\NC_4(m)$ into a simple
 polytope. Let us see what this polytope looks like. 
 
 The starting polytope $\NC_4(m)$ has the flag vector 
-\begin{align}
+\begin{align*}
  flag(\NC_4(m)) &:= (f_0, f_1, f_2, f_3; f_{03}) \\
 	&= (2^m, m2^{m-1}, 3(m-2)2^{m-2}, (m-2)2^{m-2}; 8(m-2)2^{m-2}) \\
 	&= (4, 2m, 3(m-2), m-2; 8(m-2))2^{m-2}
-\end{align}
+\end{align*}
 
 The first two entries follow from the fact that the graph is the same as that 
 of the $m$-cube. The final entry follows from the fact that the facets are 
@@ -436,7 +467,7 @@ This means that the flag vector of $\NC_4(m)'$ is
 \end{equation}
 
 By cutting of all of the original (but shortened) edges we arrive at 
-$\NC''_4(m)$. It has three types of facets:
+$\NC_4(m)''$. It has three types of facets:
 
 \begin{itemize}
  \item $(m-2)2^{m-2}$ simple polytopes which correspond to the facets of 
@@ -458,17 +489,19 @@ $\NC_4(m)''$.
 Since $2f_0 = f_1$, we can verify that $\NC_4(m)''$ is indeed a simple 
 polytope.
 
-\section{Combinatorial types}
+\section{Lower bound, straightforward approach}
 
-\section{Small separator}
+In this section we shall show an easy proof for a bound on the separator. It
+is enough to disprove \ref{simpleconjecture}, but not enough to verify Thurston's
+claim.
 
-We are interested in what the graph $G(\NC_4(m)'') = C''_m$ looks like. Its 
+We are interested in what the graph $G(\NC_4(m)'') = G''_m$ looks like. Its 
 most striking feature is its similarity to the graph of the hypercube, $Q_m$. 
-$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G(\NC_4(m)'')$ 
+$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G''_m$ 
 similarly consists of $2^m$ groups of $(6m-12)$ vertices which we call 
 \textit{clusters}. Each cluster is a 3-regular graph and the clusters are 
 connected to each other by 3 to $m-1$ edges. We will use this similarity to 
-prove a bound on the size of separators of $C''_m$. Let us therefore take a 
+prove a bound on the size of separators of $G''_m$. Let us therefore take a 
 look at the separators of $Q_m$.
 
 The problem of finding the sets of size $k$ with minimal size neighborhood is 
@@ -534,6 +567,12 @@ N)^{\frac{3}{2}}$.
 In the latter case, $c$ must contain a linear number of vertices. This means 
 that also the set $C$ must be large.  
 
+\section{Sharp lower bound}
+
+For the sharp bound, we will restrict to \textit{cyclic neighborly cubical polytopes}.
+This was the combinatorial type discovered by Joswig \& Ziegler \cite{Z62}. They
+are also a result of using the construction method of Sanyal \& Ziegler \cite{Z102}
+on cyclic polytopes with vertices in standard order, which justifies the name. 
 
 
 \section{Upper bound on minimal separators}
