@@ -389,6 +389,7 @@ separators of size $\Omega(n/\log n)$.
 \end{theorem}
 
 \subsection{Neighborly cubical polytopes}
+\ref{ncp}
 
 \begin{definition}
 A neighborly cubical polytope $\NC_d(m)$ is a cubical $d$-polytope with the $\left\lfloor \frac{d}{2} 
@@ -606,13 +607,14 @@ Let $\phi(\delta(S))$ be the sum of $\phi(e)$ for all the edges in $\delta(S)$. 
 and the other in $V\setminus S$ needs to use one of these edges, so we have $\phi(\delta(S)) \ge   |V\setminus S | |S |$.
 On the other hands, $\phi_{\max}$ is the globabl maximum for all edges of the graph, so we have $\phi(\delta(S)) \le  |\delta(S) |\phi_{\max}$.
 Hence for any $S \le \frac{ |V |}{2}$, we have
-\[
+\begin{equation}
+\label{sepbound}
  \mathcal{X}(G) \ge \frac{|\delta(S)|}{|S|} 
                 \ge \frac{\phi(\delta(S))}{\phi_{\max}\,|S|}
                 \ge \frac{|S|\,|V{\setminus}S|}{\phi_{\max}\,|S|}
                  =  \frac{|V{\setminus}S|}{\phi_{\max}}
 				\ge \frac{n}{2\,\phi_{\max}}.
-\]
+\end{equation}
 \end{proof} 
 \subsection{Relating edge expansion and separator size}
 
@@ -681,6 +683,35 @@ Truncating the long edges of $\NCC_4(m)'$ gets us the polytope $\NCC_4(m)''$. Th
 
 The cycles of short edges naturally correspond to vertices of $G_m'$, so we extend the notation $\{-,+\}^m \times [m]$ to them. "Medium" edges connect subsequent cycles $(v,i), (v,i+1 \mod m)$ while "extra" edges connect non-subsequent cycles. 
 
+\subsection{Canonical paths for $G''_m$}
+\label{canpaths}
+
+Now we will construct the canonical paths required for \ref{Sinclair} in $G''_m$. Our construction relies on the similarity
+of the vertex figures and the cubical connections between the clusters. 
+
+Let $v_0$ be a vertex in the cycle of short edges $(v,i)$ and $w_0$ be a vertex in the cycle of short edges $(w,j)$. 
+We will construct a path from $v_0$ to $w_0$ in the following way. Consider the coordinates in cyclic order $i, i+1, \dots m, 1, \dots,
+i-1$ and for each coordinate do the following:
+
+\begin{quote}
+\textbf{Procedure P:}
+Suppose the path we have constructed so far ends at vertex $u_0 \in (u,k)$.
+\begin{compactitem}
+\item If $u$ and $w$ differ in coordinate $k$, take the long edge from $u_0$ to $(u',k)$,
+where $u$ and $u'$ differ only in coordinate $k$. Then, using only short edges and a medium edge,
+move to the cycle of short edges labelled $(u', k+1)$.
+\item Otherwise, $u$ and $w$ agree in coordinate $k$. Using only short edges and a medium edge,
+move to the cycle $(u, k+1)$.
+\end{compactitem}
+\end{quote}
+
+After performing this procedure at most $m$ times, we end up in the cluster $w$. After at most $m-1$ more
+iterations, we end up in the cycle $(w,j)$. In the final iteration, we take at most $m-1$ steps in this cycle to arrive
+at $w_0$.
+
+We will now show that no edges is used more than $(O(m^2 2^,)$ times by considering the four cases of short, medium, long
+and extra edges separately.
+
 \afterpage{% 
 \begin{figure}
 	\input figure1.tex
@@ -697,6 +728,42 @@ The cycles of short edges naturally correspond to vertices of $G_m'$, so we exte
 \end{figure}	
 \clearpage
 }
+
+\subsection{Long edges}
+
+On average, a random pair of clusters differs in $\frac{m}{2}$ coordinates. Therefore half of the $n^2$ paths use long edges in direction $i$.
+Our definition of paths is independent on the value of the other coordinates. so each of the $2^{m-1}$ parallel classes in direction $i$ are used
+equally often. Every parallel class, and therefore every edge, is used by $\frac{n}{2} / 2^{m-1}$ paths.  The number of vertices is $n \in O(m2^m)$, so this works out to be $O(m^2 2^m)$.
+
+\subsection{Medium and short edges}
+
+Every path we construct uses at most $2m$ iterations of procedure $P$. The total number of iterations over all paths is therefore at most
+$O(2mn^2)$.  Every iteration uses at most one long edge, one short edge and short edges
+on one cycle. The extra edges are not used at all. 
+
+Our construction treats all coordinates and both values of the coordinate equally, each set of "cycle of short edgess and a medium edge leaving it"
+are used equally often. Moreover, these sets are disjoint. Therefore every short and medium edge is used at most $2mn^2 / (m2^m)$ times. 
+As $n \in O(m^2 2^m)$, this is works out to be $O(2mn^2 / m2^m) = O(m^2 2^m)$. 
+
+\subsection{Wrapping things up}
+
+In section \ref{ncp} we showed that $G''_m$ has $(6m-12)2^m$ vertices. Let us
+now combine our canonical paths with Sinclair's lemma \ref{Sinclair}:
+\begin{equation}
+\mathcal{X}(\CG_m'') 
+\ge \frac{n}{2\,\phi_{\max}} 
+\ge \frac{n}{2n^2/2^m}
+  = \frac{2^m}{2n}
+  = \frac{2^m}{2(6m-12)2^m}
+  = \frac{1}{12(m-2)}. 
+\end{equation}
+With lemma \ref{sepbound}, we get a bound on the size of minimal separators:
+\begin{equation}
+\frac c4 \mathcal{X}(\CG_m'')n 
+\ge \frac{c\,n}{48(m-2)} 
+ =  \Omega\Big(\frac n{\log n}\Big),
+\end{equation}
+as $n = (6m-12)2^m$ and thus $m=\Theta(\log n)$.
 
 \section{Upper bound on minimal separators}
 
