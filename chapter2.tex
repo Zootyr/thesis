@@ -170,6 +170,10 @@ $F \in \mathfrak{C}$.
 
 \end{definition}
 
+The dimension of a polytopal complex dim($\mathfrak{C}$) is the largest dimension
+among the polytopes contained in it. It's \textit{underlying set} $|\mathrak{C}|$ is the union of all of 
+its polytopes $  |\mathrak{C}| \coloneqq \cup_{F\in \mathfrak{C}} F.$
+
 % Examples of polytopal complexes include the polytope itself and its 
 % \textit{boundary complex} which is the collection of all proper faces of $P$. 
 Any polytope $P$ amd its faces form a polytopal complex. Another common complex is the 
@@ -179,6 +183,9 @@ The $k$-skeleton of a polytope is the collection of all faces of dimension $\leq
 k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and the 
 boundary complex is the $(d-1)$-skeleton. The graph of the polytope is its 
 1-skeleton and it is denoted by $G(P)$.
+
+The \textit{triangulation} of a polytope $P$ is a polytopal complex $\mathfrak{C}$ whose
+underlying set is $P$ and all the polytopes in $\mathfrak{C}$ are simplices.
 
 % Each polytope has a dual polytope associated to it. Its face lattice is the 
 % lattice of the original polytope ``upside down''. Hence its $i$-faces 
@@ -596,14 +603,14 @@ as
 This quantity gives information on mixing properties of Markov chain on $G$. We study it since
 a large edge expansion on a regular graph also implies a large separator (see \ref{separatorsize} below).
 The edge expansion can be estimated by "canonical paths" method, invented by Sinclair \cite{Sinclair}. 
-A good introduction, with applications to the graphs of polytopes, can be found in \cite{Kaibel}. 
+A good introduction, with applications to the graphs of polytopes, was given by Kaibel \cite{Kaibel}. 
 
-\subsection{Sinclar's canonical paths}
+\subsection{Sinclair's canonical paths}
 
 To estimate edge expansion of a graph $G$, we define a path between every (ordered) pair of vertices $(s,t) \in V \times V$.
-The intuition behind the method is that in graphs with small edge expansion, there exist edges which are "congested", that is there
+The intuition behind the method is that in graphs with small edge expansion, there necessarily exist edges which are "congested", that is, there
 are many paths going through them. To make this intuition precise, let $\phi: E(G) \rightarrow \mathbb{N}$ count the number of paths
-that traverse this edge. The edge expansion can be bounded 
+that traverse a given edge. The edge expansion can be bounded 
 in terms of
 \begin{equation}
 \phi_{\max} \coloneqq \max \{ \phi(e), e \in E(G) \}.
@@ -619,10 +626,10 @@ Let $\phi_{\max}$ be as defined in previous paragraph. Then the edge expansion o
 \end{lemma}
 
 \begin{proof}
-Let $\phi(\delta(S))$ be the sum of $\phi(e)$ for all the edges in $\delta(S)$. Every path that has one end in $S$
+Let $\phi(\delta(S))$ be the sum of $\phi(e)$ over all the edges in $\delta(S)$. Every path that has one end in $S$
 and the other in $V\setminus S$ needs to use one of these edges, so we have $\phi(\delta(S)) \ge   |V\setminus S | |S |$.
-On the other hands, $\phi_{\max}$ is the globabl maximum for all edges of the graph, so we have $\phi(\delta(S)) \le  |\delta(S) |\phi_{\max}$.
-Hence for any $S \le \frac{ |V |}{2}$, we have
+On the other hands, $\phi_{\max}$ is the global maximum over all the edges of the graph, so we have $\phi(\delta(S)) \le  |\delta(S) |\phi_{\max}$.
+Hence for any $|S| \le \frac{ |V |}{2}$, we have
 \begin{equation}
 \label{sepbound}
  \mathcal{X}(G) \ge \frac{|\delta(S)|}{|S|} 
@@ -633,7 +640,7 @@ Hence for any $S \le \frac{ |V |}{2}$, we have
 \end{equation}
 \end{proof} 
 \subsection{Relating edge expansion and separator size}
-
+Now we will show that large edge expansion implies a large separator.
 \begin{lemma}
 \label{separatorsize}
 Let $G$ be a $d$-regular on $n$ vertices with edge expansion $\mathcal{X}(G)$.
@@ -677,11 +684,11 @@ cyclically adjacent.
 \end{theorem}
 
  This shows that for any vertex $v$, the edges in directions $i$ and $i+1$ span a 2-face, because
-the vector $(*,v_2, \dots, v_{i-1}, *, *, v_{i+2}, \dots, v_m)$ corresponds to a facet of $\NCC(4)$
+the vector $(*,v_2, \dots, v_{i-1}, *, *, v_{i+2}, \dots, v_m)$ corresponds to a facet of $\NCC_4(m)$
 for $i\le 2 < m$. As the 2-faces correspond to edges in the vertex figure, this means that the vertices 
-of the vertex figure at $v$ are cyclically connected in a consistent way indepdent of $v$. In other words
-there is a Hamiltonian cycle $(123\dots m)$ going through the vertices in the graph of each figure.
-This is also shows that the boundary complex of $\NCC(m)$ contains a copy of the polyhedral surface 
+of the vertex figure at $v$ are cyclically connected in a consistent way independent of $v$. In other words
+there is a Hamiltonian cycle $(1,2,3,\dots, m)$ going through the vertices in the graph of each figure.
+This is also shows that the boundary complex of $\NCC_4(m)$ contains a copy of the polyhedral surface 
 describe by Ringel \cite{ringel55:_ueber_probl_wuerf_wuerf} in 1957. This was also pointed out by
 Ziegler \cite[Sect 3.]{Z100}. See also Joswig \& Rörig \cite{joswig:_neigh}.
 
@@ -691,11 +698,11 @@ by $(v,i) \in \{-,+\}^m \times [m]$ where $v \in \{-,+\}^m$ is the label of the 
 is the direction of the edge of $\NCC_4(m)$ which has been cut. The vertex figures of $G'_5$ are illustrated in \ref{figure:graphs}.
 
 We divide the edges of $\NCC_4(m)'$ into three different classes. First of all, there are the "long" edges which correspond to the edges $\NCC_4(m)$.
-They are incident to vertices $(v,i)$ and $(v',i)$ where $v$ only differ in coordinate $i$. There $m2^{m-1}$ such edges in total. Secondly, 
-there are "medium" edges, which are between vertices $(v,i)$ and $(v,i+1\mod m)$. They form a Hamilton cycle $(1\,2\,3\,\dots\, m)$ on each cluster $v$. In total there are $m2^m$ medium edges. The rest of the edges are "extra", they are between vertices $(v,i), (v,j)$ with $j-i \neq \pm 1 \mod m$.
+They are incident to vertices $(v,i)$ and $(v',i)$ where $v$ and $v'$ only differ in coordinate $i$. There $m2^{m-1}$ such edges in total. Secondly, 
+there are "medium" edges, which are between vertices $(v,i)$ and $(v,i+1\mod m)$. They form a Hamilton cycle $(1,2,3,\dots, m)$ on each cluster $v$. In total there are $m2^m$ medium edges. The rest of the edges are "extra", they are between vertices $(v,i), (v,j)$ with $j-i \neq \pm 1 \mod m$.
 There are $(2m-6)2^m$ "extra" edges in total. The "extra" and "medium" edges together form the vertex figures of $\NCC_4(m)$ which we call clusters. 
 
-Truncating the long edges of $\NCC_4(m)'$ gets us the polytope $\NCC_4(m)''$. The "medium" and "extra" edges are shortened by this procedure, but are otherwise unchanged. The "long" edges are replaced by their edge figures, which are prisms over $k$-gons with $3 \le k \le m-1$. Here $k$ is the degree of the incident vertices in their clusters, or equivalently their degree minus 1. We call the edges between these $k$-gons a \textit{parallel class of long edges}. The $k$-gon consist of "short" edges. A picture of a cluster of $G''_m$ can be seen in the bottom figure of \ref{figure:graphs}.
+Truncating the long edges of $\NCC_4(m)'$ gets us the polytope $\NCC_4(m)''$. The "medium" and "extra" edges are shortened by this procedure, but are otherwise unchanged. The "long" edges are replaced by their edge figures, which are prisms over $k$-gons with $3 \le k \le m-1$. Here $k$ is the degree of the incident vertices in their clusters, or equivalently their degree minus 1. We call the edges between these $k$-gons a \textit{parallel class of long edges}. The $k$-gon consist of "short" edges. A picture of a cluster of $G''_5$ can be seen in the bottom figure of \ref{figure:graphs}.
 
 The cycles of short edges naturally correspond to vertices of $G_m'$, so we extend the notation $\{-,+\}^m \times [m]$ to them. "Medium" edges connect subsequent cycles $(v,i), (v,i+1 \mod m)$ while "extra" edges connect non-subsequent cycles. 
 
@@ -821,4 +828,18 @@ prims over $\NCC_4(m)$ adds $(d-4)$ extra parallel classes of long edges inciden
 to each vertex. We can amend our algorithm by taking a long edge in these directions 
 if necessary and then proceeding in the usual way.
 
+\section{Zig-Zag product}
 
+Even though most regular graphs of degree $d\ge 3$ are expanders \cite{KoBa1967}, 
+constructing explicit examples is hard. Graphs of simple 4-polytopes on the other hand
+are few and far between. While our $\NC_d(m)$ are not expanders, they are not that  
+far away from expanding either. The key property is taking a fairly good expander (an $m$-cube)
+and modifying it so that it becomes a simple polytope (and therefore a regular graph). This
+is done by replacing the vertices with 3-regular graphs. There is a systematic way of doing this, called
+the zig-zag product. The zig-zag product was introduced by Reingold, Vadhan and Wigderson in 2000 
+\cite{892006}. 
+
+The zig-zag product takes a large regular graph $G$ and a small regular graph $H$ and produces a new
+graph $G \circ H$. More precisely, the graph $G$ is a $D$-regular graph on $N$ vertices, while $H$ 
+is a $d$-regular graph on $D$ vertices. Their product is then a $d^2$-regular graph on $D\times N$ vertices. 
+The important part is that if $G$ and $H$ are good expanders, then $G \circ H$ is too. 
