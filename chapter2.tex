@@ -171,8 +171,8 @@ $F \in \mathfrak{C}$.
 \end{definition}
 
 The dimension of a polytopal complex dim($\mathfrak{C}$) is the largest dimension
-among the polytopes contained in it. It's \textit{underlying set} $|\mathrak{C}|$ is the union of all of 
-its polytopes $  |\mathrak{C}| \coloneqq \cup_{F\in \mathfrak{C}} F.$
+among the polytopes contained in it. It's \textit{underlying set} $|\mathfrak{C}|$ is the union of all of 
+its polytopes $  |\mathfrak{C}| \coloneqq \cup_{F\in \mathfrak{C}} F.$
 
 % Examples of polytopal complexes include the polytope itself and its 
 % \textit{boundary complex} which is the collection of all proper faces of $P$. 
@@ -406,7 +406,7 @@ thesis is the following theorem.
 separators of size $\Omega(n/\log n)$.
 \end{theorem}
 
-\subsection{Neighborly cubical polytopes}
+\section{Neighborly cubical polytopes}
 \label{ncp}
 
 \begin{definition}
@@ -706,11 +706,19 @@ Truncating the long edges of $\NCC_4(m)'$ gets us the polytope $\NCC_4(m)''$. Th
 
 The cycles of short edges naturally correspond to vertices of $G_m'$, so we extend the notation $\{-,+\}^m \times [m]$ to them. "Medium" edges connect subsequent cycles $(v,i), (v,i+1 \mod m)$ while "extra" edges connect non-subsequent cycles. 
 
+The similarity of the graphs is apparent in their minor relations
+
+\begin {equation}
+G_m'' \rightarrow G_m' \rightarrow G_m
+\end{equation}
+We can get $G_m'$ by contracting the cycles of short edges in $G_m''$ and identifying the parallel classes of long edges 
+to a single edge. $G_m$ is obtained from $G_m'$ by contracting all of the medium and extra edges.
+
 \subsection{Canonical paths for $G''_m$}
 \label{canpaths}
 
 Now we will construct the canonical paths required for \ref{Sinclair} in $G''_m$. Our construction relies on the similarity
-of the vertex figures and the cubical connections between the clusters. 
+of the clusters and their cubical connections with each other.
 
 Let $v_0$ be a vertex in the cycle of short edges $(v,i)$ and $w_0$ be a vertex in the cycle of short edges $(w,j)$. 
 We will construct a path from $v_0$ to $w_0$ in the following way. Consider the coordinates in cyclic order $i, i+1, \dots m, 1, \dots,
@@ -732,7 +740,7 @@ After performing this procedure at most $m$ times, we end up in the cluster $w$.
 iterations, we end up in the cycle $(w,j)$. In the final iteration, we take at most $m-1$ steps in this cycle to arrive
 at $w_0$.
 
-We will now show that no edges is used more than $(O(m^2 2^,)$ times by considering the four cases of short, medium, long
+We will now show that no edges is used more than $O(m^2 2^,)$ times by considering the four cases of short, medium, long
 and extra edges separately.
 
 \afterpage{% 
@@ -755,17 +763,18 @@ and extra edges separately.
 \subsection{Long edges}
 
 On average, a random pair of clusters differs in $\frac{m}{2}$ coordinates. Therefore half of the $n^2$ paths use long edges in direction $i$.
-Our definition of paths is independent on the value of the other coordinates. so each of the $2^{m-1}$ parallel classes in direction $i$ are used
-equally often. Every parallel class, and therefore every edge, is used by $\frac{n}{2} / 2^{m-1}$ paths.  The number of vertices is $n \in O(m2^m)$, so this works out to be $O(m^2 2^m)$.
+The procedure works independently of the value of the other coordinates. so each of the $2^{m-1}$ parallel classes in direction $i$ is used
+equally often. Every parallel class is used by $(n^2/2) / 2^{m-1}$ paths and therefore each long edge is used at most this number of times. The number of vertices is $n \in O(m2^m)$, so this works out to be $O(m^2 2^m)$.
 
 \subsection{Medium and short edges}
 
 Every path we construct uses at most $2m$ iterations of procedure $P$. The total number of iterations over all paths is therefore at most
-$O(2mn^2)$.  Every iteration uses at most one long edge, one short edge and short edges
+$2mn^2$.  Every iteration uses at most one long edge, one short edge and short edges
 on one cycle. The extra edges are not used at all. 
 
-Our construction treats all coordinates and both values of the coordinate equally, each set of "cycle of short edgess and a medium edge leaving it"
-are used equally often. Moreover, these sets are disjoint. Therefore every short and medium edge is used at most $2mn^2 / (m2^m)$ times. 
+Our construction treats all coordinates and both values of the coordinates equally. This means that 
+each set of "cycle of short edgess and a medium edge leaving it"
+is used equally often. Moreover, these sets are disjoint. Therefore every short and medium edge is used at most $2mn^2 / (m2^m)$ times. 
 As $n \in O(m^2 2^m)$, this is works out to be $O(2mn^2 / m2^m) = O(m^2 2^m)$. 
 
 \subsection{Wrapping things up}
@@ -788,43 +797,44 @@ With lemma \ref{sepbound}, we get a bound on the size of minimal separators:
 \end{equation}
 as $n = (6m-12)2^m$ and thus $m=\Theta(\log n)$.
 
-\section{Upper bound on minimal separators}
+\section{Upper bound on minimal separators in $\NC_4(m)$}
 
-The minimal separators of $C''_m$ have $O(n/\log n)$ vertices. By setting $A$ 
-and $B$ to two $(m-1)$-cubes along a random ``edge direction'' of $Q_m$ we get 
-two sets with $3\cdot 2^m$ edges going between them. Moving either end vertex 
-of the edge to set $C$ we get a separator with $3\cdot 2^m = O(n/\log(n))$ 
-edges.
+The minimal separators of $G''_m$ have $O(n/\log n)$ vertices. Separators with this
+many vertices are easy to construct. Pick a random coordinate direction $i$ and separate
+the vertices into two sets: set $A'$ where the coordinate $i$ is 0 and set $B'$ where the coordinate
+is 1. Both sets have $(3m-6)2^m$ vertices and there are $O(2^m) = O(n/\log n)$ edges between them. For each of
+these edges, pick one end point and move it to $C$. The remaining vertices in $A'$ and $B'$ form
+the sets $A$ and $B$. This works for separation constant arbitrarily close to $\nicefrac{1}{2}.$
 
 \section{Generalizations}
 
 The sharp lower bound can be also proven for a larger class of neighborly cubical polytopes.
 The polytopes constructed by Sanyal and Ziegler \cite{Z102} all contain the Hamiltonian
-cycle used by paths. The triangulation of the clusters in $G'_m$ is desribed by
+cycle we use to construct our paths. The triangulation of the clusters in $G'_m$ is described by
 \cite[Thm 3.7.]{Z102}. For vertex $v$, it is a regular triangulation created by pushing 
 and pulling vertices depending on the vertex label and the order of the vertices. 
 The pushing and pulling only affects extra edges, so we end up with a Hamiltonian
 cycle through the edges. However, this cycle is not necessarily $(1,2,3,\dots,m)$ but
 rather some other fixed cycle on $[m]$.
 
-This construction generalizes easily to higher dimensions. There are two 
-natural ways, using $\NC_d(m)$ i.e.\ higher dimensional neighborly polytope, or 
+This construction can also used the same bound in higher dimensions. There are two 
+natural ways, using $\NC_d(m)$ i.e.\ a higher dimensional neighborly polytope, or 
 taking prisms over $\NC_4(m)''$.  In the first case we have to do more cuts to 
 make the polytope simple, resulting in a large number of vertices. Hence the 
 second way is the correct one. 
 
-Let $G''_m$ be the graph of a $(d-4)$-fold prism over $\NC_4(m)''$ for $d\geq 4$. 
+Let $G^d_m$ be the graph of a $(d-4)$-fold prism over $\NC_4(m)''$ for $d\geq 4$. 
 Any separator 
-$(A,B,C)$ of $\NC_4(m)''$ can be turned into a separator of $G''_m$ by setting 
+$(A,B,C)$ of $\NC_4(m)''$ can be turned into a separator of $G^d_m$ by setting 
 $(A',B',C')$ to be the prisms over their respective sets. Since no vertices 
 $a\in A, b\in B$ are adjacent and all the copies of a single vertex are in the 
 same set, there are no edges between vertices in $A'$ and $B'$. This means that 
-$G$ is at least as easy to separate as $\NC''_4(m)$. On the other hand, $G$ 
+$G^d_m$ is at least as easy to separate as $\NC''_4(m)$. On the other hand, $G^d_m$ 
 also has a cubelike structure and hence with the discrete isoperimetric 
 inequality we get the same upper bound as for $\NC''_4(m)$. 
 
 Similarly, the sharp bound can be extended to higher dimensions. A $(d-4)$ fold
-prims over $\NCC_4(m)$ adds $(d-4)$ extra parallel classes of long edges incident
+prims over $\NCC_4(m)''$ adds $(d-4)$ extra parallel classes of long edges incident
 to each vertex. We can amend our algorithm by taking a long edge in these directions 
 if necessary and then proceeding in the usual way.
 
