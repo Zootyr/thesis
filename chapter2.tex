@@ -843,13 +843,58 @@ if necessary and then proceeding in the usual way.
 Even though most regular graphs of degree $d\ge 3$ are expanders \cite{KoBa1967}, 
 constructing explicit examples is hard. Graphs of simple 4-polytopes on the other hand
 are few and far between. While our $\NC_d(m)$ are not expanders, they are not that  
-far away from expanding either. The key property is taking a fairly good expander (an $m$-cube)
+far away from expanding either. The key idea in our construction is taking a polytope which
+is a fairly good expander (an $m$-cube)
 and modifying it so that it becomes a simple polytope (and therefore a regular graph). This
-is done by replacing the vertices with 3-regular graphs. There is a systematic way of doing this, called
+is done by replacing the vertices with 3-regular graphs. There is a systematic way of doing this operation
+on graphs, called
 the zig-zag product. The zig-zag product was introduced by Reingold, Vadhan and Wigderson in 2000 
 \cite{892006}. 
 
 The zig-zag product takes a large regular graph $G$ and a small regular graph $H$ and produces a new
 graph $G \circ H$. More precisely, the graph $G$ is a $D$-regular graph on $N$ vertices, while $H$ 
 is a $d$-regular graph on $D$ vertices. Their product is then a $d^2$-regular graph on $D\times N$ vertices. 
-The important part is that if $G$ and $H$ are good expanders, then $G \circ H$ is too. 
+The important part is that if $G$ and $H$ are good expanders, then $G \circ H$ is too. Before we can give
+the formal definition of zig-zag product, we need to define \textit{rotation maps}.
+\begin{definition}
+Let $G = (V,R)$ be a $d$-regular graph. The edges incident to vertex $v$ are labeled with numbers $1,\dots, d$. 
+The rotation map $\textrm{Rot}_{G} : V \times [d] \rightarrow V \times [d]$
+returns for the $(v,i)$ pair the vertex $w$ which across the $i$th edge from $v$, and the label of this edge at $w$.
+\end{definition}
+Note that in the previous definition, each edge gets two labels, one for each endpoint. Not all graphs have rotation
+maps so that the label at both ends is the same.
+Using rotation maps of $G$ and $H$ we can now define the rotation map of $G \circ H$. 
+\begin{definition}
+Let $G$ be a $D$-regular graph on $N$ vertices and $H$ is a $d$-regular graph on $D$ vertices.
+The rotation map $\textrm{Rot}_{G\circ H}$ is found with the following procedure:
+\begin{flalign*}
+&\textrm{Rot}_{G \circ H}((v,a),(i,j)): \\
+&1. \textrm{Let} (a', i') = \textrm{Rot}_H (a,i) \\
+&2.   \textrm{Let} (w, b') = \textrm{Rot}_G (v,a') \\
+&3.  \textrm{Let} (b, j') = \textrm{Rot}_H (b',j) \\
+&4. \textrm{Output} ((w,b), (j',i')
+\end{flalign*}
+\end{definition}
+Having the edges defined locally is an advantage in computational applications. While the zig-zag product
+necessarily produces good expanders, the results may not be polytopal graphs, even if the startintg graphs are
+polytopal. As shown by the nieghborly cubical polytopes, a given graph can be the graph of polytope of various dimensions. 
+Luckily, simple polytopes don't have this problem and there are even algorithms to solve this problem \cite{KALAI1988381} \cite{Achatz2000}. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
