@@ -877,8 +877,14 @@ The rotation map $\textrm{Rot}_{G\circ H}$ is found with the following procedure
 \end{definition}
 Having the edges defined locally is an advantage in computational applications. While the zig-zag product
 necessarily produces good expanders, the results may not be polytopal graphs, even if the startintg graphs are
-polytopal. As shown by the nieghborly cubical polytopes, a given graph can be the graph of polytope of various dimensions. 
+polytopal. One stumblng block is that a polytopal graph of $d\ge 4$ must have many planar subgraphs and short
+cycles, which correspond to the 2- and 3-faces. Both of these are easy to separate, but as our truncated neighborly cubical
+polytopes show, the separator might still have to be large.
+ It is also possible that some choices of the rotation map produce polytopal graphs while others don't.
+
+ As shown by the neighborly polytopes, a given graph can be the graph of polytope of various dimensions. 
 Luckily, simple polytopes don't have this problem and there are even algorithms to solve this problem \cite{KALAI1988381} \cite{Achatz2000}. 
+Our quick experiment by hand found a product of a tetrahedron and a triangle, which was not a polytopal graph.
 
 
 
