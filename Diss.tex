@@ -1,0 +1,1198 @@
+\documentclass[a4paper,12pt]{book}
+
+%Packages
+%\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{afterpage}
+
+\usepackage{paralist}
+%\usepackage[colorlinks,citecolor=blue,pagebackref=true,pdftex]{hyperref}
+\usepackage{hyperref}
+
+\usepackage{tabularx}
+
+\usepackage[ngerman,english]{babel}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{caption}
+\usepackage{subcaption}
+
+\providecommand*\showkeyslabelformat[1]{\fbox{\tiny\tt#1}}
+%\usepackage[notref,notcite]{showkeys}
+
+\usepackage{paralist}
+\usepackage{nicefrac}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+
+\usepackage{chngcntr}
+\counterwithin{figure}{chapter}
+\counterwithin{table}{chapter}
+
+\usepackage[headsepline]{scrpage2}
+\pagestyle{scrheadings}
+
+%\usepackage[margin=3.5cm]{geometry}
+\usepackage[left=3cm,right=4cm, bottom=3.5cm]{geometry}
+
+
+%\setcounter{chapter}{-1}
+
+
+%Layout
+\newcommand\note[1]{\textbf{\color{blue}#1}}
+\newcommand\Defn[1]{\textbf{#1}}
+\newcommand\WORKLINE{\ \\ \rule{.42\textwidth}{3px} { WORKLINE }
+\rule{.42\textwidth}{3px} \ \\}
+    
+
+%Operators
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\relint}{relint}
+\DeclareMathOperator{\nvol}{Vol}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\Crit}{Crit}
+
+\usepackage{tikz}
+%\usepackage{pgfmath}
+\usepackage{xcolor}
+\usetikzlibrary{shapes,shadows,arrows,patterns,trees,automata,positioning,snakes,fadings,backgrounds,intersections,calc}
+\usepackage{tkz-euclide}
+%\usepackage{pst-plot}
+\usepackage{ifthen}
+%%%%%%%%%%%% Definitions & styles %%%%%%%%%%%%%%%%%%%%
+\tikzstyle{edge}=[line width=1mm, color=blue] %hamilton cycle edges
+\tikzstyle{face}=[color=black,fill=white,opacity=0.8,line width=0.7mm]
+\tikzstyle{line}=[black!50!white, opacity=1, line width=0.45mm] %long lines
+\tikzstyle{label} = [color=black, font=\normalsize, opacity=1]
+\tikzstyle{vertex} = [outer color=black,draw, color=black,line width=0.03mm, inner color=black!55!white, circle,inner sep=0.7mm,minimum size=0.9mm]
+
+
+
+%Theorems
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{maintheorem}[theorem]{Main Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem{convention}[theorem]{Convention}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{mtheorem}{Main Theorem}
+\newtheorem*{gtheorem}{General Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{addendum}[theorem]{Addendum}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\newcommand\R{\mathbb{R}}
+\newcommand\NC{\textrm{NCP}}
+\newcommand\NCC{\mathrm{NC}^c}
+\newcommand\CG{\mathrm{G}}
+
+
+\begin{document}
+
+ \pagenumbering{roman} 
+\pagestyle{empty}
+
+\begin{titlepage}
+\setlength{\hoffset}{5mm}
+\begin{center}
+%\vspace*{1cm}
+\begin{figure}[h]
+\begin{minipage}{.35\textwidth}
+\begin{center}
+\includegraphics[width=3.5cm]{FU-logo.jpg}
+\end{center}
+\end{minipage}
+\begin{minipage}{.64\textwidth}
+\large {Fachbereich Mathematik und Informatik\\
+der Freien Universit\"at Berlin}
+\end{minipage}
+\end{figure}
+
+%\vspace{1cm}
+\vspace{1.5cm}
+\LARGE{\bf{
+Double posets and real invariant varieties}}\\
+\vspace{0.5cm}
+\large{{Two interactions between combinatorics and geometry}}\\
+\vspace{1cm}
+\begin{figure}[h]
+\begin{center}
+
+%\includegraphics[width=6cm]{pictures/AP_subdiv.jpg}
+\includegraphics[width=8cm]{1280px-Grosser_Panda}
+
+\end{center}
+\end{figure}
+\vspace{0.5cm}
+\LARGE{
+{Dissertation}\\}
+\large
+\vspace{1cm}
+eingereicht von\\
+Tobias Friedl\\
+\vspace{1.5cm}
+Berlin 2017\\
+\vspace{3cm}
+\end{center}
+\end{titlepage}
+
+\cleardoublepage\thispagestyle{empty}
+
+\begin{titlepage}
+%\setlength{\hoffset}{5mm}
+\begin{center}
+%\vspace*{1cm}
+\begin{figure}[h]
+\begin{minipage}{.35\textwidth}
+\begin{center}
+\includegraphics[width=3.5cm]{FU-logo.jpg}
+\end{center}
+\end{minipage}
+\begin{minipage}{.64\textwidth}
+\large {Fachbereich Mathematik und Informatik\\
+der Freien Universit\"at Berlin}
+\end{minipage}
+\end{figure}
+
+%\vspace{1cm}
+\vspace{1.5cm}
+\LARGE{\bf{
+Double posets and real invariant varieties}}\\
+\vspace{0.5cm}
+\large{{Two interactions between combinatorics and geometry}}\\
+\vspace{1cm}
+\begin{figure}[h]
+\begin{center}
+
+%\includegraphics[width=6cm]{pictures/AP_subdiv.jpg}
+\includegraphics[width=8cm]{1280px-Grosser_Panda}
+
+\end{center}
+\end{figure}
+\vspace{0.5cm}
+\LARGE{
+{Dissertation}\\}
+\large
+\vspace{1cm}
+eingereicht von\\
+Tobias Friedl\\
+\vspace{1.5cm}
+Berlin 2017\\
+\vspace{3cm}
+\end{center}
+\end{titlepage}
+
+\cleardoublepage\thispagestyle{empty}
+
+\null\vfill
+\begin{center}
+\large{Advisor and first reviewer:\\
+Prof. Dr. Raman Sanyal}\\
+\vspace{0.2cm}
+Second reviewer:\\
+Prof. Dr. Francisco Santos\\
+\vspace{0.2cm}
+Third reviewer:\\
+Priv.-Doz. Dr. Christian Stump\\
+\vspace{0.6cm}
+Date of the defense:\\
+May 19, 2017
+\end{center}
+
+\cleardoublepage
+
+
+
+
+\pagestyle{scrheadings}
+
+\newcommand{\header}[1]{\markboth{}{\MakeUppercase{ #1}}}
+
+%\phantomsection
+%\addcontentsline{toc}{section}{Summary}
+
+\phantomsection
+\chapter*{Acknowledgements}
+\header{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+
+My deepest thanks go to my 
+
+
+
+
+\cleardoublepage
+
+\tableofcontents
+
+\cleardoublepage
+
+ \pagenumbering{arabic} 
+
+\chapter{Introduction}
+\label{intro}
+
+Graphs are objects used to model pairwise relations between objects. For applications such as computer
+networks, it is important that the connections are robust. This means that the failure of a few nodes doesn't 
+break the network into disconnected parts. Separators are one way to model the connectedness of a graph. 
+A separator is a partition of the vertices of a graph into three sets. There are two "large" sets $A$ and $B$ with no edges
+between a vertex in $A$ and a vertex in $B$, and 
+an additional set $C$ containing the rest of the vertices. As moving vertices from $A$ or $B$ to
+$C$ preserves the separation property, we are interested in the minimum size of the set $C$. 
+This is called the size of the separator. A similar definition exists for edge separators, but we study
+only regular graphs where the difference between the two doesn't matter.
+Separators are closely connected to the expander graphs; a family of expander graphs has minimal separators
+whose size is linear in the number of vertices.
+
+The story of separators of polytopes begins with Ungar \cite{Ungar1951},
+who proved that planar graphs, and therefore graphs of 3-polytopes, have minimal 
+separators of size $\Omega(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
+separator theorem  \cite{LiTa}, which gives the correct bound
+$\Omega(\sqrt{n})$. This result is best possible, since the $m\times m$ grid graph
+can't be separated by fewer than $\Omega(m)$ vertices. Miller and Thurston \cite{MillerThurston-separators} gave a 
+geometric proof of the planar separation theorem using the  
+Koebe–Andreev–Thurston circle-packing theorem.
+
+Miller, Teng, Thurston and Vavasis \cite{MillerTengThurstonVavasis} generalized 
+the theorem to intersection graphs of ball packings in $d$ dimensions. This 
+led Kalai (\cite{Kal97}, corrected in \cite{kalai04:_polyt}) to conjecture that 
+simple $d$-polytopes would also have small separators.
+\begin{conjecture}[Kalai]
+\label{simpleconjecture}
+Simple $d$-polytopes have separators of size
+$\Omega \left(n^{\frac{d-2}{d-1}}\right)$.
+\end{conjecture}
+Simplicity is necessary as the graph of the cyclic polytopes is complete for 
+$d\geq 4$ and hence has no vertex separator. Kalai also refers to 
+\cite{MillerTengThurstonVavasis} for a claim by Thurston who stated that there are triangulations of 
+$S^3$ which don't have separators the size of $\Omega(n/\log n)$. This is not 
+stated in the paper, but Gary Miller told us (personal communication) that 
+“\textit{Thurston gave an embedding of the cube-connected cycle graph in $\mathbb{R}^3$
+as linear tets} [tetrahedra]”. The details of this construction appear to be lost.
+
+This thesis is structured as follows. In section \ref{mathchapter} we define our main objects of study,
+separators of graphs. This section also contains necessary background information on 
+graphs and polytopes. In section \ref{ncpconstruction} we build the simple polytope used for our 
+lower bound and calculate the size of their separators. Finally in section \label{genes} we generalize
+the construction to higher dimensions and discuss possible constructions for polytopes with even larger
+minimal separators.
+
+\chapter{Graphs and Polytopes}
+\label{mathchapter}
+
+\section{Polytopes}
+
+The main objects of study in this work are polytopes and their graphs. Polytopes are 
+interesting 
+objects in their own right, but also play an important role in
+optimization. In the following section we introduce the basics of polytopes. 
+A more thorough treatment can be found in books by Ziegler \cite{PolyLec} 
+and Gr\"unbaum \cite{Grunbaum69convexpolytopes}. 
+
+There are 
+two ways to define a polytope, the vertex (or interior) representation and the 
+half-space (or exterior) representation.
+
+\begin{definition}
+(V-Polytope) A polytope is the convex hull of a finite number of points $V 
+\subset \mathbb{R}^d$, that is 
+\begin{equation}
+ P = \left\{x\in \mathbb{R}^d \middle| x = \sum_{i=1}^{|V|} \lambda_i v_i, 
+0\leq \lambda_i \leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}.
+\end{equation}
+
+\end{definition}
+
+\begin{definition}
+ (H-polytope) A polytope is the bounded intersection of a finite number of 
+half-space, that is
+\begin{equation}
+ P = \bigcap_{i=1}^n \left\{x \in \mathbb{R}^d \mid \mathbf{a}_i^T \mathbf{x} 
+\leq 
+c_i \right\}
+\end{equation}
+where $\mathbf{a}_i \in \mathbb{R}^d$ are normal vectors of the hyperplanes and 
+$c_i \in 
+\mathbb{R}$ are displacements. If this description is minimal with respect to 
+the number of half-spaces required to describe $P$, it is called 
+\textit{irredundant}.
+\end{definition}
+
+It is a fundamental theorem of polytopes that these two representations are 
+equivalent.
+\begin{theorem}[Minkowski-Weyl Theorem {\cite[Thm. 1.1.]{PolyLec}}] Let $P \subset \mathbb{R}^d$. 
+$P$ is a $H$-polytope if and only if $P$ is a $V$-polytope.
+\end{theorem}
+The dimension of a polytope is the dimension of its affine hull. The \textit{affine 
+hull} of a set of points is the dimension of the smallest hyperplane which 
+contains all of the points. A $d$-polytope in $\mathbb{R}^d$ is said to be 
+\textit{full-dimensional}. If the lowest dimensional hyperplane which contains 
+$n$ points is $(n-1)$-dimensional, the points are set to be \textit{affinely 
+independent}.
+
+ The boundary 
+of a polytope consists of lower dimensional polytopes called faces. 
+\begin{definition}
+ (Face) A face is an intersection of a polytope with a hyperplane 
+\begin{equation}
+ F = P \cap \{x \in \mathbb{R}^d \mid \mathbf{a}\mathbf{x} = c\}
+\end{equation}
+where the hyperplane has to be \textit{valid}, that is $\mathbf{a}\mathbf{x} 
+\leq c$ holds for all points in $P$. 
+
+\end{definition}
+Both the empty set and $P$ are faces of $P$, they are given by $0x \le 1$ and $0x \le 0$, respectively.
+The empty set is defined to have dimension -1.
+A face that is not equal to all of $P$ is called a \textit{proper face}.
+Some faces have special names: the 0-dimensional faces are called 
+\textit{vertices}, the 1-dimensional faces are called \textit{edges} and the 
+$(d-1)$-dimensional faces are called \textit{facets}.
+ The faces of a polytope 
+form a lattice with order given by inclusion. This lattice is called the 
+\textit{face lattice} of the polytope.
+
+The faces of various dimensions 
+are counted by the face vector.
+\begin{definition}
+ (Face vector) The face vector is $(f_0, f_1, \dots, f_{d-1}) \in \mathbb{Z}^d$ 
+where $f_i$ is 
+the number of $i$-dimensional faces.
+\end{definition}
+The face vector satisfies the famous Euler-Poincare equation
+\begin{equation}
+ \sum_{i=0}^{d-1} (-1)^i f_i = 1 - (-1)^d.
+\end{equation}
+This is the only linear equation satisfied by the face vector. More 
+constraints can be found by studying the \textit{flag vector}.
+
+\begin{definition}
+ (Flag vector) The flag vector counts the number of chains $f_{i_1,i_2,\dots i_k}, \{i_1,i_2,\dots i_k \} \subset \{0,1,\dots d-1\}$
+with $f_{i_1} \subset f_{i_2} \subset \dots \subset f_{i_k}$.
+\end{definition}
+
+For example, the entry $f_{013}$ counts the number of chains in the face 
+lattice which has entries in dimensions $(0,1,3)$. This means a vertex contained in an
+edge, which is contained in a 3-cell. The complete face vector has $2^d$ entries,
+but many of them are redundant. In particular, in 4 dimensions whrere we will be mostly working in,
+knowing the entries $(f_0, f_1, f_2, f_3, f_{03})$ is enough to figure out the rest of the entries. 
+
+Now that we have defined what a polytope is, we need a criterion to decide which polytopes 
+count as "the same". There are two ways to do this, with one stricter than the other.
+Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
+\textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
+\rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
+polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
+polytopes are \textit{combinatorially equivalent} if their face lattices are isomorphic 
+i.e.\ there is an bijection between the elements of the lattices which preservers
+the inclusion relation. Two combinatorially equivalent polytopes are said to have the 
+same \textit{combinatorial type}. 
+
+We are interested in studying the graphs of polytopes. The most theoretically 
+pleasing way to define them is to consider them a special class of 
+\textit{polytopal complexes}.
+A polytopal complex is a collection of polytopes that fit together nicely.
+More precisely:
+\begin{definition}
+ (Polytopal complex) A polytopal complex $\mathfrak{C}$ is a finite set of 
+polytopes with the following properties:
+\begin{enumerate}
+ \item The empty polytope $\emptyset \in \mathfrak{C}$.
+  \item (Downward closure) If $F \subset P$ is a face of $P$ and $P \in 
+\mathfrak{C}$, then 
+$F \in \mathfrak{C}$.
+\item The intersection $P\cap Q$ of $P,Q \in \mathfrak{C}$ is a face of both.
+
+\end{enumerate}
+
+\end{definition}
+
+The dimension of a polytopal complex dim($\mathfrak{C}$) is the largest dimension
+among the polytopes contained in it. It's \textit{underlying set} $|\mathfrak{C}|$ is the union of all of 
+its polytopes $  |\mathfrak{C}| \coloneqq \cup_{F\in \mathfrak{C}} F.$
+
+% Examples of polytopal complexes include the polytope itself and its 
+% \textit{boundary complex} which is the collection of all proper faces of $P$. 
+Any polytope $P$ amd its faces form a polytopal complex. Another common complex is the 
+\textit{boundary complex} of a polytope
+$P$. The boundary complex is the collection of proper faces of $P$.
+The $k$-skeleton of a polytope is the collection of all faces of dimension $\leq 
+k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and the 
+boundary complex is the $(d-1)$-skeleton. The graph of the polytope is its 
+1-skeleton and it is denoted by $G(P)$.
+
+The \textit{triangulation} of a polytope $P$ is a polytopal complex $\mathfrak{C}$ whose
+underlying set is $P$ and all the polytopes in $\mathfrak{C}$ are simplices.
+
+% Each polytope has a dual polytope associated to it. Its face lattice is the 
+% lattice of the original polytope ``upside down''. Hence its $i$-faces 
+% correspond to the $(d-i)$-dimensional faces of the original. The dual of the 
+% dual is the original polytope. 
+
+Two polytopes are said to be dual to each other if there is an inclusion 
+reversing bijection between their face lattices. Clearly, the dual of a 
+$d$-polytope is another $d$-polytope. The fact that every polytope has a dual 
+can be seen from the \textit{polar set}. Let $A\subset \mathbb{R}^d$, then the 
+polar set $A^*$ is defined by
+\begin{equation}
+ A^* = \{y \in \mathbb{R}^d \mid \langle x,y\rangle \leq 1 \, \forall  x  \in A 
+\} 
+\end{equation}
+If $A$ is a convex compact set with $0 \in$ int $A$, so is $A^*$. In 
+particular, if $A$ is a polytope containing $0$ in the interior, $A^*$ is dual 
+to it. 
+
+After all these theoretical construction, let's have a look at some concrete examples
+of polytopes.
+In any dimension, the polytope with the fewest vertices is the simplex. 
+\begin{definition}
+ (Simplex) A $d$-simplex is the convex hull of $d+1$ affinely independant 
+points.
+\end{definition}
+Any two simplices of the same dimension are affinely isomorphic.
+The faces of a simplex are lower dimensional simplices and any $k\le d+1$ vertices
+of the simplex form a face. Therefore the number of $k$-faces is $\binom{d+1}{k}$.
+ A polytope whose facets 
+(but not necessarily the polytope itself) are simplices is called 
+\textit{simplicial}. The dual of a simplicial polytope is called 
+\textit{simple}. The vertices of a simple $d$-polytope are contained in exactly 
+$d$ edges and $d$ facets. This means that the graph of a simple polytope is $d$-regular.
+
+Another important polytope is the $n$-cube.
+
+\begin{definition}
+ The $m$-cube $Q^m$ is a simple polytope defined by the inequalities
+\begin{equation}
+ 0 \leq x_i \leq 1 
+\end{equation}
+for $i \in 1,\dots, m$. Equivalently, it is the convex hull of all points of the form $v \in \{0,1\}^m$.
+\end{definition}
+From the vertex description we see that the $m$-cube has $2^m$ vertices. A vertex $v$
+is incident to $m$ edges, so the $m$-cube is a simple polytope. The neighbors of $v$ are precisely
+the vertices whose label differs in exactly one coordinate.
+
+From the halfspace description we see that there $2m$ facets. The facets (and therefore lower dimensional faces)
+are also combinatorial cubes. Polytopes with this property are called \textit{cubical}. 
+
+The non-empty faces of an $m$-cube can be characterized by whether the $k$th coordinate 
+is required to be 0 or 1 or whether it can take all the values in $[0,1]$. Denoting the latter case by $*$, we see
+that the faces correspond to vectors $F \in \{0,1,*\}^m$ and the empty face. The number of $*$-entries 
+is equal to the dimension of the face. Hence there are $\binom{m}{k} 2^{m-k}$ $k$-faces.
+
+
+Vertex truncation is a common method of creating new polytopes from old ones.
+We will use it extensively.
+\begin{definition}
+(Vertex truncation) Let $P$ be a polytope with vertex set $V$. Truncating a vertex $v \in V$ means adding
+a new inequality to the halfspace description, which is violated by $v$ but valid for all the others vertices in $V$.
+\end{definition}
+All the polytopes formed this way are combinatorially equivalent (but generally not affinely isomorphic). 
+For each face intersected by the hyperplane, 
+a face of one dimension lower is added to the face lattice. The new facet is 
+called the \textit{vertex figure} of the vertex $v$. The vertex figure's combinatorial type 
+idepends only on the choice of vertex, not on the inequality. Vertex cuts can be generalized to cutting of 
+faces of higher dimensions by requiring the added inequality to be violated by 
+all the vertices in the face. 
+
+The dual operation of truncation is called stacking. 
+It means adding a new vertex to the polytope which satisfies all the 
+inequalities in the irredundant description with strict inequality except the 
+ones corresponding to the face being stacked on.
+
+Another way to produce new polytopes is taking prisms. This operation takes a 
+$d$-polytope $P$ in $\mathbb{R}^d$ and produces a $(d+1)$-polytope in 
+$\mathbb{R}^{d+1}$. 
+\begin{definition}
+ A prism is the convex hull of a copy of $P$ embedded on the hyperplane 
+$x_{d+1} = 0$ and another copy on the the hyperplane $x_{d+1} = 1$.
+\end{definition}
+
+ The new polytope prism$(P)$ has 2 copies of 
+each face $F$ of $P$ at the top and bottom and for each face $F$ a face isomorphic to 
+prism$(F)$ in the middle. Two vertices in $G(\text{pyr}(P))$ are adjacent if and only if
+they are copies of the same vertex or if they are in the same copy and are 
+adjacent in $P$. 
+The $n$-cube can be defined as the $n$-fold 
+prism over the zero dimensional polytope (a point). The dual construction to prism 
+is the bipyramid. 
+\begin{definition}
+ (Bipyramid) Let $P\subset \mathbb{R}^d$ be a $d$-polytope with zero in the 
+interior. Then the bipyramid bipyr$(P)$ is the convex hull of $P$ embedded on 
+the hyperplane $x_{d+1} = 0$ and the points $(0,0,\dots, 1)$ and $(0,0,\dots, 
+-1)$.
+\end{definition}
+
+
+\section{Graphs}
+
+Graphs appear everywhere in mathematics but they are especially common in 
+combinatorics. 
+
+\begin{definition}
+(Graph) A graph is an ordered pair $G=(V,E)$. The elements of $V$ are called 
+vertices. The elements of $E$ are 2-element subsets of $V$. They are called 
+the edges of the graph. 
+\end{definition}
+A graph is often visualized by connecting dots (vertices) with lines (edges) on a plane. 
+If such a drawing can be made without any lines intersecting, the graph is called
+planar.
+We consider only simple graphs, i.e.\ graphs without loops or parallel 
+edges.
+
+If $(u,v) \in E$, the vertices $u$ and $v$ are said to be \textit{adjacent}. 
+The vertices $u$ and $v$ are \textit{incident} to the edge $(u,v)$. 
+\begin{definition}
+ (Path) A set of edges $(u_1, u_2), (u_2, u_3), \dots (u_{k-1}, u_k) \subset E$ 
+is called a path between the vertices $u_1$ and $u_k$ if all the $u_i$ are 
+distinct.
+\end{definition}
+If there is a path between every pair of vertices, the graph is said to be 
+\textit{connected}. Otherwise it is \textit{disconnected}. A disconnected graph 
+consists of several \textit{connected components}.
+
+The \textit{degree} of a vertex is the number of edges it is incident to. 
+If all the vertices in the graph have degree $d$, the graph is called 
+$d$-regular. A graph is called is $k$-vertex-connected if removal of fewer than 
+$k$ vertices does not disconnect the graph. Edge connectivity is defined in an 
+analogous manner. Steinitz' theorem states that the graphs of 
+3-polytopes are precisely all planar, simple, 3-vertex-connected graphs. Hence 
+removal of only a few vertices disconnects the graph. However, this
+often means that one of the components is very small. A more nuanced view is 
+provided 
+by separators:
+
+\begin{definition}
+(Separator) A (vertex) separator with separation constant $0<c<1/2$ is a 
+partition of the vertices of a graph into 
+sets $(A,B,C)$  with $cn \le |A| \le |B| \le (1-c)n$ so that there is no edge between 
+a vertex in $A$ and a vertex in $B$. The \textit{size} of the separator
+separator is $|C|$.  
+\end{definition}
+
+Another way to think about separators is by minimizing \textit{neighborhoods} 
+of a set of given size.
+
+\begin{definition}
+ (Neighborhood) Let $S \subset V$ be a set of vertices. Then its neighborhood 
+$N(S)$ is the set $\{v \in V\setminus S \mid (u,v) \in E, u \in S\}$. 
+\end{definition}
+
+We are generally interested how the size of the smallest separator behaves as a 
+function 
+of the number of vertices for some fixed graph family.
+
+Separators can also be defined by removing edges instead of vertices. However, 
+for regular graphs the sizes of these separators differ by a constant multiple 
+so we ignore the distinction.
+
+The size of minimal separators in the graphs of 3-polytopes was discovered by 
+Lipton and Tarjan \cite{LiTa} in 1979. They showed that planar graphs have 
+separators of size $O(\sqrt{n})$ for separation constant $\nicefrac{1}{3}$. This is 
+the best possible result since an $m\times m$-grid requires $m$ vertices to be 
+removed to be separated. However, in higher dimensions such results are 
+impossible due to the existance of \textit{neighborly polytopes}.
+
+\begin{definition}
+ A $k$-neighborly polytope on $n$-vertices is a $d$-polytope with the $k$-skeleton of a $(n-1)$-simplex.
+A $\left\lfloor \frac{d}{2} \right\rfloor$-neighborly $d$-polytope is simply called neighborly, as this is the maximal
+neighborliness of a polytope which is not a simplex.
+\end{definition}
+
+The graph of any neighborly polytope of dimension $\geq 4$ is the complete graph, which can't be separated by removing vertices. Simple 
+$d$-polytopes on the other hand have $d$-regular graphs and there better results could be 
+possible. 
+
+%An analogous class of polytopes which we will be using is called neighborly 
+%cubical polytopes. 
+%
+%\begin{definition}
+% A neighborly cubical polytope $\NC_d(m)$ is a cubical $d$-polytope with the 
+%$\left\lfloor \frac{d}{2} 
+%\right\rfloor$-skeleton of a $m$-cube.
+%\end{definition}
+%
+%They were first discovered by Joswig and Ziegler. Sanyal and Ziegler \cite{Z102}
+%generalized the construction to show that each $(d-2)$-dimensional neighborly 
+%polytope on $(m-1)$ vertices can be used to define a 
+%different combinatorial type of $\NC_d(m)$. 
+%
+%\begin{conjecture}
+% (Kalai 1991 \cite{Ka2}, corrected version 2004 \cite{kalai04:_polyt}) The 
+%graph of a simple $d$-polytope can be separated by removing 
+%$O(n^{(d-2)/(d-1)})$ vertices. 
+%\end{conjecture}
+%
+%This reduces to the planar separator theorem in the 3-dimensional case. 
+
+
+
+\chapter{Lower bound on separators of simple polytopes}
+\label{ncpconstruction}
+
+In this chapter we construct polytopes which disprove conjecture \ref{simpleconjecture} and
+calculate a lower bound on the size of the minimal separators in two ways. Both proofs are for the
+4-dimensional case, but they easily generalize to higher dimensions. The first way requires
+no advanced techniques, but the bound achieved is not sharp. For the second proof,
+we restrict ourselves to a subset of the neighborly cubical polytopes where we know the 
+combinatorics completely. This combined with a lemma proven by Sinclair to study
+the mixing properties of Markov chains gets us the sharp bound. The main result of this
+thesis is the following theorem.
+
+
+\begin{theorem}
+\label{maintheorem}
+ Let $d\geq 4$. There exist $d$-dimensional simple polytopes with
+separators of size $\Omega(n/\log n)$.
+\end{theorem}
+
+\section{Neighborly cubical polytopes}
+\label{ncp}
+
+\begin{definition}
+A neighborly cubical polytope $\NC_d(m)$ is a cubical $d$-polytope with the $\left\lfloor \frac{d}{2} 
+\right\rfloor$-skeleton of a $m$-cube.
+\end{definition}
+
+They were first discovered by Joswig and Ziegler \cite{Z62}. Sanyal and Ziegler \cite{Z102}
+generalized the construction to show that each $(d-2)$-dimensional neighborly 
+polytope on $(m-1)$ vertices can be used to define a 
+different combinatorial type of $\NC_d(m)$. As the boundary complex of any $\NC_d(m)$
+is a subcomplex of the boundary complex of the $m$-cube, its faces correspond to vectors
+in $\{0,1,*\}^m$, or equivalently, $\{-,+,*\}^m$.
+
+
+Our construction starts from the neighborly cubical 4-polytopes $\NC_4(m)$. 
+Their graph is that of an $m$-cube. The separators of $m$-cubes were discovered by Harper 
+\cite{Harp}.
+While hypercubes are simple polytopes, $\NC_4(m)$ are not since each vertex is 
+incident to $m>4$ edges. However, we can "simplify" them by 
+truncating the edges and vertices.
+
+ 
+
+\begin{lemma}
+(See also Ewald \& Shephard \cite{EwSh}) A $d$-polytope can be made simple 
+by $(d-2)$ iterative cuts.
+\end{lemma}
+
+\begin{proof}
+This is easier to see in the dual case. The dual operation of cutting a vertex 
+is stacking on a facet. By stacking on all facets one after the other, we 
+remove all the original facets and introduce new ones, which are pyramids over 
+$(d-2)$-faces. The original $(d-2)$-faces are preserved and we can stack on 
+them, removing them and the facets created in the previous operation. Every 
+iteration of this operation removes all the facets created in previous 
+iterations and creates new facets which are iterated pyramids on successively 
+lower dimensional faces. Once we have done it $(d-2)$ times, the iterated 
+pyramids are over edges and hence simplices. This means that the facets are 
+simplices, so the polytope is simplicial and its dual is simple.
+\end{proof}
+
+Therefore, by 2 iterations of cuts, we can turn $\NC_4(m)$ into a simple 
+polytope. Let us see what this polytope looks like. 
+
+The starting polytope $\NC_4(m)$ has the flag vector 
+\begin{align*}
+ flag(\NC_4(m)) &:= (f_0, f_1, f_2, f_3; f_{03}) \\
+	&= (2^m, m2^{m-1}, 3(m-2)2^{m-2}, (m-2)2^{m-2}; 8(m-2)2^{m-2}) \\
+	&= (4, 2m, 3(m-2), m-2; 8(m-2))2^{m-2}
+\end{align*}
+
+The first two entries follow from the fact that the graph is the same as that 
+of the $m$-cube. The final entry follows from the fact that the facets are 
+3-cubes and hence consists of 8 vertices. Since the facets are 3-cubes, they 
+consists of 6 squares, and each of these squares is an intersection of two 
+3-cubes. Hence we know that $6f_2 = 2f_3$ and we can calculate these values with 
+the Euler-Poincare formula.
+
+We denote the polytope formed by truncating all the vertices by $\NC_4(m)'$.
+Truncating the vertices means removing all of the original vertices, but 
+adding 2 for each edge, one at each end of the edge. The facets of this new 
+polytope come in two types:
+
+\begin{itemize}
+ \item The $(m-2)2^{m-2}$ original facets, which are cubes whose vertices are 
+cut off. These are simple polytopes with $f$-vector (24,36,14).
+ \item The $2^m$ new facets which are the vertex figures. The facets of these 
+facets are vertex figures of the cube and hence triangles. Therefore these 
+new facets are simplicial. Their $f$-vector is ($m$, 
+$3m-6, 2m-4)$.
+\end{itemize}
+
+This means that the flag vector of $\NC_4(m)'$ is 
+\begin{equation}
+ flag(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2}
+\end{equation}
+
+By cutting of all of the original (but shortened) edges we arrive at 
+$\NC_4(m)''$. It has three types of facets:
+
+\begin{itemize}
+ \item $(m-2)2^{m-2}$ simple polytopes which correspond to the facets of 
+$\NC_4(m)$, but whose vertices and edges have been cut. Their $f$-vector is 
+(48, 72, 26).
+\item $m2^{m-1}$ prisms over polygons with $3$ to $m-1$ sides. They come from 
+the edges of the original polytope.
+\item $2^m$ simple polytopes which are the truncated vertex figures of 
+$\NC_4(m)$. Their $f$-vector is $(6m - 12, 9m-18, 3m-4)$.
+\end{itemize}
+
+Using the knowledge of the facets we can work out the flag vector of 
+$\NC_4(m)''$.
+
+\begin{equation}
+ flag(\NC_4(m)'') = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
+\end{equation}
+
+Since $2f_0 = f_1$, we can verify that $\NC_4(m)''$ is indeed a simple 
+polytope.
+
+\section{Lower bound, straightforward approach}
+
+In this section we shall show an easy proof for a bound on the separator. It
+is enough to disprove \ref{simpleconjecture}, but not enough to verify Thurston's
+claim.
+
+We are interested in what the graph $G(\NC_4(m)'') = G''_m$ looks like. Its 
+most striking feature is its similarity to the graph of the hypercube, $Q_m$. 
+$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G''_m$ 
+similarly consists of $2^m$ groups of $(6m-12)$ vertices which we call 
+\textit{clusters}. Each cluster is a 3-regular graph and the clusters are 
+connected to each other by 3 to $m-1$ edges. We will use this similarity to 
+prove a bound on the size of separators of $G''_m$. Let us therefore first take a 
+look at the separators of $Q_m$.
+
+The problem of finding the sets of size $k$ with minimal size neighborhood is 
+called the \textit{discrete isoperimetric problem}. It is a generalization of 
+the minimum separator problem as there is no restriction on the size of $k$. 
+Harper \cite{Harp} solved the problem on the hypercube in the 1960's. The 
+answer turns out to be Hamming balls.
+
+\begin{definition}
+ (Hamming ball) Let $a,b \in \{0,1\}^n$. The Hamming distance between $a$ and 
+$b$ is the number of elements where $a$ and $b$ differ. The Hamming ball 
+$B(x,r)$ is the set of elements at distance $\leq r$ from $x$.
+\end{definition}
+
+A Hamming ball $B(x,r) \subset Q_m$ has 
+\begin{equation}
+ \sum_{i=0}^r {m \choose i}
+\end{equation}
+vertices. If $k$ can't be expressed in this form, let $r$ be maximal so that 
+the sum is $\leq k$ and include some vertices with distance $r+1$ to the set. 
+However, the choice is not arbitrary. Suppose $x$ is the vertex labeled with 
+all zeros. Then the extra vertices are those which come first in 
+\textit{lexicographic order} of vertices with $r+1$ ones and the rest zeros.
+\begin{definition}
+ (Lexicographic order) Let $a,b \in \{0,1\}^m$. Then $a<b$ if the first $i$ 
+elements of $a$ and $b$ are the same but $a_{i+1} < b_{i+1}$.
+\end{definition}
+The sets with smallest vertex boundary hence form an increasing sequence i.e.\ 
+the previous set is a subset of the following set. The order in which the 
+vertices are added as $k$ increases is also called \textit{graded lexicographic 
+order}.
+
+Let $k = c2^m$ for some $0<c<1$ and let $m \rightarrow \infty$. By central limit theorem, 
+the layer $r$ needs to be near the middle, i.e.\ $r\approx m/2$. The middle layers contain most of the vertices.
+The asymptotics are fairly easy to work out, (see for example \cite{Spencer:Asymptopia}):
+\begin{equation}
+\binom{n}{(n+i)/2} \sim \sqrt{\frac{2}{\pi n}} 2^n e^{\left(-i^2/2n\right)}  
+\end{equation}
+for $i \in o(n^{(2/3)})$.
+%By Stirling's formula,
+
+%\begin{equation}
+% {m \choose m/2} = \Theta \left(\frac{2^m}{\sqrt{m}}\right)
+%\end{equation}
+
+We will use the the separators of $Q_m$ to show that the separators of $G''_m$ are not small.
+Let $f: \NC_4(m)'' \rightarrow Q_m$ 
+be the map that sends all the vertices of a cluster to the corresponding vertex 
+in the cube. 
+Let $(A,B,C)$ be a separator in $G''_m$. Then we can partition
+$Q_m$ to sets $(a,b,c)$ using $f$. If $f^{-1}(v) \subset A$ (resp.) $B$ 
+then 
+$v \in a$ (resp.) $b$. Otherwise, $v \in c$. Since the clusters are connected 
+graphs, any cluster which contains vertices in $A$ and $B$ must also contain 
+vertices in $C$. This means that $|c| \leq |C|$.
+Now, no vertices with labels $a$ and $b$ are adjacent since this would imply 
+that a cluster which belongs to $A$ is adjacent to a cluster which belongs to 
+$B$ which impossible in a separator. Therefore
+\begin{enumerate}
+ \item $(a,b,c)$ is a separator of $Q_m$ or
+\item one or both of $a,b$ is small.
+\end{enumerate}
+In the first case, $c$ contains at least the neighborhood of $a$ and $b$ and 
+hence its size is bounded by the isoperimetric inequality. Therefore $c$ has 
+$\Omega(2^m/\sqrt{m})$ vertices. Hence $C$ contains at least $\Omega(n/(\log 
+n)^{\frac{3}{2}})$.
+
+In the latter case, $c$ must contain a linear number of vertices. This means 
+that also the set $C$ must be large.  
+
+\section{Sharp lower bound}
+
+To prove the sharp bound, we need some extra tools. Let $G= (V,E)$ be a simple graph and
+ $S\subset V$. The \textit{edge boundary} $\delta(S)$ is defined as the set of edges with one end
+in $S$ and the other in $V\setminus S$. The \textit{edge expansion} $\mathcal{X}(G)$ is then defined
+as 
+\begin{equation}
+\mathcal{X}(G) \coloneqq  \min \left\{ \frac{ |\delta(S) |}{ |S |}, S \subset V, S\neq \emptyset, |S| \leq \frac{ |V |}{2}  \right\}.
+\end{equation} 
+This quantity gives information on mixing properties of Markov chain on $G$. We study it since
+a large edge expansion on a regular graph also implies a large separator (see \ref{separatorsize} below).
+The edge expansion can be estimated by "canonical paths" method, invented by Sinclair \cite{Sinclair}. 
+A good introduction, with applications to the graphs of polytopes, was given by Kaibel \cite{Kaibel}. 
+
+\subsection{Sinclair's canonical paths}
+
+To estimate edge expansion of a graph $G$, we define a path between every (ordered) pair of vertices $(s,t) \in V \times V$.
+The intuition behind the method is that in graphs with small edge expansion, there necessarily exist edges which are "congested", that is, there
+are many paths going through them. To make this intuition precise, let $\phi: E(G) \rightarrow \mathbb{N}$ count the number of paths
+that traverse a given edge. The edge expansion can be bounded 
+in terms of
+\begin{equation}
+\phi_{\max} \coloneqq \max \{ \phi(e), e \in E(G) \}.
+\end{equation}
+
+
+\begin{lemma}[Sinclair's lemma]
+\label{Sinclair}
+Let $\phi_{\max}$ be as defined in previous paragraph. Then the edge expansion of $G$ satisfies 
+\begin{equation}
+\mathcal{X}(G) \ge \frac{n}{2 \phi_{\max}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Let $\phi(\delta(S))$ be the sum of $\phi(e)$ over all the edges in $\delta(S)$. Every path that has one end in $S$
+and the other in $V\setminus S$ needs to use one of these edges, so we have $\phi(\delta(S)) \ge   |V\setminus S | |S |$.
+On the other hands, $\phi_{\max}$ is the global maximum over all the edges of the graph, so we have $\phi(\delta(S)) \le  |\delta(S) |\phi_{\max}$.
+Hence for any $|S| \le \frac{ |V |}{2}$, we have
+\begin{equation}
+\label{sepbound}
+ \mathcal{X}(G) \ge \frac{|\delta(S)|}{|S|} 
+                \ge \frac{\phi(\delta(S))}{\phi_{\max}\,|S|}
+                \ge \frac{|S|\,|V{\setminus}S|}{\phi_{\max}\,|S|}
+                 =  \frac{|V{\setminus}S|}{\phi_{\max}}
+				\ge \frac{n}{2\,\phi_{\max}}.
+\end{equation}
+\end{proof} 
+\subsection{Relating edge expansion and separator size}
+Now we will show that large edge expansion implies a large separator.
+\begin{lemma}
+\label{separatorsize}
+Let $G$ be a $d$-regular on $n$ vertices with edge expansion $\mathcal{X}(G)$.
+Then its separators are of size at least
+\begin{equation}
+	\frac{c}{d}\mathcal{X}(G)n = \Omega(\mathcal{X}(G)n),
+\end{equation}
+where $c$ is the constant from the definition of a separator.
+\end{lemma}
+\begin{proof}
+Let $G$ be as defined above and let $(A,B,C)$ be a separator of $G$ with $|B| \ge |A| \ge cn$.
+As there are no edges between $A$ and $B$, any edge in the set $\delta(A)$ has its other end in
+$C$. This means that $\delta(A)$ contains at least $|A|\mathcal{X}(G)$ edges. Since $G$ is $d$-regular,
+the size of $C$ is at least $\mathcal{X}(G)|A|/d \ge \mathcal{X}(G)cn/d = (c/d)\mathcal{X}(G)n$.  
+\end{proof}
+
+For the sharp bound, we will restrict to \textit{cyclic neighborly cubical polytopes} 
+ $\NC^c_d(m)$.
+This was the combinatorial type discovered by Joswig \& Ziegler \cite{Z62}. They
+are also a result of using the construction method of Sanyal \& Ziegler \cite{Z102}
+on cyclic polytopes with vertices in standard order, which justifies the name.  According
+to their analysis, the vertex figures are combinatorially equivalent to a pyramid over
+a triangulation of the cyclic polytope $C_{d-2}(m-1)$. Since the graph $G_m$ of $\NC^c_d(m)$
+is isomorphic to that of the $m$-cube, we will label the vertices by vectors in $\{-,+\}^m$ and
+edges by vectors in $\{-,+,*\}^m$ with exactly one $*$-entry. The index of the $*$-entry is
+called the \textit{direction} of the edge. There are $2^{m-1}$ edges in each direction.
+The combinatorics of $\NC^c_d(m)$ are fully described by Cubical Gale Evennes Criterion.
+This criterion is fairly complicated even in the 4-dimensional case, but we do not need the 
+complete description.
+
+\begin{theorem}
+[Part of the Cubical Gale Evenness Criterion, for $d=4$ {\cite[Thm.~18]{Z62}}] 
+The facets of the cyclic neighborly polytope $\NCC_4(m)$ are given by vectors in
+$\{-,+,*\}^m$ with exactly three $*$-entries. 
+
+If the first component of a vector in $\{-,+,*\}^m$ is $*$, it corresponds to a facet 
+of $\NCC_4(m)$ if and only if the rest of the vector satisfies the Gale Evenness criterion, 
+that is, if between any two non-$*$-entries there is an even number of $*$-entries.
+Equivalently, this happens if in the rest of that vector the two $*$-entries are
+cyclically adjacent.
+\end{theorem}
+
+ This shows that for any vertex $v$, the edges in directions $i$ and $i+1$ span a 2-face, because
+the vector $(*,v_2, \dots, v_{i-1}, *, *, v_{i+2}, \dots, v_m)$ corresponds to a facet of $\NCC_4(m)$
+for $i\le 2 < m$. As the 2-faces correspond to edges in the vertex figure, this means that the vertices 
+of the vertex figure at $v$ are cyclically connected in a consistent way independent of $v$. In other words
+there is a Hamiltonian cycle $(1,2,3,\dots, m)$ going through the vertices in the graph of each figure.
+This is also shows that the boundary complex of $\NCC_4(m)$ contains a copy of the polyhedral surface 
+describe by Ringel \cite{ringel55:_ueber_probl_wuerf_wuerf} in 1957. This was also pointed out by
+Ziegler \cite[Sect 3.]{Z100}. See also Joswig \& Rörig \cite{joswig:_neigh}.
+
+Let us take a closer look at $\NCC_4(m)'$ first.  Each vertex in a "new" facet is labelled naturally by
+the direction of the edge of $G_m$ it is incident to. Therefore we can label the vertices of $G'_m$
+by $(v,i) \in \{-,+\}^m \times [m]$ where $v \in \{-,+\}^m$ is the label of the vertex of $\NCC_4(m)$ which has been truncated and $i \in [m]$ 
+is the direction of the edge of $\NCC_4(m)$ which has been cut. The vertex figures of $G'_5$ are illustrated in \ref{figure:graphs}.
+
+We divide the edges of $\NCC_4(m)'$ into three different classes. First of all, there are the "long" edges which correspond to the edges $\NCC_4(m)$.
+They are incident to vertices $(v,i)$ and $(v',i)$ where $v$ and $v'$ only differ in coordinate $i$. There $m2^{m-1}$ such edges in total. Secondly, 
+there are "medium" edges, which are between vertices $(v,i)$ and $(v,i+1\mod m)$. They form a Hamilton cycle $(1,2,3,\dots, m)$ on each cluster $v$. In total there are $m2^m$ medium edges. The rest of the edges are "extra", they are between vertices $(v,i), (v,j)$ with $j-i \neq \pm 1 \mod m$.
+There are $(2m-6)2^m$ "extra" edges in total. The "extra" and "medium" edges together form the vertex figures of $\NCC_4(m)$ which we call clusters. 
+
+Truncating the long edges of $\NCC_4(m)'$ gets us the polytope $\NCC_4(m)''$. The "medium" and "extra" edges are shortened by this procedure, but are otherwise unchanged. The "long" edges are replaced by their edge figures, which are prisms over $k$-gons with $3 \le k \le m-1$. Here $k$ is the degree of the incident vertices in their clusters, or equivalently their degree minus 1. We call the edges between these $k$-gons a \textit{parallel class of long edges}. The $k$-gon consist of "short" edges. A picture of a cluster of $G''_5$ can be seen in the bottom figure of \ref{figure:graphs}.
+
+The cycles of short edges naturally correspond to vertices of $G_m'$, so we extend the notation $\{-,+\}^m \times [m]$ to them. "Medium" edges connect subsequent cycles $(v,i), (v,i+1 \mod m)$ while "extra" edges connect non-subsequent cycles. 
+
+The similarity of the graphs is apparent in their minor relations
+
+\begin {equation}
+G_m'' \rightarrow G_m' \rightarrow G_m
+\end{equation}
+We can get $G_m'$ by contracting the cycles of short edges in $G_m''$ and identifying the parallel classes of long edges 
+to a single edge. $G_m$ is obtained from $G_m'$ by contracting all of the medium and extra edges.
+
+
+\subsection{Canonical paths for $G''_m$}
+\label{canpaths}
+
+Now we will construct the canonical paths required for \ref{Sinclair} in $G''_m$. Our construction relies on the similarity
+of the clusters and their cubical connections with each other.
+
+Let $v_0$ be a vertex in the cycle of short edges $(v,i)$ and $w_0$ be a vertex in the cycle of short edges $(w,j)$. 
+We will construct a path from $v_0$ to $w_0$ in the following way. Consider the coordinates in cyclic order $i, i+1, \dots m, 1, \dots,
+i-1$ and for each coordinate do the following:
+
+\begin{quote}
+\textbf{Procedure P:}
+Suppose the path we have constructed so far ends at vertex $u_0 \in (u,k)$.
+\begin{compactitem}
+\item If $u$ and $w$ differ in coordinate $k$, take the long edge from $u_0$ to $(u',k)$,
+where $u$ and $u'$ differ only in coordinate $k$. Then, using only short edges and a medium edge,
+move to the cycle of short edges labelled $(u', k+1)$.
+\item Otherwise, $u$ and $w$ agree in coordinate $k$. Using only short edges and a medium edge,
+move to the cycle $(u, k+1)$.
+\end{compactitem}
+\end{quote}
+
+After performing this procedure at most $m$ times, we end up in the cluster $w$. After at most $m-1$ more
+iterations, we end up in the cycle $(w,j)$. In the final iteration, we take at most $m-1$ steps in this cycle to arrive
+at $w_0$.
+
+We will now show that no edges is used more than $O(m^2 2^,)$ times by considering the four cases of short, medium, long
+and extra edges separately.
+
+\afterpage{% 
+\begin{figure}
+	\input figure1.tex
+\bigskip
+
+	\input figure2.tex
+\bigskip
+
+	\input figure3.tex 
+	
+\caption{The graphs $\CG_m$, $\CG_m'$, and $\CG_m''$, for $m=5$:
+	Local situation at one cluster.}
+\label{figure:graphs}
+\end{figure}	
+\clearpage
+}
+
+\subsection{Long edges}
+
+On average, a random pair of clusters differs in $\frac{m}{2}$ coordinates. Therefore half of the $n^2$ paths use long edges in direction $i$.
+The procedure works independently of the value of the other coordinates. so each of the $2^{m-1}$ parallel classes in direction $i$ is used
+equally often. Every parallel class is used by $(n^2/2) / 2^{m-1}$ paths and therefore each long edge is used at most this number of times. The number of vertices is $n \in O(m2^m)$, so this works out to be $O(m^2 2^m)$.
+
+\subsection{Medium and short edges}
+
+Every path we construct uses at most $2m$ iterations of procedure $P$. The total number of iterations over all paths is therefore at most
+$2mn^2$.  Every iteration uses at most one long edge, one short edge and short edges
+on one cycle. The extra edges are not used at all. 
+
+Our construction treats all coordinates and both values of the coordinates equally. This means that 
+each set of "cycle of short edgess and a medium edge leaving it"
+is used equally often. Moreover, these sets are disjoint. Therefore every short and medium edge is used at most $2mn^2 / (m2^m)$ times. 
+As $n \in O(m^2 2^m)$, this is works out to be $O(2mn^2 / m2^m) = O(m^2 2^m)$. 
+
+\subsection{Wrapping things up}
+
+In section \ref{ncp} we showed that $G''_m$ has $(6m-12)2^m$ vertices. Let us
+now combine our canonical paths with Sinclair's lemma \ref{Sinclair}:
+\begin{equation}
+\mathcal{X}(\CG_m'') 
+\ge \frac{n}{2\,\phi_{\max}} 
+\ge \frac{n}{2n^2/2^m}
+  = \frac{2^m}{2n}
+  = \frac{2^m}{2(6m-12)2^m}
+  = \frac{1}{12(m-2)}. 
+\end{equation}
+With lemma \ref{sepbound}, we get a bound on the size of minimal separators:
+\begin{equation}
+\frac c4 \mathcal{X}(\CG_m'')n 
+\ge \frac{c\,n}{48(m-2)} 
+ =  \Omega\Big(\frac n{\log n}\Big),
+\end{equation}
+as $n = (6m-12)2^m$ and thus $m=\Theta(\log n)$.
+
+\section{Upper bound on minimal separators in $\NC_4(m)$}
+
+The minimal separators of $G''_m$ have $O(n/\log n)$ vertices. Separators with this
+many vertices are easy to construct. Pick a random coordinate direction $i$ and separate
+the vertices into two sets: set $A'$ where the coordinate $i$ is 0 and set $B'$ where the coordinate
+is 1. Both sets have $(3m-6)2^m$ vertices and there are $O(2^m) = O(n/\log n)$ edges between them. For each of
+these edges, pick one end point and move it to $C$. The remaining vertices in $A'$ and $B'$ form
+the sets $A$ and $B$. This works for separation constant arbitrarily close to $\nicefrac{1}{2}.$
+
+\chapter{Generalizations and possible larger separators}
+\label{genes}
+
+The sharp lower bound can be also proven for a larger class of neighborly cubical polytopes.
+The polytopes constructed by Sanyal and Ziegler \cite{Z102} all contain the Hamiltonian
+cycle we use to construct our paths. The triangulation of the clusters in $G'_m$ is described by
+\cite[Thm 3.7.]{Z102}. For vertex $v$, it is a regular triangulation created by pushing 
+and pulling vertices depending on the vertex label and the order of the vertices. 
+The pushing and pulling only affects extra edges, so we end up with a Hamiltonian
+cycle through the edges. However, this cycle is not necessarily $(1,2,3,\dots,m)$ but
+rather some other fixed cycle on $[m]$.
+
+This construction can also used the same bound in higher dimensions. There are two 
+natural ways, using $\NC_d(m)$ i.e.\ a higher dimensional neighborly polytope, or 
+taking prisms over $\NC_4(m)''$.  In the first case we have to do more cuts to 
+make the polytope simple, resulting in a large number of vertices. Hence the 
+second way is the correct one. 
+
+Let $G^d_m$ be the graph of a $(d-4)$-fold prism over $\NC_4(m)''$ for $d\geq 4$. 
+Any separator 
+$(A,B,C)$ of $\NC_4(m)''$ can be turned into a separator of $G^d_m$ by setting 
+$(A',B',C')$ to be the prisms over their respective sets. Since no vertices 
+$a\in A, b\in B$ are adjacent and all the copies of a single vertex are in the 
+same set, there are no edges between vertices in $A'$ and $B'$. This means that 
+$G^d_m$ is at least as easy to separate as $\NC''_4(m)$. On the other hand, $G^d_m$ 
+also has a cubelike structure and hence with the discrete isoperimetric 
+inequality we get the same upper bound as for $\NC''_4(m)$. 
+
+Similarly, the sharp bound can be extended to higher dimensions. A $(d-4)$ fold
+prims over $\NCC_4(m)''$ adds $(d-4)$ extra parallel classes of long edges incident
+to each vertex. We can amend our algorithm by taking a long edge in these directions 
+if necessary and then proceeding in the usual way.
+
+\section{Zig-Zag product}
+
+Even though most regular graphs of degree $d\ge 3$ are expanders \cite{KoBa1967}, 
+constructing explicit examples is hard. Graphs of simple 4-polytopes on the other hand
+are few and far between. While our $\NC_d(m)$ are not expanders, they are not that  
+far away from expanding either. The key idea in our construction is taking a polytope which
+is a fairly good expander (an $m$-cube)
+and modifying it so that it becomes a simple polytope (and therefore a regular graph). This
+is done by replacing the vertices with 3-regular graphs. There is a systematic way of doing this operation
+on graphs, called
+the zig-zag product. The zig-zag product was introduced by Reingold, Vadhan and Wigderson in 2000 
+\cite{892006}. 
+
+The zig-zag product takes a large regular graph $G$ and a small regular graph $H$ and produces a new
+graph $G \circ H$. More precisely, the graph $G$ is a $D$-regular graph on $N$ vertices, while $H$ 
+is a $d$-regular graph on $D$ vertices. Their product is then a $d^2$-regular graph on $D\times N$ vertices. 
+The important part is that if $G$ and $H$ are good expanders, then $G \circ H$ is too. Before we can give
+the formal definition of zig-zag product, we need to define \textit{rotation maps}.
+\begin{definition}
+Let $G = (V,R)$ be a $d$-regular graph. The edges incident to vertex $v$ are labeled with numbers $1,\dots, d$. 
+The rotation map $\textrm{Rot}_{G} : V \times [d] \rightarrow V \times [d]$
+returns for the $(v,i)$ pair the vertex $w$ which across the $i$th edge from $v$, and the label of this edge at $w$.
+\end{definition}
+Note that in the previous definition, each edge gets two labels, one for each endpoint. Not all graphs have rotation
+maps so that the label at both ends is the same.
+Using rotation maps of $G$ and $H$ we can now define the rotation map of $G \circ H$. 
+\begin{definition}
+Let $G$ be a $D$-regular graph on $N$ vertices and $H$ is a $d$-regular graph on $D$ vertices.
+The rotation map $\textrm{Rot}_{G\circ H}$ is found with the following procedure:
+\begin{flalign*}
+&\textrm{Rot}_{G \circ H}((v,a),(i,j)): \\
+&1. \textrm{Let} (a', i') = \textrm{Rot}_H (a,i) \\
+&2.   \textrm{Let} (w, b') = \textrm{Rot}_G (v,a') \\
+&3.  \textrm{Let} (b, j') = \textrm{Rot}_H (b',j) \\
+&4. \textrm{Output} ((w,b), (j',i')
+\end{flalign*}
+\end{definition}
+Having the edges defined locally is an advantage in computational applications. While the zig-zag product
+necessarily produces good expanders, the results may not be polytopal graphs, even if the startintg graphs are
+polytopal. One stumblng block is that a polytopal graph of $d\ge 4$ must have many planar subgraphs and short
+cycles, which correspond to the 2- and 3-faces. Both of these are easy to separate, but as our truncated neighborly cubical
+polytopes show, the separator might still have to be large.
+ It is also possible that some choices of the rotation map produce polytopal graphs while others don't.
+
+ As shown by the neighborly polytopes, a given graph can be the graph of polytope of various dimensions. 
+Luckily, simple polytopes don't have this problem and there are even algorithms to solve this problem \cite{KALAI1988381} \cite{Achatz2000}. 
+Our quick experiment by hand found a product of a tetrahedron and a triangle, which was not a polytopal graph.
+
+
+
+\addtocontents{toc}{\vspace{\baselineskip}}
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{section}{Bibliography}
+
+\bibliographystyle{siam}
+\bibliography{separators}
+
+\selectlanguage{ngerman}
+
+
+\phantomsection
+\chapter*{Zusammenfassung}
+\header{Zusammenfassung}
+\addcontentsline{toc}{section}{Zusammenfassung}
+
+\small{
+Richard Stanle.}
+
+
+
+
+\phantomsection
+\chapter*{Selbstst\"andigkeitserkl\"arung}
+%\header{Introduction}
+\addcontentsline{toc}{section}{Selbstst\"andigkeitserkl\"arung}
+
+Gem\"a{\ss} \S 7 (4) der Promotionsordnung des Fachbereichs Mathematik und Informatik der Freien Universit\"at Berlin versichere ich hiermit, dass ich alle Hilfsmittel und Hilfen angegeben und auf dieser Grundlage die Arbeit selbstst\"andig verfasst habe. Des Weiteren versichere ich, dass ich diese Arbeit nicht schon einmal zu einem fr\"uheren Promotionsverfahren eingereicht habe.
+
+\vspace{0.8cm}
+\noindent Berlin, den 
+
+\vspace{1.6cm}
+\noindent Tobias Friedl
+
+
+\end{document}
+
