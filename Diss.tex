@@ -140,9 +140,8 @@ der Freien Universit\"at Berlin}
 %\vspace{1cm}
 \vspace{1.5cm}
 \LARGE{\bf{
-Double posets and real invariant varieties}}\\
-\vspace{0.5cm}
-\large{{Two interactions between combinatorics and geometry}}\\
+Separators of simple polytopes}}\\
+
 \vspace{1cm}
 \begin{figure}[h]
 \begin{center}
@@ -158,7 +157,7 @@ Double posets and real invariant varieties}}\\
 \large
 \vspace{1cm}
 eingereicht von\\
-Tobias Friedl\\
+Lauri Loiskekoski\\
 \vspace{1.5cm}
 Berlin 2017\\
 \vspace{3cm}
@@ -186,9 +185,8 @@ der Freien Universit\"at Berlin}
 %\vspace{1cm}
 \vspace{1.5cm}
 \LARGE{\bf{
-Double posets and real invariant varieties}}\\
-\vspace{0.5cm}
-\large{{Two interactions between combinatorics and geometry}}\\
+Separators of simple polytopes}}\\
+
 \vspace{1cm}
 \begin{figure}[h]
 \begin{center}
@@ -204,7 +202,7 @@ Double posets and real invariant varieties}}\\
 \large
 \vspace{1cm}
 eingereicht von\\
-Tobias Friedl\\
+Lauri Loiskekoski\\
 \vspace{1.5cm}
 Berlin 2017\\
 \vspace{3cm}
@@ -216,16 +214,16 @@ Berlin 2017\\
 \null\vfill
 \begin{center}
 \large{Advisor and first reviewer:\\
-Prof. Dr. Raman Sanyal}\\
+Prof. Dr. Günter M. Ziegler}\\
 \vspace{0.2cm}
 Second reviewer:\\
-Prof. Dr. Francisco Santos\\
+--\\
 \vspace{0.2cm}
 Third reviewer:\\
-Priv.-Doz. Dr. Christian Stump\\
+--\\
 \vspace{0.6cm}
 Date of the defense:\\
-May 19, 2017
+--
 \end{center}
 
 \cleardoublepage
@@ -262,8 +260,9 @@ My deepest thanks go to my
 \label{intro}
 
 Graphs are objects used to model pairwise relations between objects. For applications such as computer
-networks, it is important that the connections are robust. This means that the failure of a few nodes doesn't 
+networks, it is often important that the connections between the nodes are robust. This means that the failure of a few nodes doesn't 
 break the network into disconnected parts. Separators are one way to model the connectedness of a graph. 
+
 A separator is a partition of the vertices of a graph into three sets. There are two "large" sets $A$ and $B$ with no edges
 between a vertex in $A$ and a vertex in $B$, and 
 an additional set $C$ containing the rest of the vertices. As moving vertices from $A$ or $B$ to
@@ -273,31 +272,50 @@ only regular graphs where the difference between the two doesn't matter.
 Separators are closely connected to the expander graphs; a family of expander graphs has minimal separators
 whose size is linear in the number of vertices.
 
-The story of separators of polytopes begins with Ungar \cite{Ungar1951},
+The story of separators of polytopes begins in 1951 with Ungar \cite{Ungar1951},
 who proved that planar graphs, and therefore graphs of 3-polytopes, have minimal 
-separators of size $\Omega(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
-separator theorem  \cite{LiTa}, which gives the correct bound
-$\Omega(\sqrt{n})$. This result is best possible, since the $m\times m$ grid graph
-can't be separated by fewer than $\Omega(m)$ vertices. Miller and Thurston \cite{MillerThurston-separators} gave a 
+separators of size $O(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar 
+separator theorem in 1979 \cite{LiTa}. It gives the sharp bound
+$O(\sqrt{n})$ provided that the large sets $A$ and $B$ both contain at least $\nicefrac{1}{3}$ of the vertices.
+This result is best possible, since the $m\times m$ grid graph
+can't be separated by a separation smaller than $\Omega(m)$. Miller and Thurston \cite{MillerThurston-separators} gave a 
 geometric proof of the planar separation theorem using the  
 Koebe–Andreev–Thurston circle-packing theorem.
 
 Miller, Teng, Thurston and Vavasis \cite{MillerTengThurstonVavasis} generalized 
 the theorem to intersection graphs of ball packings in $d$ dimensions. This 
-led Kalai (\cite{Kal97}, corrected in \cite{kalai04:_polyt}) to conjecture that 
-simple $d$-polytopes would also have small separators.
+led Kalai to conjecture in his 1991 paper \cite[Conj 12.1.]{Ka2}(repeated in the 1997 first edition of{Kal97} ) to conjecture that 
+simple $d$-polytopes would have separators of size
+\begin{equation}
+O\left(n^{1-\frac{1}{\lfloor d/2 \rfloor}}\right),
+\end{equation}
+which fails for $d=3$ and for $d=4$ postulates separators of size $O(\sqrt{n})$. In the 2004 second edition of
+the \textit{Handbook} \cite[Conj. 20.2.12]{kalai04:_polyt} he revised the conjecture to the following form:
 \begin{conjecture}[Kalai]
 \label{simpleconjecture}
 Simple $d$-polytopes have separators of size
-$\Omega \left(n^{\frac{d-2}{d-1}}\right)$.
+$O \left(n^{\frac{d-2}{d-1}}\right)$.
 \end{conjecture}
-Simplicity is necessary as the graph of the cyclic polytopes is complete for 
+In dimension 3, this gives the planar separator theorem, while in dimension 4 it postulates the existence
+of separators of size $O(n^{2/3}).$
+
+Simplicity is a necessary assumption as the graph of the cyclic polytopes is complete for 
 $d\geq 4$ and hence has no vertex separator. Kalai also refers to 
 \cite{MillerTengThurstonVavasis} for a claim by Thurston who stated that there are triangulations of 
 $S^3$ which don't have separators the size of $\Omega(n/\log n)$. This is not 
-stated in the paper, but Gary Miller told us (personal communication) that 
+stated in the paper, but refers to a construction which Thurston had described to his 
+coauthors. Gary Miller told us (personal communication) that 
 “\textit{Thurston gave an embedding of the cube-connected cycle graph in $\mathbb{R}^3$
 as linear tets} [tetrahedra]”. The details of this construction appear to be lost.
+
+In this paper we prove a stronger version of Thurston's claim: there is not only a triangulated simplicial sphere
+on $n$ vertices, whose dual graphs has separators of size $\Omega(n/\log n)$, but even a simplicial convex 4-polytope
+with this property. Our main theorem descirbes the simple dual polytope.
+
+\begin{theorem}
+There is a family of simple convex 4-dimensional polytopes $\NCC_4(m)''$ with $n=\Theta(m 2^m)$ vertices for which
+the smallest separators of the graph have size $\Theta(2^m) = \Theta(n/\log n)$.
+\end{theorem}
 
 This thesis is structured as follows. In section \ref{mathchapter} we define our main objects of study,
 separators of graphs. This section also contains necessary background information on 
