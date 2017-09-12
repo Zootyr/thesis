@@ -22,7 +22,7 @@
 
 \usepackage[ngerman,english]{babel}
 
-\usepackage[T1]{fontenc}
+
 
 \usepackage{caption}
 \usepackage{subcaption}
@@ -336,8 +336,11 @@ optimization. In the following section we introduce the basics of polytopes.
 A more thorough treatment can be found in books by Ziegler \cite{PolyLec} 
 and Gr\"unbaum \cite{Grunbaum69convexpolytopes}. 
 
-There are 
-two ways to define a polytope, the vertex (or interior) representation and the 
+Polytopes are geometrical objects, but we are mostly interested in their combinatorial properties.
+We will introduce polytopes in their geometric representation, but quickly forget all about coordinates
+and focus on things that can be worked out in the face lattice.
+
+There are two ways to define a polytope, the vertex (or interior) representation and the 
 half-space (or exterior) representation.
 
 \begin{definition}
@@ -347,6 +350,9 @@ half-space (or exterior) representation.
  P = \left\{x\in \mathbb{R}^d \middle| x = \sum_{i=1}^{|V|} \lambda_i v_i, 
 0\leq \lambda_i \leq 1, \sum_{i=1}^{|V|} \lambda_i = 1 \right\}.
 \end{equation}
+
+The inclusion-minimal set $V$ for which conv$(V) = P$ is called the
+\emph{vertex set} of the polytope $P$. 
 
 \end{definition}
 
@@ -392,8 +398,10 @@ Both the empty set and $P$ are faces of $P$, they are given by $0x \le 1$ and $0
 The empty set is defined to have dimension -1.
 A face that is not equal to all of $P$ is called a \textit{proper face}.
 Some faces have special names: the 0-dimensional faces are called 
-\textit{vertices}, the 1-dimensional faces are called \textit{edges} and the 
-$(d-1)$-dimensional faces are called \textit{facets}.
+\textit{vertices}, the 1-dimensional faces are called \textit{edges}, the (d-2)-dimensional
+faces are called \textit{ridges} and the 
+$(d-1)$-dimensional faces are called \textit{facets}. In an irredundant 
+half-space description each of the inequalities corresponds to a facet.
  The faces of a polytope 
 form a lattice with order given by inclusion. This lattice is called the 
 \textit{face lattice} of the polytope.
@@ -413,24 +421,25 @@ This is the only linear equation satisfied by the face vector. More
 constraints can be found by studying the \textit{flag vector}.
 
 \begin{definition}
- (Flag vector) The flag vector counts the number of chains $f_{i_1,i_2,\dots i_k}, \{i_1,i_2,\dots i_k \} \subset \{0,1,\dots d-1\}$
+ (Flag vector) The flag vector counts the number of chains $f_{i_1,i_2,\dots i_k}, \{i_1,i_2,\dots, i_k \} \subset \{0,1,\dots, d-1\}$
 with $f_{i_1} \subset f_{i_2} \subset \dots \subset f_{i_k}$.
 \end{definition}
 
-For example, the entry $f_{013}$ counts the number of chains in the face 
+For example, the entry $f_{0,1,3}$ counts the number of chains in the face 
 lattice which has entries in dimensions $(0,1,3)$. This means a vertex contained in an
-edge, which is contained in a 3-cell. The complete face vector has $2^d$ entries,
-but many of them are redundant. In particular, in 4 dimensions whrere we will be mostly working in,
+edge, which is contained in a 3-face. The complete flag vector has $2^d$ entries,
+but many of them are redundant. For example, we always have $f_{0,1} = 2f_1$ since each edges
+connects two vertices. In particular, in 4 dimensions where we will be mostly working in,
 knowing the entries $(f_0, f_1, f_2, f_3, f_{03})$ is enough to figure out the rest of the entries. 
 
 Now that we have defined what a polytope is, we need a criterion to decide which polytopes 
-count as "the same". There are two ways to do this, with one stricter than the other.
+count as "the same". There are two ways to do this, a combinatorial one and a geometric one.
 Two polytopes $P\subset \mathbb{R}^d, Q \subset \mathbb{R}^e$ are 
 \textit{affinely isomorphic} if there is an affine map $f: \mathbb{R}^d 
 \rightarrow \mathbb{R}^e$ which is a bijection between the points of the 
 polytope. A more relaxed equivalence relation is combinatorial equivalence. Two 
 polytopes are \textit{combinatorially equivalent} if their face lattices are isomorphic 
-i.e.\ there is an bijection between the elements of the lattices which preservers
+i.e.\ there is an bijection between the elements of the lattices which preserves
 the inclusion relation. Two combinatorially equivalent polytopes are said to have the 
 same \textit{combinatorial type}. 
 
@@ -459,16 +468,17 @@ its polytopes $  |\mathfrak{C}| \coloneqq \cup_{F\in \mathfrak{C}} F.$
 
 % Examples of polytopal complexes include the polytope itself and its 
 % \textit{boundary complex} which is the collection of all proper faces of $P$. 
-Any polytope $P$ amd its faces form a polytopal complex. Another common complex is the 
+Any polytope $P$ and its faces form a polytopal complex. Another common complex is the 
 \textit{boundary complex} of a polytope
 $P$. The boundary complex is the collection of proper faces of $P$.
-The $k$-skeleton of a polytope is the collection of all faces of dimension $\leq 
-k$. Hence the $d$-skeleton of a $d$-polytope is the polytope itself and the 
+The $k$-skeleton of a polytope $P$ is the collection of all faces of dimension $\leq 
+k$. Hence the $d$-skeleton of a $d$-polytope is the polytope and its faces, while the 
 boundary complex is the $(d-1)$-skeleton. The graph of the polytope is its 
 1-skeleton and it is denoted by $G(P)$.
 
-The \textit{triangulation} of a polytope $P$ is a polytopal complex $\mathfrak{C}$ whose
-underlying set is $P$ and all the polytopes in $\mathfrak{C}$ are simplices.
+The \textit{triangulation} of a polytope $P$ is a polytopal complex $\mathfrak{C}$ consisting only of simplices
+and whose underlying set is $P$.
+
 
 % Each polytope has a dual polytope associated to it. Its face lattice is the 
 % lattice of the original polytope ``upside down''. Hence its $i$-faces 
@@ -488,7 +498,7 @@ If $A$ is a convex compact set with $0 \in$ int $A$, so is $A^*$. In
 particular, if $A$ is a polytope containing $0$ in the interior, $A^*$ is dual 
 to it. 
 
-After all these theoretical construction, let's have a look at some concrete examples
+After all these theoretical constructions, let's have a look at some concrete examples
 of polytopes.
 In any dimension, the polytope with the fewest vertices is the simplex. 
 \begin{definition}
@@ -497,11 +507,13 @@ points.
 \end{definition}
 Any two simplices of the same dimension are affinely isomorphic.
 The faces of a simplex are lower dimensional simplices and any $k\le d+1$ vertices
-of the simplex form a face. Therefore the number of $k$-faces is $\binom{d+1}{k}$.
+of the simplex form a face. Therefore the number of $k$-faces is $\binom{d+1}{k}$
+and the total number of faces is $2^{d+1}$.
  A polytope whose facets 
 (but not necessarily the polytope itself) are simplices is called 
 \textit{simplicial}. The dual of a simplicial polytope is called 
-\textit{simple}. The vertices of a simple $d$-polytope are contained in exactly 
+\textit{simple}. The simplex has the honor of being the only simple and simplicial polytope.
+The vertices of a simple $d$-polytope are contained in exactly 
 $d$ edges and $d$ facets. This means that the graph of a simple polytope is $d$-regular.
 
 Another important polytope is the $n$-cube.
@@ -514,19 +526,23 @@ Another important polytope is the $n$-cube.
 for $i \in 1,\dots, m$. Equivalently, it is the convex hull of all points of the form $v \in \{0,1\}^m$.
 \end{definition}
 From the vertex description we see that the $m$-cube has $2^m$ vertices. A vertex $v$
-is incident to $m$ edges, so the $m$-cube is a simple polytope. The neighbors of $v$ are precisely
-the vertices whose label differs in exactly one coordinate.
+is incident to $m$ edges, so the $m$-cube is a simple polytope. The neighbors of $v$ are
+the vertices which agree in precisely $m-1$ coordinates.
 
 From the halfspace description we see that there $2m$ facets. The facets (and therefore lower dimensional faces)
 are also combinatorial cubes. Polytopes with this property are called \textit{cubical}. 
 
 The non-empty faces of an $m$-cube can be characterized by whether the $k$th coordinate 
 is required to be 0 or 1 or whether it can take all the values in $[0,1]$. Denoting the latter case by $*$, we see
-that the faces correspond to vectors $F \in \{0,1,*\}^m$ and the empty face. The number of $*$-entries 
-is equal to the dimension of the face. Hence there are $\binom{m}{k} 2^{m-k}$ $k$-faces.
+that the faces correspond to vectors $F \in \{0,1,*\}^m$ plus the empty face. The number of $*$-entries 
+is equal to the dimension of the face. Hence there are $\binom{m}{k} 2^{m-k}$ $k$-faces and $3^m +1$ faces in total.
 
+There is an interesting connection between the simplex and the cube. If we draw a diagram
+of the face lattice of a $d$-simplex by connecting each $k$-face with the $(k+1)$-faces containing it,
+we end up with the graph of a $d+1$-cube.
 
-Vertex truncation is a common method of creating new polytopes from old ones.
+Now that we have some polytopes to work with, we will present several ways to turn these polytopes into new ones.
+Vertex truncation is one such method.
 We will use it extensively.
 \begin{definition}
 (Vertex truncation) Let $P$ be a polytope with vertex set $V$. Truncating a vertex $v \in V$ means adding
@@ -536,17 +552,19 @@ All the polytopes formed this way are combinatorially equivalent (but generally 
 For each face intersected by the hyperplane, 
 a face of one dimension lower is added to the face lattice. The new facet is 
 called the \textit{vertex figure} of the vertex $v$. The vertex figure's combinatorial type 
-idepends only on the choice of vertex, not on the inequality. Vertex cuts can be generalized to cutting of 
+depends only on the choice of vertex, not on the inequality. Vertex cuts can be generalized to cutting of 
 faces of higher dimensions by requiring the added inequality to be violated by 
 all the vertices in the face. 
 
-The dual operation of truncation is called stacking. 
-It means adding a new vertex to the polytope which satisfies all the 
+The dual operation of truncation is called stacking. What we mean by this is is that we cut off vertex $v$
+and take the dual of the resulting polytope is equivalent to first taking the dual and then stacking on the
+corresponding facet.
+Stacking means adding a new vertex to the polytope which satisfies all the 
 inequalities in the irredundant description with strict inequality except the 
 ones corresponding to the face being stacked on.
 
 Another way to produce new polytopes is taking prisms. This operation takes a 
-$d$-polytope $P$ in $\mathbb{R}^d$ and produces a $(d+1)$-polytope in 
+$d$-polytope $P$ in $\mathbb{R}^d$ and produces a $(d+1)$-polytope prism$(P)$ in 
 $\mathbb{R}^{d+1}$. 
 \begin{definition}
  A prism is the convex hull of a copy of $P$ embedded on the hyperplane 
@@ -557,7 +575,10 @@ $x_{d+1} = 0$ and another copy on the the hyperplane $x_{d+1} = 1$.
 each face $F$ of $P$ at the top and bottom and for each face $F$ a face isomorphic to 
 prism$(F)$ in the middle. Two vertices in $G(\text{pyr}(P))$ are adjacent if and only if
 they are copies of the same vertex or if they are in the same copy and are 
-adjacent in $P$. 
+adjacent in $P$. Because taking the prism increase the degree of each vertex by one, prism$(P)$ 
+is a simple polytope if and only if $P$ is a simple polytope.
+
+
 The $n$-cube can be defined as the $n$-fold 
 prism over the zero dimensional polytope (a point). The dual construction to prism 
 is the bipyramid. 
@@ -571,8 +592,10 @@ the hyperplane $x_{d+1} = 0$ and the points $(0,0,\dots, 1)$ and $(0,0,\dots,
 
 \section{Graphs}
 
-Graphs appear everywhere in mathematics but they are especially common in 
-combinatorics. 
+Graph theory is a subject in its own right, with connections to all branches 
+of mathematics. We neither can nor wish to give a complete introduction, but
+rather focus on the parts necessary for our own study. More information on graphs
+and their separators can be found in \cite{spectra} and \cite{Rama}.
 
 \begin{definition}
 (Graph) A graph is an ordered pair $G=(V,E)$. The elements of $V$ are called 
@@ -669,7 +692,6 @@ possible.
 %\end{conjecture}
 %
 %This reduces to the planar separator theorem in the 3-dimensional case. 
-
 
 
 \chapter{Lower bound on separators of simple polytopes}
@@ -1209,7 +1231,7 @@ Gem\"a{\ss} \S 7 (4) der Promotionsordnung des Fachbereichs Mathematik und Infor
 \noindent Berlin, den 
 
 \vspace{1.6cm}
-\noindent Tobias Friedl
+\noindent Lauri Loiskekoski
 
 
 \end{document}
