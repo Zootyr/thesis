@@ -409,7 +409,7 @@ form a lattice with order given by inclusion. This lattice is called the
 The faces of various dimensions 
 are counted by the face vector.
 \begin{definition}
- (Face vector) The face vector is $(f_0, f_1, \dots, f_{d-1}) \in \mathbb{Z}^d$ 
+ (Face vector) The face vector $f(P)$ is $(f_0, f_1, \dots, f_{d-1}) \in \mathbb{Z}^d$ 
 where $f_i$ is 
 the number of $i$-dimensional faces.
 \end{definition}
@@ -421,7 +421,7 @@ This is the only linear equation satisfied by the face vector. More
 constraints can be found by studying the \textit{flag vector}.
 
 \begin{definition}
- (Flag vector) The flag vector counts the number of chains $f_{i_1,i_2,\dots i_k}, \{i_1,i_2,\dots, i_k \} \subset \{0,1,\dots, d-1\}$
+ (Flag vector) The flag vector flag$(P)$ counts the number of chains $f_{i_1,i_2,\dots i_k}, \{i_1,i_2,\dots, i_k \} \subset \{0,1,\dots, d-1\}$
 with $f_{i_1} \subset f_{i_2} \subset \dots \subset f_{i_k}$.
 \end{definition}
 
@@ -576,11 +576,18 @@ each face $F$ of $P$ at the top and bottom and for each face $F$ a face isomorph
 prism$(F)$ in the middle. Two vertices in $G(\text{pyr}(P))$ are adjacent if and only if
 they are copies of the same vertex or if they are in the same copy and are 
 adjacent in $P$. Because taking the prism increase the degree of each vertex by one, prism$(P)$ 
-is a simple polytope if and only if $P$ is a simple polytope.
+is a simple polytope if and only if $P$ is a simple polytope. We can easily calculate
+the face vector of prism$(P)$ from the face vector of $P$.
+\begin{align}
+& f_0(\textrm{prism}(P)) = 2f_0(P) \\
+& f_i(\textrm{prism}(P)) = f_{i-1}(P) + 2f_i(P) \quad 1 \le i \le d
+\end{align}
 
 
 The $n$-cube can be defined as the $n$-fold 
-prism over the zero dimensional polytope (a point). The dual construction to prism 
+prism over the zero dimensional polytope (a point). 
+
+The dual construction to prism 
 is the bipyramid. 
 \begin{definition}
  (Bipyramid) Let $P\subset \mathbb{R}^d$ be a $d$-polytope with zero in the 
@@ -598,7 +605,7 @@ rather focus on the parts necessary for our own study. More information on graph
 and their separators can be found in \cite{spectra} and \cite{Rama}.
 
 \begin{definition}
-(Graph) A graph is an ordered pair $G=(V,E)$. The elements of $V$ are called 
+(Graph) A graph is an ordered pair of sets $G=(V,E)$. The elements of $V$ are called 
 vertices. The elements of $E$ are 2-element subsets of $V$. They are called 
 the edges of the graph. 
 \end{definition}
@@ -609,9 +616,10 @@ We consider only simple graphs, i.e.\ graphs without loops or parallel
 edges.
 
 If $(u,v) \in E$, the vertices $u$ and $v$ are said to be \textit{adjacent}. 
-The vertices $u$ and $v$ are \textit{incident} to the edge $(u,v)$. 
+The vertices $u$ and $v$ are \textit{incident} to the edge $(u,v)$. If there is an edge
+between every pair of vertices, the graph is \textit{complete}.
 \begin{definition}
- (Path) A set of edges $(u_1, u_2), (u_2, u_3), \dots (u_{k-1}, u_k) \subset E$ 
+ (Path) A sequence of edges $(u_1, u_2), (u_2, u_3), \dots (u_{k-1}, u_k) \subset E$ 
 is called a path between the vertices $u_1$ and $u_k$ if all the $u_i$ are 
 distinct.
 \end{definition}
@@ -638,8 +646,8 @@ a vertex in $A$ and a vertex in $B$. The \textit{size} of the separator
 separator is $|C|$.  
 \end{definition}
 
-Another way to think about separators is by minimizing \textit{neighborhoods} 
-of a set of given size.
+Another way to think about separators is to find a set of given size with as small
+as possible \textit{neighborhood}.
 
 \begin{definition}
  (Neighborhood) Let $S \subset V$ be a set of vertices. Then its neighborhood 
@@ -651,7 +659,7 @@ function
 of the number of vertices for some fixed graph family.
 
 Separators can also be defined by removing edges instead of vertices. However, 
-for regular graphs the sizes of these separators differ by a constant multiple 
+for regular graphs the sizes of these separators differ by a constant multiple,
 so we ignore the distinction.
 
 The size of minimal separators in the graphs of 3-polytopes was discovered by 
@@ -698,6 +706,7 @@ possible.
 \label{ncpconstruction}
 
 In this chapter we construct polytopes which disprove conjecture \ref{simpleconjecture} and
+strongly affirm Thurston's claim about separators of dual graphs of triangulations. We
 calculate a lower bound on the size of the minimal separators in two ways. Both proofs are for the
 4-dimensional case, but they easily generalize to higher dimensions. The first way requires
 no advanced techniques, but the bound achieved is not sharp. For the second proof,
@@ -709,12 +718,14 @@ thesis is the following theorem.
 
 \begin{theorem}
 \label{maintheorem}
- Let $d\geq 4$. There exist $d$-dimensional simple polytopes with
+ Let $d\geq 4$. There exist a sequence of $d$-dimensional simple polytopes with
 separators of size $\Omega(n/\log n)$.
 \end{theorem}
 
-\section{Neighborly cubical polytopes}
+\section{Doubly truncated neighborly cubical polytopes}
 \label{ncp}
+
+We start by introducing neighborly cubical polytopes. They are the block from which we carve our simple polytopes.
 
 \begin{definition}
 A neighborly cubical polytope $\NC_d(m)$ is a cubical $d$-polytope with the $\left\lfloor \frac{d}{2} 
@@ -747,7 +758,7 @@ by $(d-2)$ iterative cuts.
 This is easier to see in the dual case. The dual operation of cutting a vertex 
 is stacking on a facet. By stacking on all facets one after the other, we 
 remove all the original facets and introduce new ones, which are pyramids over 
-$(d-2)$-faces. The original $(d-2)$-faces are preserved and we can stack on 
+$(d-2)$-faces (ridges). The original $(d-2)$-faces are preserved and we can stack on 
 them, removing them and the facets created in the previous operation. Every 
 iteration of this operation removes all the facets created in previous 
 iterations and creates new facets which are iterated pyramids on successively 
@@ -761,7 +772,7 @@ polytope. Let us see what this polytope looks like.
 
 The starting polytope $\NC_4(m)$ has the flag vector 
 \begin{align*}
- flag(\NC_4(m)) &:= (f_0, f_1, f_2, f_3; f_{03}) \\
+ \textrm{flag}(\NC_4(m)) &:= (f_0, f_1, f_2, f_3; f_{03}) \\
 	&= (2^m, m2^{m-1}, 3(m-2)2^{m-2}, (m-2)2^{m-2}; 8(m-2)2^{m-2}) \\
 	&= (4, 2m, 3(m-2), m-2; 8(m-2))2^{m-2}
 \end{align*}
@@ -775,7 +786,7 @@ the Euler-Poincare formula.
 
 We denote the polytope formed by truncating all the vertices by $\NC_4(m)'$.
 Truncating the vertices means removing all of the original vertices, but 
-adding 2 for each edge, one at each end of the edge. The facets of this new 
+adding 2 new vertices for each edge, one at each end of the edge. The facets of this new 
 polytope come in two types:
 
 \begin{itemize}
@@ -787,12 +798,12 @@ new facets are simplicial. Their $f$-vector is ($m$,
 $3m-6, 2m-4)$.
 \end{itemize}
 
-This means that the flag vector of $\NC_4(m)'$ is 
+With this information of the facets we can work out the flag vector of $\NC_4(m)'$:
 \begin{equation}
- flag(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2}
+ \textrm{flag}(\NC'_4(m)) = (4m, 14m-24, 11m-22, m+2; 28m-24)2^{m-2}.
 \end{equation}
 
-By cutting of all of the original (but shortened) edges we arrive at 
+By cutting of all of the original (but shortened) edges in $\NC_4(m)'$, we arrive at 
 $\NC_4(m)''$. It has three types of facets:
 
 \begin{itemize}
@@ -809,44 +820,47 @@ Using the knowledge of the facets we can work out the flag vector of
 $\NC_4(m)''$.
 
 \begin{equation}
- flag(\NC_4(m)'') = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
+ \textrm{flag}(\NC_4(m)'') = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
 \end{equation}
 
 Since $2f_0 = f_1$, we can verify that $\NC_4(m)''$ is indeed a simple 
-polytope.
+polytope. In the next section we will work out its separators.
 
 \section{Lower bound, straightforward approach}
 
 In this section we shall show an easy proof for a bound on the separator. It
-is enough to disprove \ref{simpleconjecture}, but not enough to verify Thurston's
+is enough to disprove conjecture \ref{simpleconjecture}, but not enough to verify Thurston's
 claim.
 
 We are interested in what the graph $G(\NC_4(m)'') = G''_m$ looks like. Its 
 most striking feature is its similarity to the graph of the hypercube, $Q_m$. 
-$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. $G''_m$ 
+$Q_m$ is a graph on $2^m$ vertices with $m2^{m-1}$ edges. The vertices of $Q^m$
+are labelled by vectors in $\{0,1\}^m$. $G''_m$ 
 similarly consists of $2^m$ groups of $(6m-12)$ vertices which we call 
-\textit{clusters}. Each cluster is a 3-regular graph and the clusters are 
-connected to each other by 3 to $m-1$ edges. We will use this similarity to 
+\textit{clusters}. Each cluster is a 3-regular graph and is connected to its
+$m$ neighbors by 3 to $m-1$ edges. We will use this similarity to 
 prove a bound on the size of separators of $G''_m$. Let us therefore first take a 
 look at the separators of $Q_m$.
 
-The problem of finding the sets of size $k$ with minimal size neighborhood is 
+The problem of finding the sets of size $k$ with minimal size neighborhood in a graph $G$ is 
 called the \textit{discrete isoperimetric problem}. It is a generalization of 
 the minimum separator problem as there is no restriction on the size of $k$. 
 Harper \cite{Harp} solved the problem on the hypercube in the 1960's. The 
 answer turns out to be Hamming balls.
 
 \begin{definition}
- (Hamming ball) Let $a,b \in \{0,1\}^n$. The Hamming distance between $a$ and 
-$b$ is the number of elements where $a$ and $b$ differ. The Hamming ball 
-$B(x,r)$ is the set of elements at distance $\leq r$ from $x$.
+ (Hamming ball) Let $a,b \in \{0,1\}^m$. The Hamming distance between $a$ and 
+$b$ is the number of coordinates where $a$ and $b$ differ. The Hamming ball 
+$B(x,r) \subset \{0,1\}^m$ is the set of elements at Hamming distance $\leq r$ from $x$.
 \end{definition}
 
 A Hamming ball $B(x,r) \subset Q_m$ has 
 \begin{equation}
  \sum_{i=0}^r {m \choose i}
 \end{equation}
-vertices. If $k$ can't be expressed in this form, let $r$ be maximal so that 
+vertices. If $k$ can be written in this form, any Hamming ball has minimal size neighborhoods 
+among the $k$-element sets of $Q_m$. 
+If $k$ can't be expressed in this form, let $r$ be maximal so that 
 the sum is $\leq k$ and include some vertices with distance $r+1$ to the set. 
 However, the choice is not arbitrary. Suppose $x$ is the vertex labeled with 
 all zeros. Then the extra vertices are those which come first in 
