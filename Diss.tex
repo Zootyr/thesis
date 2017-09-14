@@ -667,7 +667,7 @@ Lipton and Tarjan \cite{LiTa} in 1979. They showed that planar graphs have
 separators of size $O(\sqrt{n})$ for separation constant $\nicefrac{1}{3}$. This is 
 the best possible result since an $m\times m$-grid requires $m$ vertices to be 
 removed to be separated. However, in higher dimensions such results are 
-impossible due to the existance of \textit{neighborly polytopes}.
+impossible due to the existence of \textit{neighborly polytopes}.
 
 \begin{definition}
  A $k$-neighborly polytope on $n$-vertices is a $d$-polytope with the $k$-skeleton of a $(n-1)$-simplex.
@@ -675,6 +675,8 @@ A $\left\lfloor \frac{d}{2} \right\rfloor$-neighborly $d$-polytope is simply cal
 neighborliness of a polytope which is not a simplex.
 \end{definition}
 
+The simplest and first discovered example of neighborly polytopes is the \textit{cyclic polytope} $C_d(n)$.
+It is the convex hull of $n$ vertices which lie on the moment curve parametrized by $(t,t^2,\dots t^d) \subset \mathbb{R}^d$.
 The graph of any neighborly polytope of dimension $\geq 4$ is the complete graph, which can't be separated by removing vertices. Simple 
 $d$-polytopes on the other hand have $d$-regular graphs and there better results could be 
 possible. 
@@ -862,46 +864,45 @@ vertices. If $k$ can be written in this form, any Hamming ball has minimal size 
 among the $k$-element sets of $Q_m$. 
 If $k$ can't be expressed in this form, let $r$ be maximal so that 
 the sum is $\leq k$ and include some vertices with distance $r+1$ to the set. 
-However, the choice is not arbitrary. Suppose $x$ is the vertex labeled with 
-all zeros. Then the extra vertices are those which come first in 
-\textit{lexicographic order} of vertices with $r+1$ ones and the rest zeros.
+However, not all such choices is minimize the neighborhood. Suppose $x$ is the vertex labeled with 
+all zeros. Then the extra vertices are those which come first in the
+\textit{lexicographic order} of vertices with $r+1$ ones and $m-r-1$ zeros.
 \begin{definition}
  (Lexicographic order) Let $a,b \in \{0,1\}^m$. Then $a<b$ if the first $i$ 
 elements of $a$ and $b$ are the same but $a_{i+1} < b_{i+1}$.
 \end{definition}
-The sets with smallest vertex boundary hence form an increasing sequence i.e.\ 
+The sets with smallest vertex neighborhood hence form an increasing sequence i.e.\ 
 the previous set is a subset of the following set. The order in which the 
 vertices are added as $k$ increases is also called \textit{graded lexicographic 
-order}.
+order}. Let us now calculate how the size of the neighborhoods behaves asymptotically.
 
-Let $k = c2^m$ for some $0<c<1$ and let $m \rightarrow \infty$. By central limit theorem, 
-the layer $r$ needs to be near the middle, i.e.\ $r\approx m/2$. The middle layers contain most of the vertices.
+Let $k = c2^m$ for some $0<c<\nicefrac{1}{2}$ and let $m \rightarrow \infty$. By central limit theorem, 
+the radius $r$ needs to be $\approx m/2$. This is because the middle layers contain most of the vertices.
 The asymptotics are fairly easy to work out, (see for example \cite{Spencer:Asymptopia}):
 \begin{equation}
-\binom{n}{(n+i)/2} \sim \sqrt{\frac{2}{\pi n}} 2^n e^{\left(-i^2/2n\right)}  
+\binom{m}{(m+i)/2} \sim \sqrt{\frac{2}{\pi m}} 2^m e^{\left(-i^2/2m\right)}  
 \end{equation}
-for $i \in o(n^{(2/3)})$.
+for $i \in o(m^{2/3})$. For fixed $i$ this is $\Theta(2^m/\sqrt{m})$.
 %By Stirling's formula,
 
 %\begin{equation}
 % {m \choose m/2} = \Theta \left(\frac{2^m}{\sqrt{m}}\right)
 %\end{equation}
 
-We will use the the separators of $Q_m$ to show that the separators of $G''_m$ are not small.
-Let $f: \NC_4(m)'' \rightarrow Q_m$ 
+We will use the separators of $Q_m$ to show that the separators of $G''_m$ are not small.
+Let $f: G_m'' \rightarrow Q_m$ 
 be the map that sends all the vertices of a cluster to the corresponding vertex 
-in the cube. 
+in the cube graph. 
 Let $(A,B,C)$ be a separator in $G''_m$. Then we can partition
-$Q_m$ to sets $(a,b,c)$ using $f$. If $f^{-1}(v) \subset A$ (resp.) $B$ 
-then 
-$v \in a$ (resp.) $b$. Otherwise, $v \in c$. Since the clusters are connected 
+$Q_m$ to sets $(a,b,c)$ using $f$ and the separator $(A,B,C)$. If $f^{-1}(v) \subset A$ (respectively) $B$ 
+then, $v \in a$ (respectively) $b$. Otherwise, $v \in c$. Since the clusters are connected 
 graphs, any cluster which contains vertices in $A$ and $B$ must also contain 
-vertices in $C$. This means that $|c| \leq |C|$.
+vertices in $C$. This means that the preimage of a vertex $v \in c$ contains vertices in $C$. Hence $|c| \leq |C|$. 
 Now, no vertices with labels $a$ and $b$ are adjacent since this would imply 
-that a cluster which belongs to $A$ is adjacent to a cluster which belongs to 
-$B$ which impossible in a separator. Therefore
+that a cluster whose vertices all belong to $A$ is adjacent to a cluster whose vertices all belong to 
+$B$. This is impossible since we assumed $(A,B,C)$ is a separator. Therefore
 \begin{enumerate}
- \item $(a,b,c)$ is a separator of $Q_m$ or
+ \item $(a,b,c)$ is a separator of $Q_m$, or
 \item one or both of $a,b$ is small.
 \end{enumerate}
 In the first case, $c$ contains at least the neighborhood of $a$ and $b$ and 
@@ -910,7 +911,7 @@ $\Omega(2^m/\sqrt{m})$ vertices. Hence $C$ contains at least $\Omega(n/(\log
 n)^{\frac{3}{2}})$.
 
 In the latter case, $c$ must contain a linear number of vertices. This means 
-that also the set $C$ must be large.  
+that the set $C$ must also be large.  
 
 \section{Sharp lower bound}
 
@@ -924,7 +925,7 @@ as
 This quantity gives information on mixing properties of Markov chain on $G$. We study it since
 a large edge expansion on a regular graph also implies a large separator (see \ref{separatorsize} below).
 The edge expansion can be estimated by "canonical paths" method, invented by Sinclair \cite{Sinclair}. 
-A good introduction, with applications to the graphs of polytopes, was given by Kaibel \cite{Kaibel}. 
+A good introduction, with applications to the graphs of polytopes, is given by Kaibel \cite{Kaibel}. 
 
 \subsection{Sinclair's canonical paths}
 
@@ -949,7 +950,7 @@ Let $\phi_{\max}$ be as defined in previous paragraph. Then the edge expansion o
 \begin{proof}
 Let $\phi(\delta(S))$ be the sum of $\phi(e)$ over all the edges in $\delta(S)$. Every path that has one end in $S$
 and the other in $V\setminus S$ needs to use one of these edges, so we have $\phi(\delta(S)) \ge   |V\setminus S | |S |$.
-On the other hands, $\phi_{\max}$ is the global maximum over all the edges of the graph, so we have $\phi(\delta(S)) \le  |\delta(S) |\phi_{\max}$.
+On the other hand, $\phi_{\max}$ is the global maximum over all the edges of the graph, so we have $\phi(\delta(S)) \le  |\delta(S) |\phi_{\max}$.
 Hence for any $|S| \le \frac{ |V |}{2}$, we have
 \begin{equation}
 \label{sepbound}
@@ -977,6 +978,8 @@ As there are no edges between $A$ and $B$, any edge in the set $\delta(A)$ has i
 $C$. This means that $\delta(A)$ contains at least $|A|\mathcal{X}(G)$ edges. Since $G$ is $d$-regular,
 the size of $C$ is at least $\mathcal{X}(G)|A|/d \ge \mathcal{X}(G)cn/d = (c/d)\mathcal{X}(G)n$.  
 \end{proof}
+
+\subsection{Cyclic neighborly cubical polytopes}
 
 For the sharp bound, we will restrict to \textit{cyclic neighborly cubical polytopes} 
  $\NC^c_d(m)$.
