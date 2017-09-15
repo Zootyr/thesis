@@ -1065,7 +1065,7 @@ After performing this procedure at most $m$ times, we end up in the cluster $w$.
 iterations, we end up in the cycle $(w,j)$. In the final iteration, we take at most $m-1$ steps in this cycle to arrive
 at $w_0$.
 
-We will now show that no edges is used more than $O(m^2 2^,)$ times by considering the four cases of short, medium, long
+We will now show that no edges is used more than $\Theta(m^2 2^m)$ times by considering the four cases of short, medium, long
 and extra edges separately.
 
 \afterpage{% 
@@ -1087,8 +1087,8 @@ and extra edges separately.
 
 \subsection{Long edges}
 
-On average, a random pair of clusters differs in $\frac{m}{2}$ coordinates. Therefore half of the $n^2$ paths use long edges in direction $i$.
-The procedure works independently of the value of the other coordinates. so each of the $2^{m-1}$ parallel classes in direction $i$ is used
+On average, a random pair of clusters differs in $m/2$ coordinates. Therefore half of the $n^2$ paths use long edges in direction $i$.
+The procedure works independently of the value of the other coordinates, so each of the $2^{m-1}$ parallel classes in direction $i$ is used
 equally often. Every parallel class is used by $(n^2/2) / 2^{m-1}$ paths and therefore each long edge is used at most this number of times. The number of vertices is $n \in O(m2^m)$, so this works out to be $O(m^2 2^m)$.
 
 \subsection{Medium and short edges}
@@ -1100,7 +1100,7 @@ on one cycle. The extra edges are not used at all.
 Our construction treats all coordinates and both values of the coordinates equally. This means that 
 each set of "cycle of short edgess and a medium edge leaving it"
 is used equally often. Moreover, these sets are disjoint. Therefore every short and medium edge is used at most $2mn^2 / (m2^m)$ times. 
-As $n \in O(m^2 2^m)$, this is works out to be $O(2mn^2 / m2^m) = O(m^2 2^m)$. 
+As $n \in \Theta(m^2 2^m)$, this is works out to be $O(2mn^2 / m2^m) = O(m^2 2^m)$. 
 
 \subsection{Wrapping things up}
 
@@ -1166,6 +1166,8 @@ if necessary and then proceeding in the usual way.
 
 \section{Zig-Zag product}
 
+Expander graphs are graphs which are as hard as possible to separate. This means that their
+separators have $\Omega(n)$ vertices.
 Even though most regular graphs of degree $d\ge 3$ are expanders \cite{KoBa1967}, 
 constructing explicit examples is hard. Graphs of simple 4-polytopes on the other hand
 are few and far between. While our $\NC_d(m)$ are not expanders, they are not that  
@@ -1173,7 +1175,7 @@ far away from expanding either. The key idea in our construction is taking a pol
 is a fairly good expander (an $m$-cube)
 and modifying it so that it becomes a simple polytope (and therefore a regular graph). This
 is done by replacing the vertices with 3-regular graphs. There is a systematic way of doing this operation
-on graphs, called
+on graphs which guarantees good separation properties. It is called
 the zig-zag product. The zig-zag product was introduced by Reingold, Vadhan and Wigderson in 2000 
 \cite{892006}. 
 
@@ -1189,6 +1191,7 @@ returns for the $(v,i)$ pair the vertex $w$ which across the $i$th edge from $v$
 \end{definition}
 Note that in the previous definition, each edge gets two labels, one for each endpoint. Not all graphs have rotation
 maps so that the label at both ends is the same.
+
 Using rotation maps of $G$ and $H$ we can now define the rotation map of $G \circ H$. 
 \begin{definition}
 Let $G$ be a $D$-regular graph on $N$ vertices and $H$ is a $d$-regular graph on $D$ vertices.
@@ -1204,7 +1207,7 @@ The rotation map $\textrm{Rot}_{G\circ H}$ is found with the following procedure
 Having the edges defined locally is an advantage in computational applications. While the zig-zag product
 necessarily produces good expanders, the results may not be polytopal graphs, even if the startintg graphs are
 polytopal. One stumblng block is that a polytopal graph of $d\ge 4$ must have many planar subgraphs and short
-cycles, which correspond to the 2- and 3-faces. Both of these are easy to separate, but as our truncated neighborly cubical
+cycles, which correspond to the 3- and 2-faces. Both of these are easy to separate, but as our truncated neighborly cubical
 polytopes show, the separator might still have to be large.
  It is also possible that some choices of the rotation map produce polytopal graphs while others don't.
 
