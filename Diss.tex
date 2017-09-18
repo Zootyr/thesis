@@ -147,7 +147,7 @@ Separators of simple polytopes}}\\
 \begin{center}
 
 %\includegraphics[width=6cm]{pictures/AP_subdiv.jpg}
-\includegraphics[width=8cm]{1280px-Grosser_Panda}
+\includegraphics[width=8cm]{Tesseract_Mark}
 
 \end{center}
 \end{figure}
@@ -192,7 +192,7 @@ Separators of simple polytopes}}\\
 \begin{center}
 
 %\includegraphics[width=6cm]{pictures/AP_subdiv.jpg}
-\includegraphics[width=8cm]{1280px-Grosser_Panda}
+\includegraphics[width=8cm]{Tesseract_Mark}
 
 \end{center}
 \end{figure}
@@ -278,13 +278,13 @@ separators of size $O(\sqrt{n} \log n)$. Lipton and Tarjan proved the planar
 separator theorem in 1979 \cite{LiTa}. It gives the sharp bound
 $O(\sqrt{n})$ provided that the large sets $A$ and $B$ both contain at least $\nicefrac{1}{3}$ of the vertices.
 This result is best possible, since the $m\times m$ grid graph
-can't be separated by a separation smaller than $\Omega(m)$. Miller and Thurston \cite{MillerThurston-separators} gave a 
+can't be separated by a separator smaller than $\Omega(m)$. Miller and Thurston \cite{MillerThurston-separators} gave a 
 geometric proof of the planar separation theorem using the  
 Koebe–Andreev–Thurston circle-packing theorem.
 
 Miller, Teng, Thurston and Vavasis \cite{MillerTengThurstonVavasis} generalized 
 the theorem to intersection graphs of ball packings in $d$ dimensions. This 
-led Kalai to conjecture in his 1991 paper \cite[Conj 12.1.]{Ka2}(repeated in the 1997 first edition of{Kal97} ) to conjecture that 
+led Kalai to conjecture in his 1991 paper \cite[Conj 12.1.]{Ka2}(repeated in the 1997 first edition of \cite{Kal97} ) that 
 simple $d$-polytopes would have separators of size
 \begin{equation}
 O\left(n^{1-\frac{1}{\lfloor d/2 \rfloor}}\right),
@@ -302,15 +302,15 @@ of separators of size $O(n^{2/3}).$
 Simplicity is a necessary assumption as the graph of the cyclic polytopes is complete for 
 $d\geq 4$ and hence has no vertex separator. Kalai also refers to 
 \cite{MillerTengThurstonVavasis} for a claim by Thurston who stated that there are triangulations of 
-$S^3$ which don't have separators the size of $\Omega(n/\log n)$. This is not 
+$S^3$ with $n$ facets whose dual graphs have separators with size $\Omega(n/\log n)$. This is not 
 stated in the paper, but refers to a construction which Thurston had described to his 
 coauthors. Gary Miller told us (personal communication) that 
 “\textit{Thurston gave an embedding of the cube-connected cycle graph in $\mathbb{R}^3$
 as linear tets} [tetrahedra]”. The details of this construction appear to be lost.
 
-In this paper we prove a stronger version of Thurston's claim: there is not only a triangulated simplicial sphere
+In this paper we disprove conjecture \ref{simpleconjecture} and prove a stronger version of Thurston's claim: there is not only a triangulated simplicial sphere
 on $n$ vertices, whose dual graphs has separators of size $\Omega(n/\log n)$, but even a simplicial convex 4-polytope
-with this property. Our main theorem descirbes the simple dual polytope.
+with this property. Our main theorem describes the simple dual polytope.
 
 \begin{theorem}
 There is a family of simple convex 4-dimensional polytopes $\NCC_4(m)''$ with $n=\Theta(m 2^m)$ vertices for which
@@ -320,7 +320,7 @@ the smallest separators of the graph have size $\Theta(2^m) = \Theta(n/\log n)$.
 This thesis is structured as follows. In section \ref{mathchapter} we define our main objects of study,
 separators of graphs. This section also contains necessary background information on 
 graphs and polytopes. In section \ref{ncpconstruction} we build the simple polytope used for our 
-lower bound and calculate the size of their separators. Finally in section \label{genes} we generalize
+lower bound and calculate the size of their separators. Finally in section \ref{genes} we generalize
 the construction to higher dimensions and discuss possible constructions for polytopes with even larger
 minimal separators.
 
@@ -430,7 +430,7 @@ lattice which has entries in dimensions $(0,1,3)$. This means a vertex contained
 edge, which is contained in a 3-face. The complete flag vector has $2^d$ entries,
 but many of them are redundant. For example, we always have $f_{0,1} = 2f_1$ since each edges
 connects two vertices. In particular, in 4 dimensions where we will be mostly working in,
-knowing the entries $(f_0, f_1, f_2, f_3, f_{03})$ is enough to figure out the rest of the entries. 
+knowing the entries $(f_0, f_1, f_2, f_3, f_{03})$ is enough to figure out the complete flag vector.
 
 Now that we have defined what a polytope is, we need a criterion to decide which polytopes 
 count as "the same". There are two ways to do this, a combinatorial one and a geometric one.
@@ -441,7 +441,27 @@ polytope. A more relaxed equivalence relation is combinatorial equivalence. Two
 polytopes are \textit{combinatorially equivalent} if their face lattices are isomorphic 
 i.e.\ there is an bijection between the elements of the lattices which preserves
 the inclusion relation. Two combinatorially equivalent polytopes are said to have the 
-same \textit{combinatorial type}. 
+same \textit{combinatorial type}. Any two affinely isomorphic polytopes are combinatorially
+equivalent.
+
+% Each polytope has a dual polytope associated to it. Its face lattice is the 
+% lattice of the original polytope ``upside down''. Hence its $i$-faces 
+% correspond to the $(d-i)$-dimensional faces of the original. The dual of the 
+% dual is the original polytope. 
+
+Two polytopes are said to be dual to each other if there is an inclusion 
+reversing bijection between their face lattices. Clearly, the dual of a 
+$d$-polytope is another $d$-polytope. The fact that every polytope has a dual 
+can be seen from the \textit{polar set}. Let $A\subset \mathbb{R}^d$, then the 
+polar set $A^*$ is defined by
+\begin{equation}
+ A^* = \{y \in \mathbb{R}^d \mid \langle x,y\rangle \leq 1 \, \forall  x  \in A 
+\} 
+\end{equation}
+If $A$ is a convex compact set with $0 \in$ int $A$, so is $A^*$. In 
+particular, if $A$ is a polytope containing $0$ in the interior, $A^*$ is dual 
+to it. 
+
 
 We are interested in studying the graphs of polytopes. The most theoretically 
 pleasing way to define them is to consider them a special class of 
@@ -476,28 +496,6 @@ k$. Hence the $d$-skeleton of a $d$-polytope is the polytope and its faces, whil
 boundary complex is the $(d-1)$-skeleton. The graph of the polytope is its 
 1-skeleton and it is denoted by $G(P)$.
 
-The \textit{triangulation} of a polytope $P$ is a polytopal complex $\mathfrak{C}$ consisting only of simplices
-and whose underlying set is $P$.
-
-
-% Each polytope has a dual polytope associated to it. Its face lattice is the 
-% lattice of the original polytope ``upside down''. Hence its $i$-faces 
-% correspond to the $(d-i)$-dimensional faces of the original. The dual of the 
-% dual is the original polytope. 
-
-Two polytopes are said to be dual to each other if there is an inclusion 
-reversing bijection between their face lattices. Clearly, the dual of a 
-$d$-polytope is another $d$-polytope. The fact that every polytope has a dual 
-can be seen from the \textit{polar set}. Let $A\subset \mathbb{R}^d$, then the 
-polar set $A^*$ is defined by
-\begin{equation}
- A^* = \{y \in \mathbb{R}^d \mid \langle x,y\rangle \leq 1 \, \forall  x  \in A 
-\} 
-\end{equation}
-If $A$ is a convex compact set with $0 \in$ int $A$, so is $A^*$. In 
-particular, if $A$ is a polytope containing $0$ in the interior, $A^*$ is dual 
-to it. 
-
 After all these theoretical constructions, let's have a look at some concrete examples
 of polytopes.
 In any dimension, the polytope with the fewest vertices is the simplex. 
@@ -516,7 +514,12 @@ and the total number of faces is $2^{d+1}$.
 The vertices of a simple $d$-polytope are contained in exactly 
 $d$ edges and $d$ facets. This means that the graph of a simple polytope is $d$-regular.
 
-Another important polytope is the $n$-cube.
+As simplices are the least complicated polytope, it is often useful to break up a polytope into
+a union of simplices. The triangulation of a polytope $P$ is a polytopal complex with underlying set
+$P$ where all the polytopes are simplices.
+
+
+Another important polytope is the $m$-cube.
 
 \begin{definition}
  The $m$-cube $Q^m$ is a simple polytope defined by the inequalities
@@ -556,7 +559,7 @@ depends only on the choice of vertex, not on the inequality. Vertex cuts can be 
 faces of higher dimensions by requiring the added inequality to be violated by 
 all the vertices in the face. 
 
-The dual operation of truncation is called stacking. What we mean by this is is that we cut off vertex $v$
+The dual operation of truncation is called stacking. What we mean by this is is that if we cut off vertex $v$
 and take the dual of the resulting polytope is equivalent to first taking the dual and then stacking on the
 corresponding facet.
 Stacking means adding a new vertex to the polytope which satisfies all the 
@@ -626,6 +629,7 @@ distinct.
 If there is a path between every pair of vertices, the graph is said to be 
 \textit{connected}. Otherwise it is \textit{disconnected}. A disconnected graph 
 consists of several \textit{connected components}.
+
 
 The \textit{degree} of a vertex is the number of edges it is incident to. 
 If all the vertices in the graph have degree $d$, the graph is called 
@@ -710,7 +714,7 @@ possible.
 In this chapter we construct polytopes which disprove conjecture \ref{simpleconjecture} and
 strongly affirm Thurston's claim about separators of dual graphs of triangulations. We
 calculate a lower bound on the size of the minimal separators in two ways. Both proofs are for the
-4-dimensional case, but they easily generalize to higher dimensions. The first way requires
+4-dimensional case, but they easily generalize to higher dimensions. The first proof requires
 no advanced techniques, but the bound achieved is not sharp. For the second proof,
 we restrict ourselves to a subset of the neighborly cubical polytopes where we know the 
 combinatorics completely. This combined with a lemma proven by Sinclair to study
@@ -738,7 +742,7 @@ They were first discovered by Joswig and Ziegler \cite{Z62}. Sanyal and Ziegler 
 generalized the construction to show that each $(d-2)$-dimensional neighborly 
 polytope on $(m-1)$ vertices can be used to define a 
 different combinatorial type of $\NC_d(m)$. As the boundary complex of any $\NC_d(m)$
-is a subcomplex of the boundary complex of the $m$-cube, its faces correspond to vectors
+is a subcomplex of the boundary complex of the $m$-cube, its proper faces correspond to vectors
 in $\{0,1,*\}^m$, or equivalently, $\{-,+,*\}^m$.
 
 
@@ -747,7 +751,7 @@ Their graph is that of an $m$-cube. The separators of $m$-cubes were discovered 
 \cite{Harp}.
 While hypercubes are simple polytopes, $\NC_4(m)$ are not since each vertex is 
 incident to $m>4$ edges. However, we can "simplify" them by 
-truncating the edges and vertices.
+truncating the vertices and the edges.
 
  
 
@@ -819,7 +823,7 @@ $\NC_4(m)$. Their $f$-vector is $(6m - 12, 9m-18, 3m-4)$.
 \end{itemize}
 
 Using the knowledge of the facets we can work out the flag vector of 
-$\NC_4(m)''$.
+$\NC_4(m)''$:
 
 \begin{equation}
  \textrm{flag}(\NC_4(m)'') = (24m-48, 48m-96, 27m - 46, 3m+2; 28m -48)2^{m-2}
@@ -830,7 +834,7 @@ polytope. In the next section we will work out its separators.
 
 \section{Lower bound, straightforward approach}
 
-In this section we shall show an easy proof for a bound on the separator. It
+In this section we will show an easy proof for a lower bound on the separator. It
 is enough to disprove conjecture \ref{simpleconjecture}, but not enough to verify Thurston's
 claim.
 
@@ -860,7 +864,7 @@ A Hamming ball $B(x,r) \subset Q_m$ has
 \begin{equation}
  \sum_{i=0}^r {m \choose i}
 \end{equation}
-vertices. If $k$ can be written in this form, any Hamming ball has minimal size neighborhoods 
+vertices. If $k$ can be written in this form for some $r \in \mathbb{N}$, any Hamming ball with radius $r$ has minimal size neighborhoods 
 among the $k$-element sets of $Q_m$. 
 If $k$ can't be expressed in this form, let $r$ be maximal so that 
 the sum is $\leq k$ and include some vertices with distance $r+1$ to the set. 
@@ -908,7 +912,7 @@ $B$. This is impossible since we assumed $(A,B,C)$ is a separator. Therefore
 In the first case, $c$ contains at least the neighborhood of $a$ and $b$ and 
 hence its size is bounded by the isoperimetric inequality. Therefore $c$ has 
 $\Omega(2^m/\sqrt{m})$ vertices. Hence $C$ contains at least $\Omega(n/(\log 
-n)^{\frac{3}{2}})$.
+n)^{\frac{3}{2}})$ vertices.
 
 In the latter case, $c$ must contain a linear number of vertices. This means 
 that the set $C$ must also be large.  
@@ -1206,7 +1210,7 @@ The rotation map $\textrm{Rot}_{G\circ H}$ is found with the following procedure
 \end{definition}
 Having the edges defined locally is an advantage in computational applications. While the zig-zag product
 necessarily produces good expanders, the results may not be polytopal graphs, even if the startintg graphs are
-polytopal. One stumblng block is that a polytopal graph of $d\ge 4$ must have many planar subgraphs and short
+polytopal. One stumbling block is that a polytopal graph of $d\ge 4$ must have many planar subgraphs and short
 cycles, which correspond to the 3- and 2-faces. Both of these are easy to separate, but as our truncated neighborly cubical
 polytopes show, the separator might still have to be large.
  It is also possible that some choices of the rotation map produce polytopal graphs while others don't.
