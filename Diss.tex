@@ -315,6 +315,7 @@ with this property. Our main theorem describes the simple dual polytope.
 \begin{theorem}
 There is a family of simple convex $4$-dimensional polytopes $\NCC_4(m)''$ with $n=\Theta(m 2^m)$ vertices for which
 the smallest separators of the graph have size $\Theta(2^m) = \Theta(n/\log n)$.
+\label{maintheorem}
 \end{theorem}
 
 This thesis is structured as follows. In chapter \ref{mathchapter} we define our main objects of study,
@@ -1143,7 +1144,7 @@ the sets $A$ and $B$. This works for separation constant arbitrarily close to $\
 
 The sharp lower bound can be also proven for a larger class of neighborly cubical polytopes.
 The polytopes constructed by Sanyal and Ziegler \cite{Z102} all contain the Hamiltonian
-cycle we use to construct our paths. The triangulation of the clusters in $G'_m$ is described by
+cycle we used to construct our paths. The triangulation of the clusters in $G'_m$ is described by
 \cite[Thm 3.7.]{Z102}. For vertex $v$, it is a regular triangulation created by pushing 
 and pulling vertices depending on the vertex label and the order of the vertices. 
 The pushing and pulling only affects extra edges, so we end up with a Hamiltonian
@@ -1154,7 +1155,14 @@ This construction can also used the same bound in higher dimensions. There are t
 natural ways, using $\NC_d(m)$ i.e.\ a higher dimensional neighborly polytope, or 
 taking prisms over $\NC_4(m)''$.  In the first case we have to do more cuts to 
 make the polytope simple, resulting in a large number of vertices. Hence the 
-second way is the correct one. 
+second way is the correct one. Using it we prove Theorem \ref{maintheorem}
+in dimensions $d>4$.
+
+\begin{theorem}
+Let $d\ge 4$.
+There is a family of simple convex $d$-dimensional polytopes $\NCC_d(m)''$ with $n=\Theta(m 2^m)$ vertices for which
+the smallest separators of the graph have size $\Theta(2^m) = \Theta(n/\log n)$.
+\end{theorem}
 
 Let $G^d_m$ be the graph of a $(d-4)$-fold prism over $\NC_4(m)''$ for $d\geq 4$. 
 Any separator 
@@ -1173,11 +1181,15 @@ if necessary and then proceeding in the usual way.
 
 \section{Zig-Zag product}
 
-Expander graphs are graphs which are as hard as possible to separate. This means that their
+Expander graphs are graphs that have as large minimal separators as possible. This means that their
 separators have $\Omega(n)$ vertices.
 Even though most regular graphs of degree $d\ge 3$ are expanders \cite{KoBa1967}, 
 constructing explicit examples is hard. Graphs of simple 4-polytopes on the other hand
-are few and far between. While our $\NC_d(m)$ are not expanders, they are not that  
+are rare. Constructions for expander graphs are often algebraic in nature and there is not much hope of turning them into
+geometry since general expander graphs may contain loops and parallel edges. 
+A simple example is taking the elements of $\mathbb{Z}_p$ as vertices and connecting $x$ to $x-1,x+1$ and $x^{-1}$ \cite{Lubo}.
+
+ While our $\NC_d(m)$ are not expanders, they are not that  
 far away from expanding either. The key idea in our construction is taking a polytope which
 is a fairly good expander (an $m$-cube)
 and modifying it so that it becomes a simple polytope (and therefore a regular graph). This
@@ -1187,10 +1199,10 @@ the zig-zag product. The zig-zag product was introduced by Reingold, Vadhan and 
 \cite{892006}. 
 
 The zig-zag product takes a large regular graph $G$ and a small regular graph $H$ and produces a new
-graph $G \circ H$. More precisely, the graph $G$ is a $D$-regular graph on $N$ vertices, while $H$ 
-is a $d$-regular graph on $D$ vertices. Their product is then a $d^2$-regular graph on $D\times N$ vertices. 
+graph $G \circ H$. Let $G$ be a $D$-regular graph on $N$ vertices and $H$ 
+be a $d$-regular graph on $D$ vertices, then their product is then a $d^2$-regular graph on $D\times N$ vertices. 
 The important part is that if $G$ and $H$ are good expanders, then $G \circ H$ is too. Before we can give
-the formal definition of zig-zag product, we need to define \textit{rotation maps}.
+the formal definition of the zig-zag product, we need to define \textit{rotation maps}.
 \begin{definition}
 Let $G = (V,R)$ be a $d$-regular graph. The edges incident to vertex $v$ are labeled with numbers $1,\dots, d$. 
 The rotation map $\textrm{Rot}_{G} : V \times [d] \rightarrow V \times [d]$
@@ -1213,14 +1225,14 @@ The rotation map $\textrm{Rot}_{G\circ H}$ is found with the following procedure
 \end{definition}
 Having the edges defined locally is an advantage in computational applications. While the zig-zag product
 necessarily produces good expanders, the results may not be polytopal graphs, even if the starting graphs are
-polytopal. One stumbling block is that a polytopal graph of $d\ge 4$ must have many planar subgraphs and short
-cycles, which correspond to the 3- and 2-faces. Both of these are easy to separate, but as our truncated neighborly cubical
-polytopes show, the separator might still have to be large. Another problem is that the resulting graphs have degree $d^2$. While this
+polytopal. One stumbling block is that a polytopal graph of a $d$-polytope for $d\ge 4$ must have many planar subgraphs and short
+cycles, which correspond to the 3- and 2-faces. Both $3$- and $2$-polytopes have small separators, but as our truncated neighborly cubical
+polytopes show, the separator of the $4$-polytope might still have to be large. Another problem is that the resulting graphs have degree $d^2$. While this
 allows for creation of 4-dimensional polytopes, the only 2-dimensional polytopes are polygons they might not possess sufficient variety
 to create expander graphs. The next feasible dimension is 9, but there we have already lost most of our geometric intuition.
  It is also possible that some choices of the rotation map produce polytopal graphs while others don't.
 
- As shown by the neighborly polytopes, a given graph can be the graph of polytope of various dimensions. 
+ As shown by the neighborly polytopes, a given graph can be the graph of polytopes of various dimensions. 
 Luckily, simple polytopes don't have this problem and there are even algorithms to solve this problem \cite{KALAI1988381} \cite{Achatz2000}. 
 Our quick experiment by hand found a product of a tetrahedron and a triangle, which was not a polytopal graph.
 
